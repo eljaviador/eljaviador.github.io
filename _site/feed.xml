@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title></title>
+		<description>Blog personal sobre la plataforma Java</description>
+		<link>/</link>
+		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+		
+			<item>
+				<title>Hilos en Java [1]</title>
+				<description>&lt;p&gt;Bueno esta es la primera de varias entregas sobre concurrencia o hilos en Java.  Vamos a tratar de ir de 0 a 100 para entender mejor todo este mundo de la multitaréa con el fin de aplicar lo que aprendamos en nuestros diseños de una forma mas optima.&lt;/p&gt;
+
+&lt;h2 id=&quot;introduccin-a-los-hilos&quot;&gt;Introducción a los Hilos&lt;/h2&gt;
+&lt;p&gt;Para no alargar mucho la historia ya que pueden conseguir bastantes definiciones por ahí, Java nos permite la ejecución de varios procesos al tiempo algo muy parecido a lo que hace el sistema operativo. Bueno realmente sabemos que con un solo núcleo o procesador solo se ejecuta un proceso a la vez, pero dada la velocidad con que se realizan para nosotros son como procesos paralelos. Con Java la &lt;strong&gt;JVM&lt;/strong&gt; es nuestro pequeño sistema operativo en este caso y es la encargada con su sistema de scheduling (planificador) de manejar nuestros hilos o procesos de forma concurrente.&lt;/p&gt;
+
+&lt;p&gt;Si tuviéramos un sistema operativo como Solaris, es posible que la JVM haga un mapeo de cada hilo que nosotros creamos directamente a procesos del mismo sistema operativo.&lt;/p&gt;
+
+&lt;p&gt;Cuando hablamos de un HILO en Java tenemos dos posibles conceptos según el contexto:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Un hilo es una instancia de la clase &lt;code&gt;Thread&lt;/code&gt; ubicada en el paquete &lt;code&gt;java.lang&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Un hilo es un proceso(Thread) de ejecución.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Una instancia de &lt;code&gt;Thread&lt;/code&gt; es un objeto común y corriente, de los que usamos con un simple new:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hilo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Aquí solo he creado un simple objeto de tipo &lt;code&gt;Thread&lt;/code&gt; y este tendrá variables, métodos, vivirá y morirá en el &lt;strong&gt;Heap&lt;/strong&gt;. No es un hilo de ejecución porque no lo he iniciado como tal. &lt;/p&gt;
+
+&lt;p&gt;Un &lt;em&gt;Thread de ejecución&lt;/em&gt; es un proceso individual con su propia &lt;em&gt;&lt;strong&gt;PILA DE LLAMADAS&lt;/strong&gt;&lt;/em&gt; (Call Stack).&lt;/p&gt;
+
+&lt;h2 id=&quot;pila-de-llamadas&quot;&gt;Pila de Llamadas&lt;/h2&gt;
+&lt;p&gt;En Java siempre hay aunque sea un único hilo ejecutándose, este hilo se crea al llamar al método &lt;code&gt;main()&lt;/code&gt;. Es decir, siempre tengo un hilo llamado &lt;em&gt;&lt;strong&gt;main&lt;/strong&gt;&lt;/em&gt; que es el hilo inicial. Para este hilo main, se crea una pila de llamadas que no es mas que la secuencia en que los métodos se van invocando unos a otros.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/hilos-01.jpg&quot; alt=&quot;Hilos 01&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Desde el método &lt;code&gt;main&lt;/code&gt; llamaremos al &lt;code&gt;método1&lt;/code&gt;, desde el &lt;code&gt;método1&lt;/code&gt; llamamos al &lt;code&gt;método2&lt;/code&gt; y así sucesivamente.&lt;/p&gt;
+
+&lt;p&gt;Para cada nuevo hilo que iniciamos se creara una pila de llamadas totalmente independiente una de otra. Si lanzamos dos hilos y cada uno llama al mismo método de una misma instancia de una clase(osea el mismo objeto en el heap), este se copia en cada pila sin interferir uno con otro. Cada hilo tendrá su propia copia del contenido de dicho método, sip, &lt;em&gt;&lt;strong&gt;incuso de las variables locales&lt;/strong&gt;&lt;/em&gt; (variables de método) y todo los declaremos dentro de dicho método. &lt;/p&gt;
+
+&lt;p&gt;Ojo que no pasa lo mismo con las variables o atributos de la instancia, osea &lt;em&gt;&lt;strong&gt;el estado de ese objeto es compartido&lt;/strong&gt;&lt;/em&gt; y si un hilo modifica un atributo el otro hilo vera ese cambio, pero ese tema lo vemos después con mas detalle, solo quería que entendieran el mecanismo de la pila de llamadas.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/hilos-02.jpg&quot; alt=&quot;Hilos 02&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Cada vez que lanzamos un nuevo hilo, este nuevo call stack o pila de llamadas empieza con el método &lt;code&gt;run()&lt;/code&gt;. Evidentemente el hilo principal empieza su stack con main.&lt;/p&gt;
+
+&lt;h2 id=&quot;usando-hilos&quot;&gt;Usando hilos&lt;/h2&gt;
+&lt;p&gt;La forma de usar hilos en Java es a través de la clase &lt;code&gt;java.lang.Thread&lt;/code&gt;. Esto se puede hacer de dos formas:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Crear una clase que extienda de &lt;code&gt;Thread&lt;/code&gt; y sobrescribir el método &lt;code&gt;run()&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Implementar la interface &lt;code&gt;Runnable&lt;/code&gt; y pasarla a un objeto &lt;code&gt;Thread&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;En cualquiera de los casos hay que usar un objeto &lt;code&gt;Thread&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HiloUno&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Aqui mi codigo de ejecucion&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ 
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Principal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;HiloUno&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;HiloUno&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;HiloUno&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;HiloUno&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;h1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// Se crea pila de llamadas&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// Se crea pila de llamadas&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Esta es la forma de lanzar o iniciar un hilo de ejecución. Usando el método &lt;code&gt;start()&lt;/code&gt; estoy convirtiendo un simple objeto &lt;code&gt;Thread&lt;/code&gt; en una nueva pila de llamadas, en este caso estamos lanzando dos procesos mas aparte del &lt;em&gt;&lt;strong&gt;main&lt;/strong&gt;&lt;/em&gt;, osea tenemos tres hilos de ejecución. Pero ojo si llamáramos solo el método &lt;code&gt;run()&lt;/code&gt; sin usar &lt;code&gt;start()&lt;/code&gt; estaríamos ejecutando un simple método en un simple objeto y no crearía ninguna pila de llamadas, osea no crearíamos ningún proceso aparte. &lt;/p&gt;
+
+&lt;p&gt;De la otra forma sería:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Ejecutor&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Runnable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Aqui mi codigo de ejecucion&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Principal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Ejecutor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Ejecutor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Pasar en el constructor de &lt;code&gt;Thread&lt;/code&gt; un objeto &lt;code&gt;Runnable&lt;/code&gt; y de igual manera iniciar el hilo de ejecución con &lt;code&gt;start()&lt;/code&gt;. De hecho &lt;code&gt;Thread&lt;/code&gt; tiene varios constructores y la misma clase &lt;code&gt;Thread&lt;/code&gt; también implementa &lt;code&gt;Runnable&lt;/code&gt; así que es posible pasar un &lt;code&gt;Thread&lt;/code&gt; a otro a través de su constructor.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MiHilo&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Aqui mi codigo de ejecucion&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ 
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Principal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;MiHilo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MiHilo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// Se crea pila de llamadas&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Generalmente se recomienda usar el segundo enfoque implementando &lt;code&gt;Runnable&lt;/code&gt; porque es mas flexible en cuanto a diseño. En ocasiones mi modelo puede que no permite extender de &lt;code&gt;Thread&lt;/code&gt; porque ya extiende de otra clase. Aunque usar el primer enfoque no quiere decir que precisamente este mal, como dije es cuestión de diseño o gustos .&lt;/p&gt;
+
+&lt;h2 id=&quot;ciclo-de-vida&quot;&gt;Ciclo de Vida&lt;/h2&gt;
+&lt;p&gt;Antes de pasar a trabajar más con los hilos conozcamos el ciclo de vida de estos. Cada &lt;em&gt;hilo de ejecución&lt;/em&gt; tiene un ciclo de vida determinado por sus posibles estados.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/hilos-03.jpg&quot; alt=&quot;Hilos 03&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Nuevo :&lt;/strong&gt; Este es el estado al crear una instancia de la clase &lt;code&gt;Thread&lt;/code&gt;, pero aun no es un hilo vivo, no lo hemos iniciado con &lt;code&gt;start()&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Ejecutable :&lt;/strong&gt; Este estado aparece al llamar el método &lt;code&gt;start()&lt;/code&gt; y aquí se convierte en un hilo vivo con su propia pila de llamadas.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Ejecutandose :&lt;/strong&gt; Este estado indica que el hilo esta ejecutando parte del código del método &lt;code&gt;run()&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Esperando / Bloqueado / Dormido :&lt;/strong&gt; Estos estados aparecen por algún motivo, el propio hilo se fue a dormir, esta en espera de algún recurso, el planificador lo decidió, etc.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Muerto :&lt;/strong&gt; El hilo se considera muerto cuando terminó la ejecución del método &lt;code&gt;run()&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Podemos obtener el estado de un hilo con el método &lt;code&gt;getState()&lt;/code&gt; de &lt;code&gt;Thread&lt;/code&gt;. Este retorna un enum que pertenece a la misma clase. &lt;/p&gt;
+
+&lt;p&gt;El planificador posee una especie de bolsa donde echa todos los hilos en estado &lt;em&gt;&lt;strong&gt;Ejecutable&lt;/strong&gt;&lt;/em&gt; para luego seleccionar uno y ponerlo en ejecución. La decisión de cual hilo seleccionar para ejecutar siempre pertenece al planificador, aunque bajo ciertas condiciones pudiéramos influenciar al planificador, por ejemplo especificando las prioridades de algunos hilos no significa que lo podemos controlar.&lt;/p&gt;
+
+&lt;p&gt;Hay varios escenarios por los cual el planificador puede sacar un hilo en ejecución y enviarlo a la bolsa de ejecutables o ponerlo en otro estado(esperando, bloqueado, dormido o muerto):&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Completo el método &lt;code&gt;run()&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Hay una llamada al método &lt;code&gt;wait()&lt;/code&gt; – Lo veremos después.&lt;/li&gt;
+  &lt;li&gt;Un hilo no pudo obtener el &lt;em&gt;bloqueo(Lock)&lt;/em&gt; de un objeto - Lo veremos después.&lt;/li&gt;
+  &lt;li&gt;El planificador tomó la decisión según su criterio (porque le dio la gana ).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Unos puntos para finalizar esta primera parte de hilos:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Un hilo en estado muerto(finalizó el método &lt;code&gt;run()&lt;/code&gt;) no puede volver a iniciarse con &lt;code&gt;start()&lt;/code&gt; ya que la JVM nos lanza una &lt;code&gt;IllegalThreadStateException&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Puedo encadenar hilos. Un hilo inicia solo cuando otro termine.&lt;/li&gt;
+  &lt;li&gt;Un hilo puede ceder el paso a otro y se va automáticamente de Ejecutándose a Ejecutable.&lt;/li&gt;
+  &lt;li&gt;Un hilo no puede bloquear a otro.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Hasta aquí esta primera parte, see you later .&lt;/p&gt;
+</description>
+				<pubDate>Wed, 30 Mar 2011 15:20:00 -0500</pubDate>
+				<link>/concurrencia/2011/03/30/hilos-en-java-%5Bparte-1%5D.html</link>
+				<guid isPermaLink="true">/concurrencia/2011/03/30/hilos-en-java-%5Bparte-1%5D.html</guid>
+			</item>
+		
+			<item>
+				<title>Principios S.O.L.I.D</title>
+				<description>&lt;p&gt;Los principios &lt;strong&gt;S.O.L.I.D&lt;/strong&gt; son un conjunto de guías que nos ayudan a &lt;em&gt;&lt;strong&gt;evitar malos diseños&lt;/strong&gt;&lt;/em&gt; cuando desarrollamos software orientado a objetos. Estos principios fueron reunidos y expuestos por &lt;em&gt;Robert Martin&lt;/em&gt;, también conocido como “El tío bob” en su libro &lt;em&gt;“Agile Software Development: Principles, Patterns, and Practices”&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;El buen uso de estos principios nos permite construir software extensible y fácil de mantener,  también nos permiten detectar lo que conocemos como &lt;em&gt;&lt;strong&gt;code smell&lt;/strong&gt;&lt;/em&gt; de los cuales hablaremos después. El Sr. Martin nos habla también de 3 características importantes que deben ser evitadas en la construcción de nuestro software:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Rigidez :&lt;/strong&gt; Al cambiar algo en el sistema, es necesario cambiar otras partes por estar muy acopladas.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Fragilidad :&lt;/strong&gt; Al hacer un cambio en el sistema, otras partes que no esperábamos del mismo se rompen.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Inmovilidad :&lt;/strong&gt; Dificultad para reutilizar cosas en otro sistema por ser difícil de desenredar del actual.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Si nuestro objetivo es desarrollar buen software no podemos perdernos de su conocimiento que junto con los patrones de diseño nos van a hacer la vida más fácil.&lt;/p&gt;
+
+&lt;p&gt;Estos principios son:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;S&lt;/strong&gt;ingle Responsability Principle&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;O&lt;/strong&gt;pen / Close Principle&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;L&lt;/strong&gt;iskov Substitution Principle&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;I&lt;/strong&gt;nterface Segregation Principle&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;D&lt;/strong&gt;ependency Inversion Principle&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Veamos rápidamente la definición de cada uno. En las próximas entradas los veremos con más detalle.&lt;/p&gt;
+
+&lt;h3 id=&quot;single-responsability-principle--principio-de-responsabilidad-simple&quot;&gt;Single Responsability Principle – Principio de Responsabilidad Simple&lt;/h3&gt;
+&lt;p&gt;Una clase debe tener una sola razón para cambiar.&lt;/p&gt;
+
+&lt;h3 id=&quot;open--close-principle--principio-abierto--cerrado&quot;&gt;Open / Close Principle – Principio Abierto / Cerrado&lt;/h3&gt;
+&lt;p&gt;Clases, módulos y funciones deben ser abierta para extender y cerrada para modificar.&lt;/p&gt;
+
+&lt;h3 id=&quot;liskov-substitution-principle--principio-de-sustitucin-de-liskov&quot;&gt;Liskov Substitution Principle – Principio de Sustitución de Liskov&lt;/h3&gt;
+&lt;p&gt;Al usar una clase base los subtipos de esta pueden ser cambiados.&lt;/p&gt;
+
+&lt;h3 id=&quot;interface-segregation-principle--principio-de-segregacin-de-interfaces&quot;&gt;Interface Segregation Principle – Principio de Segregación de Interfaces&lt;/h3&gt;
+&lt;p&gt;Un cliente no debe estar obligado implementar Interfaces que no usa.&lt;/p&gt;
+
+&lt;h3 id=&quot;dependency-inversion-principle--principio-de-inversin-de-dependencias&quot;&gt;Dependency Inversion Principle – Principio de Inversión de Dependencias&lt;/h3&gt;
+&lt;p&gt;Módulos de alto nivel no deben depender de módulos de bajo nivel. Las dependencias entre estos deben ser sobre abstracciones no sobre clases concretas.&lt;/p&gt;
+
+&lt;p&gt;La buena aplicación de estos principios al comienzo no suele ser tan sencillo, puede tomar cierto tiempo mientras se acumula experiencia y se conoce más el paradigma de objetos. Además de otras ventajas significativas como código fácil de mantener y de testear.&lt;/p&gt;
+</description>
+				<pubDate>Mon, 14 Mar 2011 06:00:04 -0500</pubDate>
+				<link>/conceptos/principios/2011/03/14/principios-solid.html</link>
+				<guid isPermaLink="true">/conceptos/principios/2011/03/14/principios-solid.html</guid>
+			</item>
+		
+			<item>
+				<title>Pensando en objetos [Polimorfismo]</title>
+				<description>&lt;p&gt;Vayamos directo al grano y después entramos un poco más en detalle, veamos enseguida la definición de polimorfismo, y después la vamos a explicar paso a paso.&lt;/p&gt;
+
+&lt;h2 id=&quot;polimorfismo&quot;&gt;Polimorfismo&lt;/h2&gt;
+&lt;p&gt;Manipular o ejecutar el comportamiento particular de diferentes tipos de objetos &lt;em&gt;&lt;strong&gt;a través de una interfaz común o uniforme&lt;/strong&gt;&lt;/em&gt;, ya sea por medio de herencia o por contrato. Ya conocemos como es el mecanismo de herencia, antes de seguir entendamos que es eso de &lt;em&gt;&lt;strong&gt;contrato&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Técnicamente cuando hablamos de un contrato, estamos hablando en términos de POO de una &lt;em&gt;&lt;strong&gt;Interface&lt;/strong&gt;&lt;/em&gt;. Cuando un objeto se compromete a cumplir una Interface (contrato), este debe implementar el comportamiento que dice ese contrato o Interface. Al cumplir ese contrato el objeto actual &lt;em&gt;&lt;strong&gt;automáticamente puede ser tratado como un objeto del tipo de la Interface&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Por ejemplo si existe un contrato o Interface llamada &lt;strong&gt;&lt;code&gt;Mamífero&lt;/code&gt;&lt;/strong&gt; que especifica varias operaciones como &lt;code&gt;dormir()&lt;/code&gt; y &lt;code&gt;comer()&lt;/code&gt;, podríamos tener una clase llamada Perro la cual implementara la interface Mamífero y cualquier objeto tipo &lt;code&gt;Perro&lt;/code&gt; que creemos automáticamente  es al mismo tiempo un tipo &lt;code&gt;Mamífero&lt;/code&gt;; así donde se pida un tipo &lt;code&gt;Mamífero&lt;/code&gt; yo podría pasar un objeto &lt;code&gt;Perro&lt;/code&gt; y este es aceptado porque cumple con el contrato &lt;code&gt;Mamífero&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Ahora veamos como es eso de una interfaz uniforme para tratar al polimorfismo?. Si tengo un método que pide una referencia de tipo &lt;code&gt;Mamífero&lt;/code&gt; que es un contrato:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hacerAlgo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Mamifero&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;comer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Ahora al llamar a el método &lt;code&gt;hacerAlgo()&lt;/code&gt; puedo pasar un objeto que cumpla con ese contrato &lt;code&gt;Mamífero&lt;/code&gt;. Si tengo una clase &lt;code&gt;Perro&lt;/code&gt; y otra clase &lt;code&gt;Ballena&lt;/code&gt; y ambas implementan ese contrato entonces el método aceptará cualquiera de las dos.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Perro&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Perro&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;hacerAlgo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Igual si lo hacemos con un objeto &lt;code&gt;Ballena&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Ballena&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Ballena&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;hacerAlgo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Al llamar a &lt;code&gt;m.comer()&lt;/code&gt; dentro de &lt;code&gt;hacerAlgo()&lt;/code&gt;, este se comportará según el objeto real que estamos pasando al método, sea un perro o una ballena, cada uno comerá a su manera y de eso se trata el polimorfismo, en este caso la interfaz común es el método &lt;code&gt;comer()&lt;/code&gt; que estamos invocando dentro del método con la referencia &lt;em&gt;&lt;strong&gt;m&lt;/strong&gt;&lt;/em&gt; de &lt;code&gt;Mamifero&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Este mecanismo es aplicable tanto por contrato como en el ejemplo y también por herencia. El polimorfismo permite que las aplicaciones crezcan y que sean extensibles añadiendo nuevos componentes sin modificar lo que existe.&lt;/p&gt;
+
+&lt;p&gt;Podríamos crear nuevos objetos por ejemplo una clase &lt;code&gt;Caballo&lt;/code&gt; y pasar una instancia de esta al método &lt;code&gt;hacerAlgo()&lt;/code&gt; y el método no se modificaría, solo se comportaría diferente a la hora de &lt;code&gt;comer()&lt;/code&gt;.&lt;/p&gt;
+</description>
+				<pubDate>Mon, 28 Feb 2011 13:10:04 -0500</pubDate>
+				<link>/conceptos/principios/2011/02/28/pensando-en-objetos-%5Bpolimorfismo%5D.html</link>
+				<guid isPermaLink="true">/conceptos/principios/2011/02/28/pensando-en-objetos-%5Bpolimorfismo%5D.html</guid>
+			</item>
+		
+			<item>
+				<title>Pensando en objetos [Herencia]</title>
+				<description>&lt;p&gt;Siguiendo con los conceptos importantes en la POO nos encontramos con la &lt;em&gt;&lt;strong&gt;herencia&lt;/strong&gt;&lt;/em&gt;.
+La definición más sencilla y puntual que podemos darle a la herencia es: &lt;em&gt;&lt;strong&gt;un mecanismo de relación jerárquica&lt;/strong&gt;&lt;/em&gt;; así tal cual y no más. Ahora bien esta relación es muy útil y la puedo aplicar en mi diseño o modelo de objetos para lograr varios objetivos:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Reúso de código :&lt;/strong&gt; Al aplicar este mecanismo de relación puedo heredar código desde otra clase a la que se llama padre, así puedo usar código del &lt;em&gt;&lt;strong&gt;padre&lt;/strong&gt;&lt;/em&gt; en la clase hija tan solo escribiendo un par de líneas evitando el copiar, copiar y copiar de un lado a otro.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Organización de codigo :&lt;/strong&gt; Puedo estructurar mi modelo de una forma más lógica al mundo real, así tendría árboles jerárquicos como Animal – Mamífero – Gato, Animal – Reptil – Tortuga, etc…&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Crear subtipos :&lt;/strong&gt;  Puedo obtener otros tipos de objetos hijos que vienen siendo &lt;em&gt;&lt;strong&gt;subtipos&lt;/strong&gt;&lt;/em&gt; del padre, aunque la definición de un subtipo como tal este más ligada al &lt;em&gt;&lt;strong&gt;polimorfismo&lt;/strong&gt;&lt;/em&gt; que a la herencia, podemos decir que esto es una consecuencia de aplicar este mecanismo de relación.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Los términos a tener en cuenta cuando trabajamos con herencia son:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Superclase o clase padre.&lt;/li&gt;
+  &lt;li&gt;Subclase o clase hija.&lt;/li&gt;
+  &lt;li&gt;Generalización&lt;/li&gt;
+  &lt;li&gt;Especialización&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;generalizacin&quot;&gt;Generalización&lt;/h2&gt;
+
+&lt;p&gt;Supongamos que no tenemos ninguna relación jerárquica. Ahora bien, tengo una numero de clases que me modelan varios animales: Gato, Perro, Serpiente, etc. La generalización aparece cuando tomo este grupo de clases, identifico una serie de &lt;em&gt;&lt;strong&gt;características y comportamientos comunes&lt;/strong&gt;&lt;/em&gt; y las llevo a otra clase la cual será una superclase de todas ellas, ahí en ese proceso de abstracción estoy generalizando.&lt;/p&gt;
+
+&lt;h2 id=&quot;especializacin&quot;&gt;Especialización&lt;/h2&gt;
+&lt;p&gt;Con la especialización ocurre lo contrario, al crear una nueva clase a partir de otra y &lt;em&gt;&lt;strong&gt;agregar nuevas características y comportamiento&lt;/strong&gt;&lt;/em&gt; estoy especializando un tipo de objeto. Como lo que se hace al finalizar una profesión, por ejemplo el médico se especializa en un área más puntual digamos cardiología, ahora puede comportarse tanto como cardiólogo pero sigue siendo también un médico.&lt;/p&gt;
+</description>
+				<pubDate>Sun, 13 Feb 2011 13:10:04 -0500</pubDate>
+				<link>/conceptos/principios/2011/02/13/pensando-en-objetos-%5Bherencia%5D.html</link>
+				<guid isPermaLink="true">/conceptos/principios/2011/02/13/pensando-en-objetos-%5Bherencia%5D.html</guid>
+			</item>
+		
+			<item>
+				<title>Pensando en objetos [Encapsulacion]</title>
+				<description>&lt;p&gt;Anteriormente habíamos hablado del proceso de Abstracción, este me ayuda a definir lo que es inherente al modelado de mi problema. Por ejemplo si tratamos de modelar un objeto Televisor, podemos pensar en que características y funciones debe tener este:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Un botón de encender / apagar.&lt;/li&gt;
+  &lt;li&gt;Un par de botones para subir / bajar volumen.&lt;/li&gt;
+  &lt;li&gt;Un par de botones para cambiar  el canal (subir / bajar)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/encapsulacion-01.gif&quot; alt=&quot;Encapsulacion-01&quot; /&gt; &lt;/p&gt;
+
+&lt;p&gt;Dejémoslo así sencillo. &lt;/p&gt;
+
+&lt;p&gt;Ahora después de este arduo proceso de abstracción, debo tomar todos esos conceptos que agrupe y meterlos en una bolsa o saco.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Encapsulación, tomar mi abstracción y ponerla dentro de una entidad.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Esta entidad resultante debería tener características y funcionalidades que estén fuertemente relacionadas, que sea coherente con lo que representa. Esta entidad es mi molde de creación de objetos. Es lo que conocemos como &lt;em&gt;Clase&lt;/em&gt; y el objeto resultante formado de este molde es lo conocemos como &lt;em&gt;Instancia&lt;/em&gt;. Por eso decimos que:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Una Clase&lt;/strong&gt; es una representación abstracta de un grupo de objetos.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Una Instancia&lt;/strong&gt; es una representación física real de este tipo de dato abstracto.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Es importante no confundir la encapsulación con &lt;em&gt;&lt;strong&gt;ocultamiento de información&lt;/strong&gt;&lt;/em&gt;, que es un mecanismo que me brinda el lenguaje para definir que cosas son o no visibles al mundo exterior y en que nivel de visibilidad.&lt;/p&gt;
+
+&lt;p&gt;En la encapsulación podemos definir una &lt;em&gt;&lt;strong&gt;interfaz pública&lt;/strong&gt;&lt;/em&gt; y manipular a través de ella las características de mis objetos para tener un mejor control en muchos aspectos.&lt;/p&gt;
+
+&lt;p&gt;Ahora el ocultamiento de información es algo que es fácil de entender por si misma. Podemos definir niveles de visibilidad para los atributos y métodos de un objeto, en Java conocemos 4 tipos de visibilidad:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Publica :&lt;/strong&gt; Visible para todos.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Protegida :&lt;/strong&gt; Visible para objetos hijos (concepto de herencia).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Default :&lt;/strong&gt; Visibles para todos los objetos del mismo grupo (concepto de paquete en java)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Privada :&lt;/strong&gt; Visible solo dentro del mismo objeto.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+				<pubDate>Sat, 29 Jan 2011 13:10:04 -0500</pubDate>
+				<link>/conceptos/principios/2011/01/29/pensando-en-objetos-%5Bencapsulacion%5D.html</link>
+				<guid isPermaLink="true">/conceptos/principios/2011/01/29/pensando-en-objetos-%5Bencapsulacion%5D.html</guid>
+			</item>
+		
+			<item>
+				<title>Pensando en objetos [Abstraccion]</title>
+				<description>&lt;p&gt;Una de las características más importante en la programación orientada a objeto (POO en adelante) es que me permite expresar &lt;em&gt;&lt;strong&gt;conceptos&lt;/strong&gt;&lt;/em&gt; del mundo real tal y como son. Así como existe un vehículo en mi mundo real, tal cual lo puedo recrear en la POO.&lt;/p&gt;
+
+&lt;p&gt;En mi mundo real las cosas(objetos) tienen unas &lt;em&gt;&lt;strong&gt;características&lt;/strong&gt;&lt;/em&gt; y también pueden tener una &lt;em&gt;&lt;strong&gt;funcionalidad&lt;/strong&gt;&lt;/em&gt;. 
+Existen dos términos importantes que son:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Estado :&lt;/strong&gt; El estado del objeto está representado por sus características o rasgos particulares, también llamados atributos.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Comportamiento :&lt;/strong&gt; El comportamiento está representado por las operaciones o cosas que puede realizar este objeto, también llamados métodos.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;La base para empezar a recrear mi pequeño mundo orientado a objetos es saber identificar esto ya que el proceso de abstracción implica conocer el ecosistema y el problema que estamos tratando de modelar. La definición de abstracción puede tener cierta similitud en diferentes áreas.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Filosofía :&lt;/strong&gt; Acto mental para aislar conceptualmente las propiedades de un objeto.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Psicología :&lt;/strong&gt; Reducción de los componentes fundamentales de información de un fenómeno.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Informática :&lt;/strong&gt; Agrupar características comunes y esenciales de un grupo de objetos.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Entonces aquí tenemos uno de los principales conceptos en la POO :&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Abstracción, agrupación de características esenciales para modelar mi problema&lt;/strong&gt;. &lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Con este proceso de abstracción en la POO puedo tener algunas ventajas significativas en el desarrollo de software:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Concentrarse en pocas cosas :&lt;/strong&gt; Al tener un modelo muy bien definido puedo reducir la complejidad y puedo identificar con mayor facilidad lo que quiero.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Representación real del mundo :&lt;/strong&gt; Me siento más cómodo al trabajar con mis componentes u objetos ya que me los imagino en la realidad de mi ecosistema como son y cómo interactúan entre si.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Olvidar los detalles de implementación :&lt;/strong&gt; Es una consecuencia de concentrarme en &lt;strong&gt;que es lo que debe hacer un objeto&lt;/strong&gt;, el como lo hace  queda en segundo plano.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Es importante entender lo que quiero solucionar para lograr un diseño funcional adecuado a mis necesidades, si quiero diseñar un sistema de inventarios debemos saber que nos encontraremos con Productos, Clientes, Facturas, etc. Así que entienda primero lo que quiere hacer para que realice un buen proceso de abstracción&lt;/p&gt;
+
+&lt;p&gt;En las próximas entradas veremos el resto de los conceptos principales en la POO: encapsulación, herencia y polimorfismo.&lt;/p&gt;
+</description>
+				<pubDate>Fri, 14 Jan 2011 13:10:04 -0500</pubDate>
+				<link>/conceptos/principios/2011/01/14/pensando-en-objetos-%5Babstraccion%5D.html</link>
+				<guid isPermaLink="true">/conceptos/principios/2011/01/14/pensando-en-objetos-%5Babstraccion%5D.html</guid>
+			</item>
+		
+	</channel>
+</rss>
