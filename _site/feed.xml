@@ -7,6 +7,139 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Cargador de clases</title>
+				<description>&lt;p&gt;Este tema siempre me ha parecido muy interesante y es una de las cosas que muchos programadores no conocen, pero una vez logras entender los cargadores de clases, empiezas a comprender mejor el funcionamiento de muchas cosas en la plataforma Java. Entre ellas el sistema de carga de servidores Java EE, OSGI y otras mas.&lt;/p&gt;
+
+&lt;p&gt;Empecemos desde el comienzo para entender todo esto. La siguiente imagen muestra en una idea general de como funciona la plataforma:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://eljaviador.files.wordpress.com/2014/08/plataforma_java.jpg&quot;&gt;&lt;img src=&quot;http://eljaviador.files.wordpress.com/2014/08/plataforma_java.jpg&quot; alt=&quot;plataforma_java&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Como ya sabes, un mismo archivo .class pueda ser ejecutado en diferentes sistemas operativos. Este archivo debe ser cargado por cada JVM y ejecutado. La JVM usa un mecanismo llamado carga de clase, que permite registrar en su área de datos los archivos &lt;strong&gt;&lt;em&gt;.class&lt;/em&gt;&lt;/strong&gt; y los asocia a un tipo &lt;strong&gt;Class&lt;/strong&gt;. La JVM usa los cargadores de clases para este proceso.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://eljaviador.files.wordpress.com/2014/08/jvm_architecture.jpg&quot;&gt;&lt;img src=&quot;http://eljaviador.files.wordpress.com/2014/08/jvm_architecture.jpg&quot; alt=&quot;jvm_architecture&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Supongamos que tienes un archivo HolaMundo.java, lo compilas y ejecutas.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; java HolaMundo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Que proceso ocurre cuando lo ejecutas? Que hace la JVM con las referencias a otras clases usadas dentro de &lt;strong&gt;HolaMundo.java&lt;/strong&gt;?.&lt;/p&gt;
+
+&lt;p&gt;La JVM carga el tipo &lt;strong&gt;HolaMundo&lt;/strong&gt; en su memoria y si dentro de &lt;strong&gt;HolaMundo.java&lt;/strong&gt; referencias otro tipo como por ejemplo &lt;strong&gt;MiClaseA.java&lt;/strong&gt; esta también sera cargada en demanda por la JVM. Si &lt;strong&gt;MiClaseA.java&lt;/strong&gt; referencia a una clase &lt;strong&gt;MiClaseB.java&lt;/strong&gt; esta sera también cargada en demanda por la JVM y así sucesivamente. Esto es igual si referencias una clase del lenguaje, por ejemplo String.&lt;/p&gt;
+
+&lt;p&gt;El subsistema de carga de clases posee una jerarquía de funcionamiento. Existen 3 tipo de cargadores:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Bootstrap ClassLoader :&lt;/strong&gt; Carga las clases de /lib del JRE&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Extensions ClassLoader :&lt;/strong&gt; Carga las clases de /lib/ext de JRE&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;System ClassLoader :&lt;/strong&gt; Carga el classpath. También llamado Application ClassLoader&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://eljaviador.files.wordpress.com/2014/08/classloader_hierarchy.jpg&quot;&gt;&lt;img src=&quot;http://eljaviador.files.wordpress.com/2014/08/classloader_hierarchy.jpg&quot; alt=&quot;classloader_hierarchy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;La JVM al cargar en su memoria un .class, básicamente crea un objeto de tipo &lt;strong&gt;Class&lt;/strong&gt; que tiene todas las características de dicha clase. Este objeto tipo &lt;strong&gt;Class&lt;/strong&gt; lo podemos obtener ya que el lenguaje me proporciona un método llamado &lt;em&gt;&lt;strong&gt;getClass()&lt;/strong&gt;&lt;/em&gt; que esta presente en cada clase que creamos. Veamos un ejemplo:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HolaMundo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;HolaMundo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;HolaMundo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clazz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clazzName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clazz&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;clazzName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;La clase &lt;strong&gt;Class&lt;/strong&gt; posee mas métodos interesantes que me dicen las características de la clase &lt;strong&gt;HolaMundo&lt;/strong&gt;. Uno de estos es &lt;em&gt;&lt;strong&gt;getClassLoader()&lt;/strong&gt;&lt;/em&gt; que me dice cual fue el &lt;strong&gt;ClassLoader&lt;/strong&gt; que cargo dicha clase. De hecho una misma clase puede ser cargada al mismo tiempo por diferentes ClassLoaders y en esencia aunque sea la misma clase a juicio de la JVM son diferentes.&lt;/p&gt;
+
+&lt;p&gt;Obtengamos la jerarquía de cargadores de clases que mencionamos.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HolaMundo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;HolaMundo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;HolaMundo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clazz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;ClassLoader&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;system&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clazz&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClassLoader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;ClassLoader&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;extensions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getParent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extensions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;ClassLoader&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bootstrap&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;extensions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getParent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bootstrap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;El ultimo me imprime null, esto es porque el cargador bootstrap es nativo y no esta escrito en java. Veamos algunos conceptos asociados a los cargadores de clases.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;principio-de-delegacin&quot;&gt;Principio de Delegación&lt;/h3&gt;
+
+&lt;p&gt;Este principio dicta que un &lt;strong&gt;ClassLoader&lt;/strong&gt; pide a su padre una clase, si este no la consigue  delega en su padre y así sucesivamente hasta llegar al bootstrap y bajar de nuevo al &lt;strong&gt;ClassLoader&lt;/strong&gt; que inicio la petición el cual termina cargando la clase.&lt;/p&gt;
+
+&lt;h3 id=&quot;principio-de-visibilidad&quot;&gt;Principio de Visibilidad&lt;/h3&gt;
+
+&lt;p&gt;Las clases cargadas por un &lt;strong&gt;ClassLoader&lt;/strong&gt; son visibles a sus hijos y no viceversa, es decir las clases cargadas por los hijos no son visibles para sus padres.&lt;/p&gt;
+
+&lt;h3 id=&quot;principio-de-unicidad&quot;&gt;Principio de Unicidad&lt;/h3&gt;
+
+&lt;p&gt;Cuando un &lt;strong&gt;ClassLoader&lt;/strong&gt; carga una clase sus hijos nunca la re-cargaran.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Veamos un ejemplo mas complejo con un paquete EAR instalado en un servidor Java EE. Un archivo EAR generalmente contiene lo siguientes:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Un o varios módulos &lt;strong&gt;EJB&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Uno o varios módulos &lt;strong&gt;WAR&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Dependencias &lt;strong&gt;JAR&lt;/strong&gt; compartidas por los EJB y los WAR&lt;/li&gt;
+  &lt;li&gt;Un archivo descriptor &lt;em&gt;&lt;strong&gt;application.xml&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Supongamos que tenemos dos EAR, &lt;em&gt;&lt;strong&gt;MyEar1.ear&lt;/strong&gt;&lt;/em&gt; y &lt;em&gt;&lt;strong&gt;MyEar2.ear&lt;/strong&gt;&lt;/em&gt;. La estructura de ClassLoaders es parecida esta:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://eljaviador.files.wordpress.com/2014/08/application_server_classloader.jpg&quot;&gt;&lt;img src=&quot;http://eljaviador.files.wordpress.com/2014/08/application_server_classloader.jpg&quot; alt=&quot;application_server_classloader&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cada EAR tendrá su propio ClassLoader.&lt;/li&gt;
+  &lt;li&gt;Todos los EJB comparten un mismo ClassLoader.&lt;/li&gt;
+  &lt;li&gt;Cada WAR tiene su propio ClassLoader.&lt;/li&gt;
+  &lt;li&gt;Los servidores y contenedores de Java EE pueden aplicar diferentes estrategias de carga de clases.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;padre-primero-padre-ultimo-parent-first-parent-last&quot;&gt;Padre primero, padre ultimo (Parent First, Parent Last)&lt;/h3&gt;
+
+&lt;p&gt;Algunos cargadores delegan las peticiones a su padre de forma inmediata sin antes buscar en sus directorios los archivos &lt;em&gt;&lt;strong&gt;.class&lt;/strong&gt;&lt;/em&gt;. Esta forma de operar se le denomina &lt;em&gt;&lt;strong&gt;Parent First&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Si un cargador busca primero el .class en sus directorios y solo después que no la encuentra hace la petición al padre a esto se le denomina &lt;em&gt;&lt;strong&gt;Parent Last&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Algunos servidores y contenedores por defecto están configurados para usar el enfoque de Parent Last, esto carga primero las librerías del WAR para después llegar al ClassLoader del servidor. Esto permite a las aplicaciones usar sus propias librerías y no las que están instaladas en los servidores.&lt;/p&gt;
+</description>
+				<pubDate>Sun, 31 Aug 2014 13:10:04 -0500</pubDate>
+				<link>/arquitectura/javase/2014/08/31/cargador-de-clases.html</link>
+				<guid isPermaLink="true">/arquitectura/javase/2014/08/31/cargador-de-clases.html</guid>
+			</item>
+		
+			<item>
 				<title>Hilos en Java [1]</title>
 				<description>&lt;p&gt;Bueno esta es la primera de varias entregas sobre concurrencia o hilos en Java.  Vamos a tratar de ir de 0 a 100 para entender mejor todo este mundo de la multitaréa con el fin de aplicar lo que aprendamos en nuestros diseños de una forma mas optima.&lt;/p&gt;
 
