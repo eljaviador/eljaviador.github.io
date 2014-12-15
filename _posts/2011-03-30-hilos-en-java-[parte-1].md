@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Hilos en Java [1]"
+title:  "Hilos en Java [01]"
 date:   2011-03-30 20:20:00
 categories: concurrencia
 ---

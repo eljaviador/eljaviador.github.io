@@ -21,7 +21,7 @@ Como ya sabes, un mismo archivo .class pueda ser ejecutado en diferentes sistema
 
 Supongamos que tienes un archivo HolaMundo.java, lo compilas y ejecutas.
 
-{% highlight bash linenos %}
+{% highlight bash %}
 java HolaMundo
 {% endhighlight %}
 
