@@ -154,8 +154,8 @@
 <p>Supongamos que en una oficina <strong>X</strong> necesitan un software para impresión de mensajes o documentos. En esta oficina hay una impresora Laser.</p>
 
 <ol>
-  <li>Creamos una clase <strong>Office</strong> y una clase <strong>LaserPrinter</strong>.</li>
-  <li>Creamos una clase <strong>Main</strong> que inicia nuestro programa.</li>
+  <li>Creamos una clase <code>Office</code> y una clase <code>LaserPrinter</code>.</li>
+  <li>Creamos una clase <code>Main</code> que inicia nuestro programa.</li>
 </ol>
 
 <h2 id="versin-cero">Versión cero</h2>
@@ -198,8 +198,8 @@
 
 <h2 id="primera-correccin">Primera Corrección</h2>
 
-<p>Existe un principio de dice que debemos <strong><em>programar contra interfaces y no contra clases concretas</em></strong>. Nuestro primer cambio entonces va sobre la propiedad <em>printer</em> en la clase <strong>Office</strong>.
-Creamos una interface <strong>Printer</strong> para que sea implementada por <strong>LaserPrinter</strong> y reemplazamos en la clase <strong>Office</strong> la propiedad.</p>
+<p>Existe un principio de dice que debemos <strong><em>programar contra interfaces y no contra clases concretas</em></strong>. Nuestro primer cambio entonces va sobre la propiedad <code>printer</code> en la clase <code>Office</code>.
+Creamos una interface <code>Printer</code> para que sea implementada por <code>LaserPrinter</code> y reemplazamos en la clase <code>Office</code> la propiedad.</p>
 
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span class="lineno"> 1</span> <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Printer</span> <span class="o">{</span>
 <span class="lineno"> 2</span>    <span class="kt">void</span> <span class="nf">print</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">);</span>
@@ -239,11 +239,11 @@ Creamos una interface <strong>Printer</strong> para que sea implementada por <st
 
 <p> </p>
 
-<p>Ya cambiamos el tipo de la variable <em>printer</em> a una interface.</p>
+<p>Ya cambiamos el tipo de la variable <code>printer</code> a una interface.</p>
 
-<p>Surge una nueva oficina <strong>Z</strong> que tiene una impresora de puntos. Que hacemos? Pues fácil, creamos una implementación nueva para la interface <strong>Printer</strong> que trabaja con impresoras de punto. La llamaremos <strong>DotMatrixPrinter</strong>.</p>
+<p>Surge una nueva oficina <strong>Z</strong> que tiene una impresora de puntos. Que hacemos? Pues fácil, creamos una implementación nueva para la interface <code>Printer</code> que trabaja con impresoras de punto. La llamaremos <code>DotMatrixPrinter</code>.</p>
 
-<p>Ahora la interrogante si en el código de <strong>Office</strong> hemos instanciado directamente nuestra <strong>LaserPrinter</strong>:</p>
+<p>Ahora la interrogante si en el código de <code>Office</code> hemos instanciado directamente nuestra <code>LaserPrinter</code>:</p>
 
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span class="lineno">1</span> <span class="kd">private</span> <span class="n">Printer</span> <span class="n">printer</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">LaserPrinter</span><span class="o">();</span></code></pre></div>
 
@@ -253,7 +253,7 @@ Creamos una interface <strong>Printer</strong> para que sea implementada por <st
 
 <h2 id="segunda-correccin">Segunda Corrección</h2>
 
-<p>Aplicamos el principio de <em>Inyección de Dependencias</em>, es decir, le quitamos a la clase <strong>Office</strong> la responsabilidad de hacer la instanciación de <strong>LaserPrinter</strong>. La clase <strong>Office</strong> debe recibir desde afuera la implementación indicada para la interface <strong>Printer</strong>. Podemos usar por ejemplo el constructor para pasar la implementación adecuada.</p>
+<p>Aplicamos el principio de <em>Inyección de Dependencias</em>, es decir, le quitamos a la clase <code>Office</code> la responsabilidad de hacer la instanciación de <code>LaserPrinter</code>. La clase <code>Office</code> debe recibir desde afuera la implementación indicada para la interface <code>Printer</code>. Podemos usar por ejemplo el constructor para pasar la implementación adecuada.</p>
 
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span class="lineno"> 1</span> <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Printer</span> <span class="o">{</span>
 <span class="lineno"> 2</span>    <span class="kt">void</span> <span class="nf">print</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">);</span>
@@ -321,7 +321,7 @@ Creamos una interface <strong>Printer</strong> para que sea implementada por <st
   <li>Le pedimos al contenedor que inicie o nos proporcione nuestra aplicación.</li>
 </ol>
 
-<p>Lo nuevo aquí es crear una clase que actúe como nuestro contenedor y que llamaremos <strong>Container</strong>. Ya tenemos nuestro lanzador que es la clase <strong>Main</strong>.</p>
+<p>Lo nuevo aquí es crear una clase que actúe como nuestro contenedor y que llamaremos <code>Container</code>. Ya tenemos nuestro lanzador que es la clase <code>Main</code>.</p>
 
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span class="lineno"> 1</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Container</span> <span class="o">{</span>
 <span class="lineno"> 2</span> 
@@ -370,12 +370,12 @@ Creamos una interface <strong>Printer</strong> para que sea implementada por <st
 		  
 			 
 				<li><a href="/categories.html#arquitectura-ref">
-					arquitectura <span>(3)</span>
+					arquitectura <span>(4)</span>
 					,
 				</a></li>
 			 
 				<li><a href="/categories.html#conceptos-ref">
-					conceptos <span>(6)</span>
+					conceptos <span>(7)</span>
 					
 				</a></li>
 			
@@ -418,7 +418,7 @@ Creamos una interface <strong>Printer</strong> para que sea implementada por <st
 
 		<ul class="pager">
 		  
-		  <li class="previous"><a href="/concurrencia/2011/03/30/hilos-en-java-%5Bparte-1%5D.html" title="Hilos en Java [01]">&larr; Previous</a></li>
+		  <li class="previous"><a href="/arquitectura/conceptos/2014/07/08/contenedores-e-inyeccion-de-dependencias-%5Bparte-1%5D.html" title="Contenedores e Inyección de Dependencias [01]">&larr; Previous</a></li>
 		  
 		  
 		  <li class="next"><a href="/arquitectura/framework/2014/07/13/contenedor-spring.html" title="Contenedor Spring">Next &rarr;</a></li>

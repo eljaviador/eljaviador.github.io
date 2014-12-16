@@ -16,27 +16,27 @@
 
 &lt;p&gt; &lt;/p&gt;
 
-&lt;p&gt;Como ya sabes, un mismo archivo .class pueda ser ejecutado en diferentes sistemas operativos. Este archivo debe ser cargado por cada JVM y ejecutado. La JVM usa un mecanismo llamado carga de clase, que permite registrar en su área de datos los archivos &lt;strong&gt;&lt;em&gt;.class&lt;/em&gt;&lt;/strong&gt; y los asocia a un tipo &lt;strong&gt;Class&lt;/strong&gt;. La JVM usa los cargadores de clases para este proceso.&lt;/p&gt;
+&lt;p&gt;Como ya sabes, un mismo archivo .class pueda ser ejecutado en diferentes sistemas operativos. Este archivo debe ser cargado por cada JVM y ejecutado. La JVM usa un mecanismo llamado carga de clase, que permite registrar en su área de datos los archivos &lt;code&gt;.class&lt;/code&gt; y los asocia a un tipo &lt;strong&gt;Class&lt;/strong&gt;. La JVM usa los cargadores de clases para este proceso.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://eljaviador.files.wordpress.com/2014/08/jvm_architecture.jpg&quot;&gt;&lt;img src=&quot;http://eljaviador.files.wordpress.com/2014/08/jvm_architecture.jpg&quot; alt=&quot;jvm_architecture&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt; &lt;/p&gt;
 
-&lt;p&gt;Supongamos que tienes un archivo HolaMundo.java, lo compilas y ejecutas.&lt;/p&gt;
+&lt;p&gt;Supongamos que tienes un archivo &lt;code&gt;HolaMundo.java&lt;/code&gt;, lo compilas y ejecutas.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;java HolaMundo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt; &lt;/p&gt;
 
-&lt;p&gt;Que proceso ocurre cuando lo ejecutas? Que hace la JVM con las referencias a otras clases usadas dentro de &lt;strong&gt;HolaMundo.java&lt;/strong&gt;?.&lt;/p&gt;
+&lt;p&gt;Que proceso ocurre cuando lo ejecutas? Que hace la JVM con las referencias a otras clases usadas dentro de &lt;code&gt;HolaMundo.java&lt;/code&gt;?.&lt;/p&gt;
 
-&lt;p&gt;La JVM carga el tipo &lt;strong&gt;HolaMundo&lt;/strong&gt; en su memoria y si dentro de &lt;strong&gt;HolaMundo.java&lt;/strong&gt; referencias otro tipo como por ejemplo &lt;strong&gt;MiClaseA.java&lt;/strong&gt; esta también sera cargada en demanda por la JVM. Si &lt;strong&gt;MiClaseA.java&lt;/strong&gt; referencia a una clase &lt;strong&gt;MiClaseB.java&lt;/strong&gt; esta sera también cargada en demanda por la JVM y así sucesivamente. Esto es igual si referencias una clase del lenguaje, por ejemplo String.&lt;/p&gt;
+&lt;p&gt;La JVM carga el tipo &lt;strong&gt;HolaMundo&lt;/strong&gt; en su memoria y si dentro de &lt;code&gt;HolaMundo.java&lt;/code&gt; referencias otro tipo como por ejemplo &lt;code&gt;MiClaseA.java&lt;/code&gt; esta también sera cargada en demanda por la JVM. Si &lt;code&gt;MiClaseA.java&lt;/code&gt; referencia a una clase &lt;code&gt;MiClaseB.java&lt;/code&gt; esta sera también cargada en demanda por la JVM y así sucesivamente. Esto es igual si referencias una clase del lenguaje, por ejemplo String.&lt;/p&gt;
 
 &lt;p&gt;El subsistema de carga de clases posee una jerarquía de funcionamiento. Existen 3 tipo de cargadores:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Bootstrap ClassLoader :&lt;/strong&gt; Carga las clases de /lib del JRE&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Extensions ClassLoader :&lt;/strong&gt; Carga las clases de /lib/ext de JRE&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Bootstrap ClassLoader :&lt;/strong&gt; Carga las clases de &lt;code&gt;/lib&lt;/code&gt; del JRE&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Extensions ClassLoader :&lt;/strong&gt; Carga las clases de &lt;code&gt;/lib/ext&lt;/code&gt; de JRE&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;System ClassLoader :&lt;/strong&gt; Carga el classpath. También llamado Application ClassLoader&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -44,7 +44,7 @@
 
 &lt;p&gt; &lt;/p&gt;
 
-&lt;p&gt;La JVM al cargar en su memoria un .class, básicamente crea un objeto de tipo &lt;strong&gt;Class&lt;/strong&gt; que tiene todas las características de dicha clase. Este objeto tipo &lt;strong&gt;Class&lt;/strong&gt; lo podemos obtener ya que el lenguaje me proporciona un método llamado &lt;em&gt;&lt;strong&gt;getClass()&lt;/strong&gt;&lt;/em&gt; que esta presente en cada clase que creamos. Veamos un ejemplo:&lt;/p&gt;
+&lt;p&gt;La JVM al cargar en su memoria un &lt;code&gt;.class&lt;/code&gt;, básicamente crea un objeto de tipo &lt;strong&gt;Class&lt;/strong&gt; que tiene todas las características de dicha clase. Este objeto tipo &lt;strong&gt;Class&lt;/strong&gt; lo podemos obtener ya que el lenguaje me proporciona un método llamado &lt;code&gt;getClass()&lt;/code&gt; que esta presente en cada clase que creamos. Veamos un ejemplo:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HolaMundo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; 
@@ -61,7 +61,7 @@
 
 &lt;p&gt; &lt;/p&gt;
 
-&lt;p&gt;La clase &lt;strong&gt;Class&lt;/strong&gt; posee mas métodos interesantes que me dicen las características de la clase &lt;strong&gt;HolaMundo&lt;/strong&gt;. Uno de estos es &lt;em&gt;&lt;strong&gt;getClassLoader()&lt;/strong&gt;&lt;/em&gt; que me dice cual fue el &lt;strong&gt;ClassLoader&lt;/strong&gt; que cargo dicha clase. De hecho una misma clase puede ser cargada al mismo tiempo por diferentes ClassLoaders y en esencia aunque sea la misma clase a juicio de la JVM son diferentes.&lt;/p&gt;
+&lt;p&gt;La clase &lt;strong&gt;Class&lt;/strong&gt; posee mas métodos interesantes que me dicen las características de la clase &lt;code&gt;HolaMundo&lt;/code&gt;. Uno de estos es &lt;code&gt;getClassLoader()&lt;/code&gt; que me dice cual fue el &lt;strong&gt;ClassLoader&lt;/strong&gt; que cargo dicha clase. De hecho una misma clase puede ser cargada al mismo tiempo por diferentes ClassLoaders y en esencia aunque sea la misma clase a juicio de la JVM son diferentes.&lt;/p&gt;
 
 &lt;p&gt;Obtengamos la jerarquía de cargadores de clases que mencionamos.&lt;/p&gt;
 
@@ -86,7 +86,7 @@
 
 &lt;p&gt; &lt;/p&gt;
 
-&lt;p&gt;El ultimo me imprime null, esto es porque el cargador bootstrap es nativo y no esta escrito en java. Veamos algunos conceptos asociados a los cargadores de clases.&lt;/p&gt;
+&lt;p&gt;El ultimo me imprime &lt;code&gt;null&lt;/code&gt;, esto es porque el cargador bootstrap es nativo y no esta escrito en java. Veamos algunos conceptos asociados a los cargadores de clases.&lt;/p&gt;
 
 &lt;p&gt; &lt;/p&gt;
 
@@ -110,10 +110,10 @@
   &lt;li&gt;Un o varios módulos &lt;strong&gt;EJB&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;Uno o varios módulos &lt;strong&gt;WAR&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;Dependencias &lt;strong&gt;JAR&lt;/strong&gt; compartidas por los EJB y los WAR&lt;/li&gt;
-  &lt;li&gt;Un archivo descriptor &lt;em&gt;&lt;strong&gt;application.xml&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Un archivo descriptor &lt;code&gt;application.xml&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Supongamos que tenemos dos EAR, &lt;em&gt;&lt;strong&gt;MyEar1.ear&lt;/strong&gt;&lt;/em&gt; y &lt;em&gt;&lt;strong&gt;MyEar2.ear&lt;/strong&gt;&lt;/em&gt;. La estructura de ClassLoaders es parecida esta:&lt;/p&gt;
+&lt;p&gt;Supongamos que tenemos dos EAR, &lt;code&gt;MyEar1.ear&lt;/code&gt; y &lt;code&gt;MyEar2.ear&lt;/code&gt;. La estructura de ClassLoaders es parecida esta:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://eljaviador.files.wordpress.com/2014/08/application_server_classloader.jpg&quot;&gt;&lt;img src=&quot;http://eljaviador.files.wordpress.com/2014/08/application_server_classloader.jpg&quot; alt=&quot;application_server_classloader&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -128,7 +128,7 @@
 
 &lt;h3 id=&quot;padre-primero-padre-ultimo-parent-first-parent-last&quot;&gt;Padre primero, padre ultimo (Parent First, Parent Last)&lt;/h3&gt;
 
-&lt;p&gt;Algunos cargadores delegan las peticiones a su padre de forma inmediata sin antes buscar en sus directorios los archivos &lt;em&gt;&lt;strong&gt;.class&lt;/strong&gt;&lt;/em&gt;. Esta forma de operar se le denomina &lt;em&gt;&lt;strong&gt;Parent First&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Algunos cargadores delegan las peticiones a su padre de forma inmediata sin antes buscar en sus directorios los archivos &lt;code&gt;.class&lt;/code&gt;. Esta forma de operar se le denomina &lt;em&gt;&lt;strong&gt;Parent First&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
 
 &lt;p&gt;Si un cargador busca primero el .class en sus directorios y solo después que no la encuentra hace la petición al padre a esto se le denomina &lt;em&gt;&lt;strong&gt;Parent Last&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
 
@@ -153,13 +153,13 @@ En el artículo anterior vimos una lista de pasos para usar un contenedor en nue
   &lt;li&gt;Le pedimos al contenedor que nos proporcione nuestra aplicación.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Usaremos las mismas clases del artículo anterior, &lt;strong&gt;Office&lt;/strong&gt;, &lt;strong&gt;Printer&lt;/strong&gt;, &lt;strong&gt;DotMatrixPrinter&lt;/strong&gt; y &lt;strong&gt;Main&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Usaremos las mismas clases del artículo anterior, &lt;code&gt;Office&lt;/code&gt;, &lt;code&gt;Printer&lt;/code&gt;, &lt;code&gt;DotMatrixPrinter&lt;/code&gt; y &lt;code&gt;Main&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt; &lt;/p&gt;
 
 &lt;h2 id=&quot;usando-el-api-de-spring&quot;&gt;Usando el API de Spring&lt;/h2&gt;
 
-&lt;p&gt;El core de Spring a través de la interface &lt;strong&gt;&lt;em&gt;BeanFactory&lt;/em&gt;&lt;/strong&gt; proporciona todas las características de &lt;em&gt;IoC e Inyección de Dependencias&lt;/em&gt;. La clase principal que implementa esta interface es &lt;strong&gt;DefaultListableBeanFactory&lt;/strong&gt;. Esta sera nuestro “&lt;em&gt;Container&lt;/em&gt;”.&lt;/p&gt;
+&lt;p&gt;El core de Spring a través de la interface &lt;code&gt;BeanFactory&lt;/code&gt; proporciona todas las características de &lt;em&gt;IoC e Inyección de Dependencias&lt;/em&gt;. La clase principal que implementa esta interface es &lt;code&gt;DefaultListableBeanFactory&lt;/code&gt;. Esta sera nuestro “&lt;em&gt;Container&lt;/em&gt;”.&lt;/p&gt;
 
 &lt;p&gt;Spring no solo es un simple contenedor para inyectar dependencias, también ofrece otras características y servicios como &lt;em&gt;transaccionalidad&lt;/em&gt;, &lt;em&gt;AOP&lt;/em&gt;, &lt;em&gt;eventos&lt;/em&gt;, &lt;em&gt;soporte i18n&lt;/em&gt;, &lt;em&gt;contextos&lt;/em&gt; y mas. Para esto Spring extiende el &lt;em&gt;BeanFactory&lt;/em&gt; con la interface &lt;em&gt;ApplicationContext&lt;/em&gt; de la que hablaremos pronto.&lt;/p&gt;
 
@@ -176,26 +176,26 @@ En el artículo anterior vimos una lista de pasos para usar un contenedor en nue
 &lt;p&gt;Manualmente se necesita agregar al proyecto los siguientes jars:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;spring-core-4.0.5.RELEASE.jar&lt;/li&gt;
-  &lt;li&gt;spring-beans-4.0.5.RELEASE.jar&lt;/li&gt;
-  &lt;li&gt;commons-logging-1.1.3.jar&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;spring-core-4.0.5.RELEASE.jar&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;spring-beans-4.0.5.RELEASE.jar&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;commons-logging-1.1.3.jar&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt; &lt;/p&gt;
 
 &lt;h3 id=&quot;paso-1-punto-de-arranque&quot;&gt;Paso 1, punto de arranque&lt;/h3&gt;
 
-&lt;p&gt;Nuestro punto de inicio o lanzador será un clase &lt;strong&gt;Main&lt;/strong&gt; igual que el ejemplo del artículo anterior.&lt;/p&gt;
+&lt;p&gt;Nuestro punto de inicio o lanzador será un clase &lt;code&gt;Main&lt;/code&gt; igual que el ejemplo del artículo anterior.&lt;/p&gt;
 
 &lt;h3 id=&quot;paso-2-el-lanzador-inicia-el-contenedor&quot;&gt;Paso 2, el lanzador inicia el contenedor&lt;/h3&gt;
 
-&lt;p&gt;Aquí usamos la clase de Spring que indicamos anteriormente, &lt;strong&gt;DefaultListableBeanFactory&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Aquí usamos la clase de Spring que indicamos anteriormente, &lt;code&gt;DefaultListableBeanFactory&lt;/code&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DefaultListableBeanFactory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;container&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DefaultListableBeanFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;paso-3-cargar-la-configuracin-al-contenedor&quot;&gt;Paso 3, cargar la configuración al contenedor&lt;/h3&gt;
 
-&lt;p&gt;Aquí tenemos varios sub-pasos, primero debemos especificar nuestra configuración. Spring permite esto a través de un archivo de configuración xml o a través de anotaciones. Usaremos el xml y lo llamaremos &lt;em&gt;&lt;strong&gt;my-beans.xml&lt;/strong&gt;&lt;/em&gt;. 
+&lt;p&gt;Aquí tenemos varios sub-pasos, primero debemos especificar nuestra configuración. Spring permite esto a través de un archivo de configuración xml o a través de anotaciones. Usaremos el xml y lo llamaremos &lt;code&gt;my-beans.xml&lt;/code&gt;. 
 En Spring nuestros objetos se conocen como &lt;em&gt;Beans&lt;/em&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&lt;/span&gt;
@@ -213,8 +213,8 @@ En Spring nuestros objetos se conocen como &lt;em&gt;Beans&lt;/em&gt;.&lt;/p&gt;
 
 &lt;p&gt; &lt;/p&gt;
 
-&lt;p&gt;El elemento &lt;strong&gt;&amp;lt;bean …&amp;gt;&lt;/strong&gt; permite definir mis objetos.
-Ahora cargamos nuestro xml y se lo pasamos al contenedor. Usaremos clases de Spring para ayudarnos. Primero usamos un cargador de recursos con la interface &lt;strong&gt;&lt;em&gt;ResourceLoader&lt;/em&gt;&lt;/strong&gt;. Luego un lector de xml con &lt;strong&gt;XmlBeanDefinitionReader&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;El elemento &lt;code&gt;&amp;lt;bean ...&amp;gt;&lt;/code&gt; permite definir mis objetos.
+Ahora cargamos nuestro xml y se lo pasamos al contenedor. Usaremos clases de Spring para ayudarnos. Primero usamos un cargador de recursos con la interface &lt;code&gt;ResourceLoader&lt;/code&gt;. Luego un lector de xml con &lt;code&gt;XmlBeanDefinitionReader&lt;/code&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ResourceLoader&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resourceLoader&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DefaultResourceLoader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Resource&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resourceLoader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getResource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;classpath:my-beans.xml&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
@@ -258,14 +258,14 @@ Ahora cargamos nuestro xml y se lo pasamos al contenedor. Usaremos clases de Spr
 
 &lt;h2 id=&quot;detalles-de-configuracin-del-xml&quot;&gt;Detalles de configuración del xml&lt;/h2&gt;
 
-&lt;p&gt;Los atributos importantes en el elemento &lt;strong&gt;bean&lt;/strong&gt; son &lt;em&gt;&lt;strong&gt;class&lt;/strong&gt;&lt;/em&gt; que permite especificar la clase y el &lt;em&gt;&lt;strong&gt;id&lt;/strong&gt;&lt;/em&gt; que se usa como identificador y permite referenciar el bean en todo el xml. En esta configuración usamos la &lt;em&gt;inyección por constructor&lt;/em&gt; con el elemento &lt;strong&gt;&lt;em&gt;&amp;lt;constructor-arg&amp;gt;&lt;/em&gt;&lt;/strong&gt; y con el atributo &lt;em&gt;&lt;strong&gt;ref&lt;/strong&gt;&lt;/em&gt; definimos cual id de bean es la dependencia.
-También podemos inyectar dependencias por un método setter. De esta manera debemos usar el atributo &lt;strong&gt;&lt;em&gt;&amp;lt;property&amp;gt;&lt;/em&gt;&lt;/strong&gt; así:&lt;/p&gt;
+&lt;p&gt;Los atributos importantes en el elemento &lt;code&gt;&amp;lt;bean&amp;gt;&lt;/code&gt; son &lt;code&gt;class&lt;/code&gt; que permite especificar la clase y el &lt;code&gt;id&lt;/code&gt; que se usa como identificador y permite referenciar el bean en todo el xml. En esta configuración usamos la &lt;em&gt;inyección por constructor&lt;/em&gt; con el elemento &lt;code&gt;&amp;lt;constructor-arg&amp;gt;&lt;/code&gt; y con el atributo &lt;code&gt;ref&lt;/code&gt; definimos cual id de bean es la dependencia.
+También podemos inyectar dependencias por un método setter. De esta manera debemos usar el atributo &lt;code&gt;&amp;lt;property&amp;gt;&lt;/code&gt; así:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;printer&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;myDotMatrix&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt; &lt;/p&gt;
 
-&lt;p&gt;Nuestra clase &lt;strong&gt;Office&lt;/strong&gt; debe definir un método setter:&lt;/p&gt;
+&lt;p&gt;Nuestra clase &lt;code&gt;Office&lt;/code&gt; debe definir un método setter:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Office&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; 
@@ -282,7 +282,7 @@ También podemos inyectar dependencias por un método setter. De esta manera deb
 
 &lt;h2 id=&quot;scope&quot;&gt;Scope&lt;/h2&gt;
 
-&lt;p&gt;Otro punto importante para entender es que Spring cada vez que le pides un bean te retorna el mismo objeto ya que por defecto crea una sola instancia de cada bean, es lo que se conoce como scope &lt;em&gt;&lt;strong&gt;singleton&lt;/strong&gt;&lt;/em&gt;. Si queremos una instancia diferente cada vez que hacemos &lt;em&gt;&lt;strong&gt;getBean()&lt;/strong&gt;&lt;/em&gt; definimos el bean como scope &lt;em&gt;&lt;strong&gt;prototype&lt;/strong&gt;&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;Otro punto importante para entender es que Spring cada vez que le pides un bean te retorna el mismo objeto ya que por defecto crea una sola instancia de cada bean, es lo que se conoce como scope &lt;em&gt;&lt;strong&gt;singleton&lt;/strong&gt;&lt;/em&gt;. Si queremos una instancia diferente cada vez que hacemos &lt;code&gt;getBean()&lt;/code&gt; definimos el bean como scope &lt;em&gt;&lt;strong&gt;prototype&lt;/strong&gt;&lt;/em&gt;:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;office&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;com.test.spc.Office&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;scope=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;prototype&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -306,8 +306,8 @@ También podemos inyectar dependencias por un método setter. De esta manera deb
 &lt;p&gt;Supongamos que en una oficina &lt;strong&gt;X&lt;/strong&gt; necesitan un software para impresión de mensajes o documentos. En esta oficina hay una impresora Laser.&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Creamos una clase &lt;strong&gt;Office&lt;/strong&gt; y una clase &lt;strong&gt;LaserPrinter&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;Creamos una clase &lt;strong&gt;Main&lt;/strong&gt; que inicia nuestro programa.&lt;/li&gt;
+  &lt;li&gt;Creamos una clase &lt;code&gt;Office&lt;/code&gt; y una clase &lt;code&gt;LaserPrinter&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Creamos una clase &lt;code&gt;Main&lt;/code&gt; que inicia nuestro programa.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;versin-cero&quot;&gt;Versión cero&lt;/h2&gt;
@@ -350,8 +350,8 @@ También podemos inyectar dependencias por un método setter. De esta manera deb
 
 &lt;h2 id=&quot;primera-correccin&quot;&gt;Primera Corrección&lt;/h2&gt;
 
-&lt;p&gt;Existe un principio de dice que debemos &lt;strong&gt;&lt;em&gt;programar contra interfaces y no contra clases concretas&lt;/em&gt;&lt;/strong&gt;. Nuestro primer cambio entonces va sobre la propiedad &lt;em&gt;printer&lt;/em&gt; en la clase &lt;strong&gt;Office&lt;/strong&gt;.
-Creamos una interface &lt;strong&gt;Printer&lt;/strong&gt; para que sea implementada por &lt;strong&gt;LaserPrinter&lt;/strong&gt; y reemplazamos en la clase &lt;strong&gt;Office&lt;/strong&gt; la propiedad.&lt;/p&gt;
+&lt;p&gt;Existe un principio de dice que debemos &lt;strong&gt;&lt;em&gt;programar contra interfaces y no contra clases concretas&lt;/em&gt;&lt;/strong&gt;. Nuestro primer cambio entonces va sobre la propiedad &lt;code&gt;printer&lt;/code&gt; en la clase &lt;code&gt;Office&lt;/code&gt;.
+Creamos una interface &lt;code&gt;Printer&lt;/code&gt; para que sea implementada por &lt;code&gt;LaserPrinter&lt;/code&gt; y reemplazamos en la clase &lt;code&gt;Office&lt;/code&gt; la propiedad.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Printer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
@@ -391,11 +391,11 @@ Creamos una interface &lt;strong&gt;Printer&lt;/strong&gt; para que sea implemen
 
 &lt;p&gt; &lt;/p&gt;
 
-&lt;p&gt;Ya cambiamos el tipo de la variable &lt;em&gt;printer&lt;/em&gt; a una interface.&lt;/p&gt;
+&lt;p&gt;Ya cambiamos el tipo de la variable &lt;code&gt;printer&lt;/code&gt; a una interface.&lt;/p&gt;
 
-&lt;p&gt;Surge una nueva oficina &lt;strong&gt;Z&lt;/strong&gt; que tiene una impresora de puntos. Que hacemos? Pues fácil, creamos una implementación nueva para la interface &lt;strong&gt;Printer&lt;/strong&gt; que trabaja con impresoras de punto. La llamaremos &lt;strong&gt;DotMatrixPrinter&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Surge una nueva oficina &lt;strong&gt;Z&lt;/strong&gt; que tiene una impresora de puntos. Que hacemos? Pues fácil, creamos una implementación nueva para la interface &lt;code&gt;Printer&lt;/code&gt; que trabaja con impresoras de punto. La llamaremos &lt;code&gt;DotMatrixPrinter&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Ahora la interrogante si en el código de &lt;strong&gt;Office&lt;/strong&gt; hemos instanciado directamente nuestra &lt;strong&gt;LaserPrinter&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;Ahora la interrogante si en el código de &lt;code&gt;Office&lt;/code&gt; hemos instanciado directamente nuestra &lt;code&gt;LaserPrinter&lt;/code&gt;:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Printer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;printer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;LaserPrinter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -405,7 +405,7 @@ Creamos una interface &lt;strong&gt;Printer&lt;/strong&gt; para que sea implemen
 
 &lt;h2 id=&quot;segunda-correccin&quot;&gt;Segunda Corrección&lt;/h2&gt;
 
-&lt;p&gt;Aplicamos el principio de &lt;em&gt;Inyección de Dependencias&lt;/em&gt;, es decir, le quitamos a la clase &lt;strong&gt;Office&lt;/strong&gt; la responsabilidad de hacer la instanciación de &lt;strong&gt;LaserPrinter&lt;/strong&gt;. La clase &lt;strong&gt;Office&lt;/strong&gt; debe recibir desde afuera la implementación indicada para la interface &lt;strong&gt;Printer&lt;/strong&gt;. Podemos usar por ejemplo el constructor para pasar la implementación adecuada.&lt;/p&gt;
+&lt;p&gt;Aplicamos el principio de &lt;em&gt;Inyección de Dependencias&lt;/em&gt;, es decir, le quitamos a la clase &lt;code&gt;Office&lt;/code&gt; la responsabilidad de hacer la instanciación de &lt;code&gt;LaserPrinter&lt;/code&gt;. La clase &lt;code&gt;Office&lt;/code&gt; debe recibir desde afuera la implementación indicada para la interface &lt;code&gt;Printer&lt;/code&gt;. Podemos usar por ejemplo el constructor para pasar la implementación adecuada.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Printer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
@@ -473,7 +473,7 @@ Creamos una interface &lt;strong&gt;Printer&lt;/strong&gt; para que sea implemen
   &lt;li&gt;Le pedimos al contenedor que inicie o nos proporcione nuestra aplicación.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Lo nuevo aquí es crear una clase que actúe como nuestro contenedor y que llamaremos &lt;strong&gt;Container&lt;/strong&gt;. Ya tenemos nuestro lanzador que es la clase &lt;strong&gt;Main&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Lo nuevo aquí es crear una clase que actúe como nuestro contenedor y que llamaremos &lt;code&gt;Container&lt;/code&gt;. Ya tenemos nuestro lanzador que es la clase &lt;code&gt;Main&lt;/code&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Container&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; 
@@ -516,6 +516,113 @@ Creamos una interface &lt;strong&gt;Printer&lt;/strong&gt; para que sea implemen
 				<pubDate>Fri, 11 Jul 2014 04:24:00 -0500</pubDate>
 				<link>/arquitectura/conceptos/2014/07/11/contenedores-e-inyeccion-de-dependencias-%5Bparte-2%5D.html</link>
 				<guid isPermaLink="true">/arquitectura/conceptos/2014/07/11/contenedores-e-inyeccion-de-dependencias-%5Bparte-2%5D.html</guid>
+			</item>
+		
+			<item>
+				<title>Contenedores e Inyección de Dependencias [01]</title>
+				<description>&lt;p&gt;Voy a abordar este tema de una forma sencilla, puntual y fácil ya que próximamente hablaremos de &lt;em&gt;&lt;strong&gt;Java EE&lt;/strong&gt;&lt;/em&gt; y &lt;em&gt;&lt;strong&gt;Spring framework&lt;/strong&gt;&lt;/em&gt; y los conceptos que toquemos deben quedar bastante claros.&lt;/p&gt;
+
+&lt;p&gt;Cuando desarrollamos una aplicación esta consta de muchos objetos. Estos colaboran entre si, un objeto usa otro para realizar algún trabajo. Aquí tenemos lo que llamamos &lt;em&gt;dependencia&lt;/em&gt;. Una dependencia es un objeto necesitado por otro. Ahora una dependencia como la obtiene quien la necesita?. Es instanciada directamente por quien la necesita?&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Persister&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Libro&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libro&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DBPersister&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Persister&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Libro&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libro&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;//Codigo para guardar en DB..&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Libro&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ISBN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;year&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Persister&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DBPersister&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// mas datos...&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;guardar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;22&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;23&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;24&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;25&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Prueba&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;26&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;27&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;28&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;Libro&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Libro&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//Datos del libro&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;29&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;guardar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;30&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;31&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;32&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Noooo!&lt;/strong&gt;. Al instanciar un objeto dentro de otro(&lt;code&gt;new DBPersister()&lt;/code&gt;) estamos creando &lt;em&gt;acoplamiento&lt;/em&gt;. Así lo que tenemos es un sistema rígido. Aunque durante mucho tiempo la gente lo hizo así, esto llevó a que surgieran patrones y técnicas que mejoran la conexión entre objetos. Uno de los patrones que surgieron es el que conocemos como &lt;strong&gt;&lt;em&gt;Inyección de Dependencias&lt;/em&gt;&lt;/strong&gt;, esta promueve la modularidad y el reuso de componentes.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;inyeccin-de-dependencias&quot;&gt;Inyección de Dependencias&lt;/h2&gt;
+
+&lt;p&gt;Esta emerge de un principio denominado &lt;strong&gt;&lt;em&gt;Inversion del Control&lt;/em&gt;&lt;/strong&gt; o &lt;strong&gt;&lt;em&gt;IoC&lt;/em&gt;&lt;/strong&gt;. Que en resumen lo que permite es indicar quien controla a quien. Y porque la Inyección de Dependencias emerge de el? Pues porque el objeto que necesita la dependencia ya no es quien la instancia(controla), esa tarea la lleva a cabo alguien mas. Ahi se esta invirtiendo el control. La &lt;em&gt;&lt;strong&gt;IoC&lt;/strong&gt;&lt;/em&gt; abarca otras areas también que no mencionaremos ahora.
+El otro enfoque para manejo de las dependencias es el conocido &lt;em&gt;&lt;strong&gt;Service Locator&lt;/strong&gt;&lt;/em&gt;, del cual no hablaremos aquí.&lt;/p&gt;
+
+&lt;p&gt;La Inyección de Dependencias mejora mucho nuestra arquitectura y toma los conceptos de la &lt;strong&gt;&lt;em&gt;Inversion de Dependencias&lt;/em&gt;&lt;/strong&gt;(principio &lt;strong&gt;S.O.L.I.D&lt;/strong&gt;) que dice que &lt;em&gt;NO debemos depender de clases concretas&lt;/em&gt; si no de abstracciones que nos ayudan a desacoplar nuestros objetos.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;formas-de-inyectar-dependencias&quot;&gt;Formas de inyectar dependencias&lt;/h2&gt;
+
+&lt;p&gt;Básicamente encontramos 2 formas, una a través del &lt;em&gt;&lt;strong&gt;constructor&lt;/strong&gt;&lt;/em&gt; y otra a través de un &lt;em&gt;&lt;strong&gt;método&lt;/strong&gt;&lt;/em&gt;(mayormente un &lt;em&gt;setter&lt;/em&gt;). Usando el mismo ejemplo lo que vamos a cambiar es crear la inyección por el constructor o por el setter en la clase &lt;code&gt;Libro&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Libro&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ISBN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;year&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Persister&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// mas datos...&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// Con este setter pasamos el Persister concreto&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setPersister&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Persister&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;persister&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;       &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;persister&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;persister&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;guardar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Prueba&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt;    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;Libro&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Libro&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//Datos del libro&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;22&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;DBPersister&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DBPersister&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;23&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPersister&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;24&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;guardar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;25&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;26&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;27&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Aquí quitamos el &lt;code&gt;new DBPersister()&lt;/code&gt; y cremos un metodo setter para pasar el &lt;code&gt;Persister&lt;/code&gt; a la clase &lt;code&gt;Libro&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Cuando hablábamos de la inversion del control, decíamos que alguien mas controlaba la dependencia. Quien crea la instancia y la inyecta?. En el ejemplo anterior lo hicimos manualmente nosotros y es aquí donde aparecen los &lt;em&gt;&lt;strong&gt;contenedores&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;contenedor&quot;&gt;Contenedor&lt;/h2&gt;
+
+&lt;p&gt;Un contenedor básicamente lo podemos ver como un almacén de objetos. También nos permite manejar el &lt;em&gt;&lt;strong&gt;ciclo de vida&lt;/strong&gt;&lt;/em&gt; de estos, es decir, la creación, organización, recuperación y destrucción de los objetos. Los contenedores simplifican y hacen mas cómodo el trabajo con las dependencias ya que se encargan de crear todas la conexiones que indiquemos entre los diferentes objetos. De hecho nosotros podemos crear un pequeño contenedor para gestionar nuestros objetos, aunque claro es un trabajo que necesita un poco de dedicación.&lt;/p&gt;
+
+&lt;p&gt;Hay contenedores como &lt;strong&gt;Google Guice&lt;/strong&gt; que se enfoca principalmente en gestionar dependencias y otros que nos ofrecen mucho mas, como el caso de &lt;strong&gt;Spring&lt;/strong&gt; que posee un stack de tecnologías que nos facilitan el desarrollo de aplicaciones por la gran cantidad de APIs que nos ofrece. Esto permite que nos concentremos mas en nuestra lógica de negocio.&lt;/p&gt;
+
+&lt;p&gt;Cada contenedor se configura y se usa de forma particular, pero eso es tema para otra entrada.&lt;/p&gt;
+</description>
+				<pubDate>Tue, 08 Jul 2014 04:24:00 -0500</pubDate>
+				<link>/arquitectura/conceptos/2014/07/08/contenedores-e-inyeccion-de-dependencias-%5Bparte-1%5D.html</link>
+				<guid isPermaLink="true">/arquitectura/conceptos/2014/07/08/contenedores-e-inyeccion-de-dependencias-%5Bparte-1%5D.html</guid>
 			</item>
 		
 			<item>

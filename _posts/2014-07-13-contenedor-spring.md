@@ -15,13 +15,13 @@ En el artículo anterior vimos una lista de pasos para usar un contenedor en nue
 3.  El contenedor carga la configuración de nuestros objetos y dependencias.
 4.  Le pedimos al contenedor que nos proporcione nuestra aplicación.
 
-Usaremos las mismas clases del artículo anterior, **Office**, **Printer**, **DotMatrixPrinter** y **Main**.
+Usaremos las mismas clases del artículo anterior, `Office`, `Printer`, `DotMatrixPrinter` y `Main`.
 
 &nbsp;
 
 ## Usando el API de Spring
 
-El core de Spring a través de la interface **_BeanFactory_** proporciona todas las características de _IoC e Inyección de Dependencias_. La clase principal que implementa esta interface es **DefaultListableBeanFactory**. Esta sera nuestro "_Container_".
+El core de Spring a través de la interface `BeanFactory` proporciona todas las características de _IoC e Inyección de Dependencias_. La clase principal que implementa esta interface es `DefaultListableBeanFactory`. Esta sera nuestro "_Container_".
 
 Spring no solo es un simple contenedor para inyectar dependencias, también ofrece otras características y servicios como _transaccionalidad_, _AOP_, _eventos_, _soporte i18n_, _contextos_ y mas. Para esto Spring extiende el _BeanFactory_ con la interface _ApplicationContext_ de la que hablaremos pronto.
 
@@ -39,19 +39,19 @@ Spring framework posee muchos modulos, pero aqui solo vamos a usar dos. El modul
 
 Manualmente se necesita agregar al proyecto los siguientes jars:
 
-* spring-core-4.0.5.RELEASE.jar
-* spring-beans-4.0.5.RELEASE.jar
-* commons-logging-1.1.3.jar
+* **spring-core-4.0.5.RELEASE.jar**
+* **spring-beans-4.0.5.RELEASE.jar**
+* **commons-logging-1.1.3.jar**
 
 &nbsp;
 
 ### Paso 1, punto de arranque
 
-Nuestro punto de inicio o lanzador será un clase **Main** igual que el ejemplo del artículo anterior.
+Nuestro punto de inicio o lanzador será un clase `Main` igual que el ejemplo del artículo anterior.
 
 ### Paso 2, el lanzador inicia el contenedor
 
-Aquí usamos la clase de Spring que indicamos anteriormente, **DefaultListableBeanFactory**.
+Aquí usamos la clase de Spring que indicamos anteriormente, `DefaultListableBeanFactory`.
 
 {% highlight java linenos %}
 DefaultListableBeanFactory container = new DefaultListableBeanFactory();
@@ -59,7 +59,7 @@ DefaultListableBeanFactory container = new DefaultListableBeanFactory();
 
 ### Paso 3, cargar la configuración al contenedor
 
-Aquí tenemos varios sub-pasos, primero debemos especificar nuestra configuración. Spring permite esto a través de un archivo de configuración xml o a través de anotaciones. Usaremos el xml y lo llamaremos _**my-beans.xml**_. 
+Aquí tenemos varios sub-pasos, primero debemos especificar nuestra configuración. Spring permite esto a través de un archivo de configuración xml o a través de anotaciones. Usaremos el xml y lo llamaremos `my-beans.xml`. 
 En Spring nuestros objetos se conocen como _Beans_.
 
 {% highlight xml linenos %}
@@ -79,8 +79,8 @@ En Spring nuestros objetos se conocen como _Beans_.
 
 &nbsp;
 
-El elemento **&lt;bean ...&gt;** permite definir mis objetos.
-Ahora cargamos nuestro xml y se lo pasamos al contenedor. Usaremos clases de Spring para ayudarnos. Primero usamos un cargador de recursos con la interface **_ResourceLoader_**. Luego un lector de xml con **XmlBeanDefinitionReader**.
+El elemento `<bean ...>` permite definir mis objetos.
+Ahora cargamos nuestro xml y se lo pasamos al contenedor. Usaremos clases de Spring para ayudarnos. Primero usamos un cargador de recursos con la interface `ResourceLoader`. Luego un lector de xml con `XmlBeanDefinitionReader`.
 
 {% highlight java linenos %}
 ResourceLoader resourceLoader = new DefaultResourceLoader();
@@ -130,8 +130,8 @@ public class Main {
 
 ## Detalles de configuración del xml
 
-Los atributos importantes en el elemento **bean** son _**class**_ que permite especificar la clase y el _**id**_ que se usa como identificador y permite referenciar el bean en todo el xml. En esta configuración usamos la _inyección por constructor_ con el elemento **_&lt;constructor-arg&gt;_** y con el atributo _**ref**_ definimos cual id de bean es la dependencia.
-También podemos inyectar dependencias por un método setter. De esta manera debemos usar el atributo **_&lt;property&gt;_** así:
+Los atributos importantes en el elemento `<bean>` son `class` que permite especificar la clase y el `id` que se usa como identificador y permite referenciar el bean en todo el xml. En esta configuración usamos la _inyección por constructor_ con el elemento `<constructor-arg>` y con el atributo `ref` definimos cual id de bean es la dependencia.
+También podemos inyectar dependencias por un método setter. De esta manera debemos usar el atributo `<property>` así:
 
 {% highlight xml linenos %}
 <property name="printer" ref="myDotMatrix" />
@@ -139,7 +139,7 @@ También podemos inyectar dependencias por un método setter. De esta manera deb
 
 &nbsp;
 
-Nuestra clase **Office** debe definir un método setter:
+Nuestra clase `Office` debe definir un método setter:
 
 {% highlight java linenos %}
 public class Office {
@@ -158,7 +158,7 @@ public class Office {
 
 ## Scope
 
-Otro punto importante para entender es que Spring cada vez que le pides un bean te retorna el mismo objeto ya que por defecto crea una sola instancia de cada bean, es lo que se conoce como scope _**singleton**_. Si queremos una instancia diferente cada vez que hacemos _**getBean()**_ definimos el bean como scope _**prototype**_:
+Otro punto importante para entender es que Spring cada vez que le pides un bean te retorna el mismo objeto ya que por defecto crea una sola instancia de cada bean, es lo que se conoce como scope _**singleton**_. Si queremos una instancia diferente cada vez que hacemos `getBean()` definimos el bean como scope _**prototype**_:
 
 {% highlight xml linenos %}
 <bean id="office" class="com.test.spc.Office" scope="prototype">...

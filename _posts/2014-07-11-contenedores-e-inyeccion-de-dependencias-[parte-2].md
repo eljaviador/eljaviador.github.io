@@ -11,8 +11,8 @@ Vamos a crear un contenedor propio, claro solo con fines académicos para entrar
 
 Supongamos que en una oficina **X** necesitan un software para impresión de mensajes o documentos. En esta oficina hay una impresora Laser.
 
-1.  Creamos una clase **Office** y una clase **LaserPrinter**.
-2.  Creamos una clase **Main** que inicia nuestro programa.
+1.  Creamos una clase `Office` y una clase `LaserPrinter`.
+2.  Creamos una clase `Main` que inicia nuestro programa.
 
 ## Versión cero
 
@@ -56,8 +56,8 @@ public class Main {
 
 ## Primera Corrección
 
-Existe un principio de dice que debemos **_programar contra interfaces y no contra clases concretas_**. Nuestro primer cambio entonces va sobre la propiedad _printer_ en la clase **Office**.
-Creamos una interface **Printer** para que sea implementada por **LaserPrinter** y reemplazamos en la clase **Office** la propiedad.
+Existe un principio de dice que debemos **_programar contra interfaces y no contra clases concretas_**. Nuestro primer cambio entonces va sobre la propiedad `printer` en la clase `Office`.
+Creamos una interface `Printer` para que sea implementada por `LaserPrinter` y reemplazamos en la clase `Office` la propiedad.
 
 {% highlight java linenos %}
 public interface Printer {
@@ -99,11 +99,11 @@ public class Main {
 
 &nbsp;
 
-Ya cambiamos el tipo de la variable _printer_ a una interface.
+Ya cambiamos el tipo de la variable `printer` a una interface.
 
-Surge una nueva oficina **Z** que tiene una impresora de puntos. Que hacemos? Pues fácil, creamos una implementación nueva para la interface **Printer** que trabaja con impresoras de punto. La llamaremos **DotMatrixPrinter**.
+Surge una nueva oficina **Z** que tiene una impresora de puntos. Que hacemos? Pues fácil, creamos una implementación nueva para la interface `Printer` que trabaja con impresoras de punto. La llamaremos `DotMatrixPrinter`.
 
-Ahora la interrogante si en el código de **Office** hemos instanciado directamente nuestra **LaserPrinter**:
+Ahora la interrogante si en el código de `Office` hemos instanciado directamente nuestra `LaserPrinter`:
 
 {% highlight java linenos %}
 private Printer printer = new LaserPrinter();
@@ -115,7 +115,7 @@ Que hacemos?
 
 ## Segunda Corrección
 
-Aplicamos el principio de _Inyección de Dependencias_, es decir, le quitamos a la clase **Office** la responsabilidad de hacer la instanciación de **LaserPrinter**. La clase **Office** debe recibir desde afuera la implementación indicada para la interface **Printer**. Podemos usar por ejemplo el constructor para pasar la implementación adecuada.
+Aplicamos el principio de _Inyección de Dependencias_, es decir, le quitamos a la clase `Office` la responsabilidad de hacer la instanciación de `LaserPrinter`. La clase `Office` debe recibir desde afuera la implementación indicada para la interface `Printer`. Podemos usar por ejemplo el constructor para pasar la implementación adecuada.
 
 {% highlight java linenos %}
 public interface Printer {
@@ -183,7 +183,7 @@ Vamos a crear nuestro pequeño contenedor(le haremos competencia a _Google Guice
 3.  El contenedor lee la configuración que hemos indicado de nuestros objetos y dependencias.
 4.  Le pedimos al contenedor que inicie o nos proporcione nuestra aplicación.
 
-Lo nuevo aquí es crear una clase que actúe como nuestro contenedor y que llamaremos **Container**. Ya tenemos nuestro lanzador que es la clase **Main**.
+Lo nuevo aquí es crear una clase que actúe como nuestro contenedor y que llamaremos `Container`. Ya tenemos nuestro lanzador que es la clase `Main`.
 
 {% highlight java linenos %}
 public class Container {

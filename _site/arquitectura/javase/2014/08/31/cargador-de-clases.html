@@ -155,27 +155,27 @@
 
 <p> </p>
 
-<p>Como ya sabes, un mismo archivo .class pueda ser ejecutado en diferentes sistemas operativos. Este archivo debe ser cargado por cada JVM y ejecutado. La JVM usa un mecanismo llamado carga de clase, que permite registrar en su área de datos los archivos <strong><em>.class</em></strong> y los asocia a un tipo <strong>Class</strong>. La JVM usa los cargadores de clases para este proceso.</p>
+<p>Como ya sabes, un mismo archivo .class pueda ser ejecutado en diferentes sistemas operativos. Este archivo debe ser cargado por cada JVM y ejecutado. La JVM usa un mecanismo llamado carga de clase, que permite registrar en su área de datos los archivos <code>.class</code> y los asocia a un tipo <strong>Class</strong>. La JVM usa los cargadores de clases para este proceso.</p>
 
 <p><a href="https://eljaviador.files.wordpress.com/2014/08/jvm_architecture.jpg"><img src="http://eljaviador.files.wordpress.com/2014/08/jvm_architecture.jpg" alt="jvm_architecture" /></a></p>
 
 <p> </p>
 
-<p>Supongamos que tienes un archivo HolaMundo.java, lo compilas y ejecutas.</p>
+<p>Supongamos que tienes un archivo <code>HolaMundo.java</code>, lo compilas y ejecutas.</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">java HolaMundo</code></pre></div>
 
 <p> </p>
 
-<p>Que proceso ocurre cuando lo ejecutas? Que hace la JVM con las referencias a otras clases usadas dentro de <strong>HolaMundo.java</strong>?.</p>
+<p>Que proceso ocurre cuando lo ejecutas? Que hace la JVM con las referencias a otras clases usadas dentro de <code>HolaMundo.java</code>?.</p>
 
-<p>La JVM carga el tipo <strong>HolaMundo</strong> en su memoria y si dentro de <strong>HolaMundo.java</strong> referencias otro tipo como por ejemplo <strong>MiClaseA.java</strong> esta también sera cargada en demanda por la JVM. Si <strong>MiClaseA.java</strong> referencia a una clase <strong>MiClaseB.java</strong> esta sera también cargada en demanda por la JVM y así sucesivamente. Esto es igual si referencias una clase del lenguaje, por ejemplo String.</p>
+<p>La JVM carga el tipo <strong>HolaMundo</strong> en su memoria y si dentro de <code>HolaMundo.java</code> referencias otro tipo como por ejemplo <code>MiClaseA.java</code> esta también sera cargada en demanda por la JVM. Si <code>MiClaseA.java</code> referencia a una clase <code>MiClaseB.java</code> esta sera también cargada en demanda por la JVM y así sucesivamente. Esto es igual si referencias una clase del lenguaje, por ejemplo String.</p>
 
 <p>El subsistema de carga de clases posee una jerarquía de funcionamiento. Existen 3 tipo de cargadores:</p>
 
 <ol>
-  <li><strong>Bootstrap ClassLoader :</strong> Carga las clases de /lib del JRE</li>
-  <li><strong>Extensions ClassLoader :</strong> Carga las clases de /lib/ext de JRE</li>
+  <li><strong>Bootstrap ClassLoader :</strong> Carga las clases de <code>/lib</code> del JRE</li>
+  <li><strong>Extensions ClassLoader :</strong> Carga las clases de <code>/lib/ext</code> de JRE</li>
   <li><strong>System ClassLoader :</strong> Carga el classpath. También llamado Application ClassLoader</li>
 </ol>
 
@@ -183,7 +183,7 @@
 
 <p> </p>
 
-<p>La JVM al cargar en su memoria un .class, básicamente crea un objeto de tipo <strong>Class</strong> que tiene todas las características de dicha clase. Este objeto tipo <strong>Class</strong> lo podemos obtener ya que el lenguaje me proporciona un método llamado <em><strong>getClass()</strong></em> que esta presente en cada clase que creamos. Veamos un ejemplo:</p>
+<p>La JVM al cargar en su memoria un <code>.class</code>, básicamente crea un objeto de tipo <strong>Class</strong> que tiene todas las características de dicha clase. Este objeto tipo <strong>Class</strong> lo podemos obtener ya que el lenguaje me proporciona un método llamado <code>getClass()</code> que esta presente en cada clase que creamos. Veamos un ejemplo:</p>
 
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span class="lineno"> 1</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HolaMundo</span> <span class="o">{</span>
 <span class="lineno"> 2</span> 
@@ -200,7 +200,7 @@
 
 <p> </p>
 
-<p>La clase <strong>Class</strong> posee mas métodos interesantes que me dicen las características de la clase <strong>HolaMundo</strong>. Uno de estos es <em><strong>getClassLoader()</strong></em> que me dice cual fue el <strong>ClassLoader</strong> que cargo dicha clase. De hecho una misma clase puede ser cargada al mismo tiempo por diferentes ClassLoaders y en esencia aunque sea la misma clase a juicio de la JVM son diferentes.</p>
+<p>La clase <strong>Class</strong> posee mas métodos interesantes que me dicen las características de la clase <code>HolaMundo</code>. Uno de estos es <code>getClassLoader()</code> que me dice cual fue el <strong>ClassLoader</strong> que cargo dicha clase. De hecho una misma clase puede ser cargada al mismo tiempo por diferentes ClassLoaders y en esencia aunque sea la misma clase a juicio de la JVM son diferentes.</p>
 
 <p>Obtengamos la jerarquía de cargadores de clases que mencionamos.</p>
 
@@ -225,7 +225,7 @@
 
 <p> </p>
 
-<p>El ultimo me imprime null, esto es porque el cargador bootstrap es nativo y no esta escrito en java. Veamos algunos conceptos asociados a los cargadores de clases.</p>
+<p>El ultimo me imprime <code>null</code>, esto es porque el cargador bootstrap es nativo y no esta escrito en java. Veamos algunos conceptos asociados a los cargadores de clases.</p>
 
 <p> </p>
 
@@ -249,10 +249,10 @@
   <li>Un o varios módulos <strong>EJB</strong></li>
   <li>Uno o varios módulos <strong>WAR</strong></li>
   <li>Dependencias <strong>JAR</strong> compartidas por los EJB y los WAR</li>
-  <li>Un archivo descriptor <em><strong>application.xml</strong></em></li>
+  <li>Un archivo descriptor <code>application.xml</code></li>
 </ol>
 
-<p>Supongamos que tenemos dos EAR, <em><strong>MyEar1.ear</strong></em> y <em><strong>MyEar2.ear</strong></em>. La estructura de ClassLoaders es parecida esta:</p>
+<p>Supongamos que tenemos dos EAR, <code>MyEar1.ear</code> y <code>MyEar2.ear</code>. La estructura de ClassLoaders es parecida esta:</p>
 
 <p><a href="https://eljaviador.files.wordpress.com/2014/08/application_server_classloader.jpg"><img src="http://eljaviador.files.wordpress.com/2014/08/application_server_classloader.jpg" alt="application_server_classloader" /></a></p>
 
@@ -267,7 +267,7 @@
 
 <h3 id="padre-primero-padre-ultimo-parent-first-parent-last">Padre primero, padre ultimo (Parent First, Parent Last)</h3>
 
-<p>Algunos cargadores delegan las peticiones a su padre de forma inmediata sin antes buscar en sus directorios los archivos <em><strong>.class</strong></em>. Esta forma de operar se le denomina <em><strong>Parent First</strong></em>.</p>
+<p>Algunos cargadores delegan las peticiones a su padre de forma inmediata sin antes buscar en sus directorios los archivos <code>.class</code>. Esta forma de operar se le denomina <em><strong>Parent First</strong></em>.</p>
 
 <p>Si un cargador busca primero el .class en sus directorios y solo después que no la encuentra hace la petición al padre a esto se le denomina <em><strong>Parent Last</strong></em>.</p>
 
@@ -282,7 +282,7 @@
 		  
 			 
 				<li><a href="/categories.html#arquitectura-ref">
-					arquitectura <span>(3)</span>
+					arquitectura <span>(4)</span>
 					,
 				</a></li>
 			 

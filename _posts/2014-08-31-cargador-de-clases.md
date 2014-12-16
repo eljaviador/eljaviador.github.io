@@ -13,13 +13,13 @@ Empecemos desde el comienzo para entender todo esto. La siguiente imagen muestra
 
 &nbsp;
 
-Como ya sabes, un mismo archivo .class pueda ser ejecutado en diferentes sistemas operativos. Este archivo debe ser cargado por cada JVM y ejecutado. La JVM usa un mecanismo llamado carga de clase, que permite registrar en su área de datos los archivos **_.class_** y los asocia a un tipo **Class**. La JVM usa los cargadores de clases para este proceso.
+Como ya sabes, un mismo archivo .class pueda ser ejecutado en diferentes sistemas operativos. Este archivo debe ser cargado por cada JVM y ejecutado. La JVM usa un mecanismo llamado carga de clase, que permite registrar en su área de datos los archivos `.class` y los asocia a un tipo **Class**. La JVM usa los cargadores de clases para este proceso.
 
 [![jvm_architecture](http://eljaviador.files.wordpress.com/2014/08/jvm_architecture.jpg)](https://eljaviador.files.wordpress.com/2014/08/jvm_architecture.jpg)
 
 &nbsp;
 
-Supongamos que tienes un archivo HolaMundo.java, lo compilas y ejecutas.
+Supongamos que tienes un archivo `HolaMundo.java`, lo compilas y ejecutas.
 
 {% highlight bash %}
 java HolaMundo
@@ -27,21 +27,21 @@ java HolaMundo
 
 &nbsp;
 
-Que proceso ocurre cuando lo ejecutas? Que hace la JVM con las referencias a otras clases usadas dentro de **HolaMundo.java**?.
+Que proceso ocurre cuando lo ejecutas? Que hace la JVM con las referencias a otras clases usadas dentro de `HolaMundo.java`?.
 
-La JVM carga el tipo **HolaMundo** en su memoria y si dentro de **HolaMundo.java** referencias otro tipo como por ejemplo **MiClaseA.java** esta también sera cargada en demanda por la JVM. Si **MiClaseA.java** referencia a una clase **MiClaseB.java** esta sera también cargada en demanda por la JVM y así sucesivamente. Esto es igual si referencias una clase del lenguaje, por ejemplo String.
+La JVM carga el tipo **HolaMundo** en su memoria y si dentro de `HolaMundo.java` referencias otro tipo como por ejemplo `MiClaseA.java` esta también sera cargada en demanda por la JVM. Si `MiClaseA.java` referencia a una clase `MiClaseB.java` esta sera también cargada en demanda por la JVM y así sucesivamente. Esto es igual si referencias una clase del lenguaje, por ejemplo String.
 
 El subsistema de carga de clases posee una jerarquía de funcionamiento. Existen 3 tipo de cargadores:
 
-1.  **Bootstrap ClassLoader :** Carga las clases de /lib del JRE
-2.  **Extensions ClassLoader :** Carga las clases de /lib/ext de JRE
+1.  **Bootstrap ClassLoader :** Carga las clases de `/lib` del JRE
+2.  **Extensions ClassLoader :** Carga las clases de `/lib/ext` de JRE
 3.  **System ClassLoader :** Carga el classpath. También llamado Application ClassLoader
 
 [![classloader_hierarchy](http://eljaviador.files.wordpress.com/2014/08/classloader_hierarchy.jpg)](https://eljaviador.files.wordpress.com/2014/08/classloader_hierarchy.jpg)
 
 &nbsp;
 
-La JVM al cargar en su memoria un .class, básicamente crea un objeto de tipo **Class** que tiene todas las características de dicha clase. Este objeto tipo **Class** lo podemos obtener ya que el lenguaje me proporciona un método llamado _**getClass()**_ que esta presente en cada clase que creamos. Veamos un ejemplo:
+La JVM al cargar en su memoria un `.class`, básicamente crea un objeto de tipo **Class** que tiene todas las características de dicha clase. Este objeto tipo **Class** lo podemos obtener ya que el lenguaje me proporciona un método llamado `getClass()` que esta presente en cada clase que creamos. Veamos un ejemplo:
 
 {% highlight java linenos %}
 public class HolaMundo {
@@ -60,7 +60,7 @@ public class HolaMundo {
 
 &nbsp;
 
-La clase **Class** posee mas métodos interesantes que me dicen las características de la clase **HolaMundo**. Uno de estos es _**getClassLoader()**_ que me dice cual fue el **ClassLoader** que cargo dicha clase. De hecho una misma clase puede ser cargada al mismo tiempo por diferentes ClassLoaders y en esencia aunque sea la misma clase a juicio de la JVM son diferentes.
+La clase **Class** posee mas métodos interesantes que me dicen las características de la clase `HolaMundo`. Uno de estos es `getClassLoader()` que me dice cual fue el **ClassLoader** que cargo dicha clase. De hecho una misma clase puede ser cargada al mismo tiempo por diferentes ClassLoaders y en esencia aunque sea la misma clase a juicio de la JVM son diferentes.
 
 Obtengamos la jerarquía de cargadores de clases que mencionamos.
 
@@ -87,7 +87,7 @@ public class HolaMundo {
 
 &nbsp;
 
-El ultimo me imprime null, esto es porque el cargador bootstrap es nativo y no esta escrito en java. Veamos algunos conceptos asociados a los cargadores de clases.
+El ultimo me imprime `null`, esto es porque el cargador bootstrap es nativo y no esta escrito en java. Veamos algunos conceptos asociados a los cargadores de clases.
 
 &nbsp;
 
@@ -110,9 +110,9 @@ Veamos un ejemplo mas complejo con un paquete EAR instalado en un servidor Java 
 1.  Un o varios módulos **EJB**
 2.  Uno o varios módulos **WAR**
 3.  Dependencias **JAR** compartidas por los EJB y los WAR
-4.  Un archivo descriptor _**application.xml**_
+4.  Un archivo descriptor `application.xml`
 
-Supongamos que tenemos dos EAR, _**MyEar1.ear**_ y _**MyEar2.ear**_. La estructura de ClassLoaders es parecida esta:
+Supongamos que tenemos dos EAR, `MyEar1.ear` y `MyEar2.ear`. La estructura de ClassLoaders es parecida esta:
 
 [![application_server_classloader](http://eljaviador.files.wordpress.com/2014/08/application_server_classloader.jpg)](https://eljaviador.files.wordpress.com/2014/08/application_server_classloader.jpg)
 
@@ -125,7 +125,7 @@ Supongamos que tenemos dos EAR, _**MyEar1.ear**_ y _**MyEar2.ear**_. La estructu
 
 ### Padre primero, padre ultimo (Parent First, Parent Last)
 
-Algunos cargadores delegan las peticiones a su padre de forma inmediata sin antes buscar en sus directorios los archivos _**.class**_. Esta forma de operar se le denomina _**Parent First**_.
+Algunos cargadores delegan las peticiones a su padre de forma inmediata sin antes buscar en sus directorios los archivos `.class`. Esta forma de operar se le denomina _**Parent First**_.
 
 Si un cargador busca primero el .class en sus directorios y solo después que no la encuentra hace la petición al padre a esto se le denomina _**Parent Last**_.
 
