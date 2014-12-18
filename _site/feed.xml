@@ -626,6 +626,196 @@ El otro enfoque para manejo de las dependencias es el conocido &lt;em&gt;&lt;str
 			</item>
 		
 			<item>
+				<title>Comprender Manven [02]</title>
+				<description>&lt;p&gt;El &lt;strong&gt;&lt;em&gt;Project Object Model&lt;/em&gt;&lt;/strong&gt; es un archivo xml(&lt;code&gt;pom.xml&lt;/code&gt;) que cada proyecto posee y el cual describe la configuración de los plugins, las dependencias o librerías de terceros, los perfiles y más. &lt;/p&gt;
+
+&lt;p&gt;Este xml es usado por maven para realizar la construcción(build) del proyecto cada vez que ejecutamos algún goal o una fase del ciclo de vida.&lt;/p&gt;
+
+&lt;p&gt;Contiene un elemento padre llamado &lt;code&gt;&amp;lt;project&amp;gt;...&amp;lt;/project&amp;gt;&lt;/code&gt; y este a su vez otros subelementos. De todos los elementos el POM al menos debe tener las coordenadas que identifican al proyecto. Que son las coordenadas?&lt;/p&gt;
+
+&lt;h2 id=&quot;coordenadas-maven&quot;&gt;Coordenadas Maven&lt;/h2&gt;
+
+&lt;p&gt;Los elementos &lt;strong&gt;groupId&lt;/strong&gt;, &lt;strong&gt;artifactId&lt;/strong&gt; y &lt;strong&gt;version&lt;/strong&gt; son identificadores que forman lo que se denomina coordenadas de un proyecto. Estas coordenadas son únicas y no existen dos proyectos con los mismos valores en groupId, artifactId y version.&lt;/p&gt;
+
+&lt;p&gt;Se le denomina coordenadas porque se asemeja a tener una dirección o ubicación única para un proyecto dentro del espacio de proyectos Maven. Esta es la forma en que maven relaciona proyectos entre sí. Los repositorios Maven están organizados usando estos identificadores.&lt;/p&gt;
+
+&lt;h3 id=&quot;el-elemento-groupid&quot;&gt;El elemento groupId&lt;/h3&gt;
+
+&lt;p&gt;Representa un grupo, empresa, equipo u organización. Generalmente se nombra empezando con un dominio y la organización que crea el proyecto ej: &lt;strong&gt;org.miempresa&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;el-elemento-artifactid&quot;&gt;El elemento artifactId&lt;/h3&gt;
+
+&lt;p&gt;Representa de manera única el nombre ya sea del del proyecto completo o de un módulo de este.&lt;/p&gt;
+
+&lt;h3 id=&quot;el-elemento-version&quot;&gt;El elemento version&lt;/h3&gt;
+
+&lt;p&gt;Representa la versión de este proyecto o de este módulo. Bajo desarrollo suele usarse un número más la palabra &lt;strong&gt;SNAPSHOT&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;el-elemento-packaging&quot;&gt;El elemento packaging&lt;/h3&gt;
+
+&lt;p&gt;Representa la forma en que se va a distribuir la aplicación. Si no se coloca este elemento por defecto es &lt;strong&gt;JAR&lt;/strong&gt;. También existe &lt;strong&gt;WAR&lt;/strong&gt;, &lt;strong&gt;EJB&lt;/strong&gt;, &lt;strong&gt;POM&lt;/strong&gt; y otros. Aunque packaging es un elemento de las coordenadas, no es parte de los identificadores únicos de un proyecto.&lt;/p&gt;
+
+&lt;p&gt;Los siguientes son los elementos que puede contener un pom.xml&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;project&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Básicos --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;parent&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/parent&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependencyManagement&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependencyManagement&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;modules&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/modules&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;properties&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/properties&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Configuración para construcción(build) --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;reporting&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/reporting&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Otras información del proyecto --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;description&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/description&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;22&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;23&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;inceptionYear&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/inceptionYear&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;24&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;licenses&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/licenses&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;25&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;organization&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/organization&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;26&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;developers&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/developers&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;27&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;contributors&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/contributors&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;28&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;29&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Configurcion de entorno --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;30&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;issueManagement&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/issueManagement&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;31&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;ciManagement&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ciManagement&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;32&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;mailingLists&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/mailingLists&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;33&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;scm&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/scm&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;34&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;prerequisites&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prerequisites&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;35&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;repositories&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/repositories&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;36&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;pluginRepositories&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/pluginRepositories&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;37&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;distributionManagement&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/distributionManagement&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;38&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;profiles&amp;gt;&lt;/span&gt;...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/profiles&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;39&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Mientras vayamos haciendo ejemplos veremos la mayoría de estos elementos. Este es un pom básico generado por maven:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;project...&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;net.ejemplos.ejemplomaven&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;ejemplo-maven&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;jar&lt;span class=&quot;nt&quot;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;ejemplo-maven&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;http://maven.apache.org&lt;span class=&quot;nt&quot;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;       &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;junit&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;       &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;junit&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;       &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;3.8.1&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt;       &lt;span class=&quot;nt&quot;&gt;&amp;lt;scope&amp;gt;&lt;/span&gt;test&lt;span class=&quot;nt&quot;&gt;&amp;lt;/scope&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt;     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Ahora hagamos un ejemplo. Vamos a crear un pequeño proyecto y compilarlo. Usaremos dos plugins:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;archetype:generate&lt;/strong&gt; para generar el proyecto.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;compiler:compile&lt;/strong&gt; para compilarlo.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;arquetipos&quot;&gt;Arquetipos&lt;/h2&gt;
+
+&lt;p&gt;En Maven un arquetipo básicamente es un modelo. Como una especie de molde para crear los proyectos. Los arquetipos crean un proyecto agregando características específicas como: que directorios hacen parte de la estructura o que elementos son incluidos en el pom. Vamos a usar el arquetipo &lt;strong&gt;&lt;em&gt;maven-archetype-quickstart&lt;/em&gt;&lt;/strong&gt; que crea un proyecto muy básico.&lt;/p&gt;
+
+&lt;h3 id=&quot;cremos-el-proyecto&quot;&gt;Cremos el Proyecto&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mvn archetype:generate -DarchetypeArtifactId&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;maven-archetype-quickstart -DinteractiveMode&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt; -DgroupId&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;org.empresa.proyecto -DartifactId&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;proyecto1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Esto crea una estructura como esta:&lt;/p&gt;
+&lt;pre&gt;
+proyecto1
+ ├─ pom.xml
+ └─ src
+     ├─ main
+     │   └─ java
+     │       └─ org
+     │           └─ empresa
+     │               └─ proyecto
+     │                   └─ App.java
+     └─ test
+         └─ java
+             └─ org
+                 └─ empresa
+                     └─ proyecto
+                         └─ AppTest.java
+&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;compilamos-el-proyecto&quot;&gt;Compilamos el Proyecto&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mvn compiler:compile&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Esto crea un nuevo directorio para el proyecto generado llamado &lt;code&gt;target&lt;/code&gt; y un subdirectorio en &lt;code&gt;target&lt;/code&gt; llamado &lt;code&gt;classes&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;ejecutamos-el-proyecto&quot;&gt;Ejecutamos el Proyecto&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;java -cp target/classes org.empresa.proyecto.App&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;No te gustan esos nombres de directorio? Bueno hagamos nuestra primera configuracion en el &lt;code&gt;pom.xml&lt;/code&gt; generado.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;limpiar-el-proyecto-generado&quot;&gt;Limpiar el proyecto generado:&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mvn clean&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;agregamos-al-pomxml&quot;&gt;Agregamos al pom.xml:&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;directory&amp;gt;&lt;/span&gt;build&lt;span class=&quot;nt&quot;&gt;&amp;lt;/directory&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;compilamos-de-nuevo&quot;&gt;Compilamos de nuevo:&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mvn compiler:compile&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Ahora ya no vemos que genera el directorio target si no build. Así configuramos muchas cosas en el &lt;code&gt;pom.xml&lt;/code&gt; para cambiar el comportamiento de los plugins.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;usando-el-ciclo-de-vida&quot;&gt;Usando el Ciclo de Vida&lt;/h2&gt;
+
+&lt;p&gt;En vez de usar plugins directamente para compilar usemos el ciclo de vida. Quitamos la configuración el elemento que colocamos en el &lt;code&gt;pom.xml&lt;/code&gt; y ejecutamos:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mvn install&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Esto crea el directorio target con varios subdirectorios y el nombre del empaquetado del proyecto, en este caso:
+&lt;code&gt;proyecto1-1.0-SNAPSHOT.jar&lt;/code&gt;&lt;/p&gt;
+</description>
+				<pubDate>Mon, 27 May 2013 08:57:00 -0500</pubDate>
+				<link>/frameworks/herramientas/2013/05/27/comprender-maven-parte-02.html</link>
+				<guid isPermaLink="true">/frameworks/herramientas/2013/05/27/comprender-maven-parte-02.html</guid>
+			</item>
+		
+			<item>
 				<title>Hilos en Java [01]</title>
 				<description>&lt;p&gt;Bueno esta es la primera de varias entregas sobre concurrencia o hilos en Java.  Vamos a tratar de ir de 0 a 100 para entender mejor todo este mundo de la multitaréa con el fin de aplicar lo que aprendamos en nuestros diseños de una forma mas optima.&lt;/p&gt;
 
@@ -927,49 +1117,6 @@ La definición más sencilla y puntual que podemos darle a la herencia es: &lt;e
 				<pubDate>Sat, 29 Jan 2011 13:10:04 -0500</pubDate>
 				<link>/conceptos/principios/2011/01/29/pensando-en-objetos-%5Bencapsulacion%5D.html</link>
 				<guid isPermaLink="true">/conceptos/principios/2011/01/29/pensando-en-objetos-%5Bencapsulacion%5D.html</guid>
-			</item>
-		
-			<item>
-				<title>Pensando en objetos [Abstraccion]</title>
-				<description>&lt;p&gt;Una de las características más importante en la programación orientada a objeto (POO en adelante) es que me permite expresar &lt;em&gt;&lt;strong&gt;conceptos&lt;/strong&gt;&lt;/em&gt; del mundo real tal y como son. Así como existe un vehículo en mi mundo real, tal cual lo puedo recrear en la POO.&lt;/p&gt;
-
-&lt;p&gt;En mi mundo real las cosas(objetos) tienen unas &lt;em&gt;&lt;strong&gt;características&lt;/strong&gt;&lt;/em&gt; y también pueden tener una &lt;em&gt;&lt;strong&gt;funcionalidad&lt;/strong&gt;&lt;/em&gt;. 
-Existen dos términos importantes que son:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Estado :&lt;/strong&gt; El estado del objeto está representado por sus características o rasgos particulares, también llamados atributos.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Comportamiento :&lt;/strong&gt; El comportamiento está representado por las operaciones o cosas que puede realizar este objeto, también llamados métodos.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;La base para empezar a recrear mi pequeño mundo orientado a objetos es saber identificar esto ya que el proceso de abstracción implica conocer el ecosistema y el problema que estamos tratando de modelar. La definición de abstracción puede tener cierta similitud en diferentes áreas.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Filosofía :&lt;/strong&gt; Acto mental para aislar conceptualmente las propiedades de un objeto.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Psicología :&lt;/strong&gt; Reducción de los componentes fundamentales de información de un fenómeno.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Informática :&lt;/strong&gt; Agrupar características comunes y esenciales de un grupo de objetos.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Entonces aquí tenemos uno de los principales conceptos en la POO :&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Abstracción, agrupación de características esenciales para modelar mi problema&lt;/strong&gt;. &lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Con este proceso de abstracción en la POO puedo tener algunas ventajas significativas en el desarrollo de software:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Concentrarse en pocas cosas :&lt;/strong&gt; Al tener un modelo muy bien definido puedo reducir la complejidad y puedo identificar con mayor facilidad lo que quiero.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Representación real del mundo :&lt;/strong&gt; Me siento más cómodo al trabajar con mis componentes u objetos ya que me los imagino en la realidad de mi ecosistema como son y cómo interactúan entre si.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Olvidar los detalles de implementación :&lt;/strong&gt; Es una consecuencia de concentrarme en &lt;strong&gt;que es lo que debe hacer un objeto&lt;/strong&gt;, el como lo hace  queda en segundo plano.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Es importante entender lo que quiero solucionar para lograr un diseño funcional adecuado a mis necesidades, si quiero diseñar un sistema de inventarios debemos saber que nos encontraremos con Productos, Clientes, Facturas, etc. Así que entienda primero lo que quiere hacer para que realice un buen proceso de abstracción&lt;/p&gt;
-
-&lt;p&gt;En las próximas entradas veremos el resto de los conceptos principales en la POO: encapsulación, herencia y polimorfismo.&lt;/p&gt;
-</description>
-				<pubDate>Fri, 14 Jan 2011 13:10:04 -0500</pubDate>
-				<link>/conceptos/principios/2011/01/14/pensando-en-objetos-%5Babstraccion%5D.html</link>
-				<guid isPermaLink="true">/conceptos/principios/2011/01/14/pensando-en-objetos-%5Babstraccion%5D.html</guid>
 			</item>
 		
 	</channel>
