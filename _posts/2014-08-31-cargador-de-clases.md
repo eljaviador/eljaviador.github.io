@@ -9,13 +9,13 @@ Este tema siempre me ha parecido interesante y es de las cosas que muchos progra
 
 Empecemos desde el comienzo para entender todo esto. La siguiente imagen muestra en una idea general de como funciona la plataforma:
 
-[![plataforma_java](http://eljaviador.files.wordpress.com/2014/08/plataforma_java.jpg)](https://eljaviador.files.wordpress.com/2014/08/plataforma_java.jpg)
+![plataforma_java](/images/plataforma_java.jpg)
 
 &nbsp;
 
 Como ya sabes, un mismo archivo .class pueda ser ejecutado en diferentes sistemas operativos. Este archivo debe ser cargado por cada JVM y ejecutado. La JVM usa un mecanismo llamado carga de clase, que permite registrar en su área de datos los archivos `.class` y los asocia a un tipo **Class**. La JVM usa los cargadores de clases para este proceso.
 
-[![jvm_architecture](http://eljaviador.files.wordpress.com/2014/08/jvm_architecture.jpg)](https://eljaviador.files.wordpress.com/2014/08/jvm_architecture.jpg)
+![jvm_architecture](/images/jvm_architecture.jpg)
 
 &nbsp;
 
@@ -37,7 +37,7 @@ El subsistema de carga de clases posee una jerarquía de funcionamiento. Existen
 2.  **Extensions ClassLoader :** Carga las clases de `/lib/ext` de JRE
 3.  **System ClassLoader :** Carga el classpath. También llamado Application ClassLoader
 
-[![classloader_hierarchy](http://eljaviador.files.wordpress.com/2014/08/classloader_hierarchy.jpg)](https://eljaviador.files.wordpress.com/2014/08/classloader_hierarchy.jpg)
+![classloader_hierarchy](/images/classloader_hierarchy.jpg)
 
 &nbsp;
 
@@ -114,7 +114,7 @@ Veamos un ejemplo mas complejo con un paquete EAR instalado en un servidor Java 
 
 Supongamos que tenemos dos EAR, `MyEar1.ear` y `MyEar2.ear`. La estructura de ClassLoaders es parecida esta:
 
-[![application_server_classloader](http://eljaviador.files.wordpress.com/2014/08/application_server_classloader.jpg)](https://eljaviador.files.wordpress.com/2014/08/application_server_classloader.jpg)
+![application_server_classloader](/images/application_server_classloader.jpg)
 
 - Cada EAR tendrá su propio ClassLoader.
 - Todos los EJB comparten un mismo ClassLoader.
