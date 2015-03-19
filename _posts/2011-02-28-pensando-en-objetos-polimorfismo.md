@@ -20,22 +20,21 @@ Ahora veamos como es eso de una interfaz uniforme para tratar al polimorfismo?. 
 public void hacerAlgo(Mamifero m){
    m.comer();
 }
-{% endhighlight %}
-
+{% endhighlight %}<br/>
 
 Ahora al llamar a el método `hacerAlgo()` puedo pasar un objeto que cumpla con ese contrato `Mamífero`. Si tengo una clase `Perro` y otra clase `Ballena` y ambas implementan ese contrato entonces el método aceptará cualquiera de las dos.
 
-{% highlight java %}
+{% highlight java linenos%}
 Perro p = new Perro();
 hacerAlgo(p);
-{% endhighlight %}
+{% endhighlight %}<br/>
 
 Igual si lo hacemos con un objeto `Ballena`:
 
-{% highlight java %}
+{% highlight java linenos%}
 Ballena b = new Ballena();
 hacerAlgo(b);
-{% endhighlight %}
+{% endhighlight %}<br/>
 
 Al llamar a `m.comer()` dentro de `hacerAlgo()`, este se comportará según el objeto real que estamos pasando al método, sea un perro o una ballena, cada uno comerá a su manera y de eso se trata el polimorfismo, en este caso la interfaz común es el método `comer()` que estamos invocando dentro del método con la referencia _**m**_ de `Mamifero`.
 

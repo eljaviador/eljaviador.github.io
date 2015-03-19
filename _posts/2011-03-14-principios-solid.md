@@ -23,21 +23,21 @@ Estos principios son:
 * **I**nterface Segregation Principle
 * **D**ependency Inversion Principle
 
-Veamos rápidamente la definición de cada uno. En las próximas entradas los veremos con más detalle.
+Veamos rápidamente la definición de cada uno. En las próximas entradas los veremos con más detalle.<br/><br/>
 
-### Single Responsability Principle – Principio de Responsabilidad Simple
-Una clase debe tener una sola razón para cambiar.
+#### [Single Responsability Principle [Principio de Responsabilidad Simple]]({% post_url 2011-04-29-SOLID-principio-de-responsabilidad-simple %})
+Una clase debe tener una sola razón para cambiar.<br/><br/>
 
-### Open / Close Principle – Principio Abierto / Cerrado
-Clases, módulos y funciones deben ser abierta para extender y cerrada para modificar.
+#### Open / Close Principle [Principio Abierto / Cerrado]
+Clases, módulos y funciones deben ser abierta para extender y cerrada para modificar.<br/><br/>
 
-### Liskov Substitution Principle – Principio de Sustitución de Liskov
-Al usar una clase base los subtipos de esta pueden ser cambiados.
+#### Liskov Substitution Principle [Principio de Sustitución de Liskov]
+Al usar una clase base los subtipos de esta pueden ser cambiados.<br/><br/>
 
-### Interface Segregation Principle – Principio de Segregación de Interfaces
-Un cliente no debe estar obligado implementar Interfaces que no usa.
+#### Interface Segregation Principle [Principio de Segregación de Interfaces]
+Un cliente no debe estar obligado implementar Interfaces que no usa.<br/><br/>
 
-### Dependency Inversion Principle – Principio de Inversión de Dependencias
-Módulos de alto nivel no deben depender de módulos de bajo nivel. Las dependencias entre estos deben ser sobre abstracciones no sobre clases concretas.
+#### Dependency Inversion Principle [Principio de Inversión de Dependencias]
+Módulos de alto nivel no deben depender de módulos de bajo nivel. Las dependencias entre estos deben ser sobre abstracciones no sobre clases concretas.<br/><br/>
 
 La buena aplicación de estos principios al comienzo no suele ser tan sencillo, puede tomar cierto tiempo mientras se acumula experiencia y se conoce más el paradigma de objetos. Además de otras ventajas significativas como código fácil de mantener y de testear.

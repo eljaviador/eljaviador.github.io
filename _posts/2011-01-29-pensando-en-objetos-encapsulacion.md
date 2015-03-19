@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Pensando en objetos [Encapsulacion]"
+title:  "Pensando en objetos [Encapsulación]"
 date:   2011-01-29 18:10:04
 categories: conceptos principios
 ---
@@ -13,16 +13,16 @@ Anteriormente habíamos hablado del proceso de Abstracción, este me ayuda a def
 
 ![Encapsulacion-01](/images/encapsulacion-01.gif) 
 
-Dejémoslo así sencillo. 
+Dejémoslo así sencillo. <br/><br/>
 
 Ahora después de este arduo proceso de abstracción, debo tomar todos esos conceptos que agrupe y meterlos en una bolsa o saco.
 
-> Encapsulación, tomar mi abstracción y ponerla dentro de una entidad.
+> _Encapsulación, tomar mi abstracción y ponerla dentro de una entidad_.
 
 Esta entidad resultante debería tener características y funcionalidades que estén fuertemente relacionadas, que sea coherente con lo que representa. Esta entidad es mi molde de creación de objetos. Es lo que conocemos como _Clase_ y el objeto resultante formado de este molde es lo conocemos como _Instancia_. Por eso decimos que:
 
 * **Una Clase** es una representación abstracta de un grupo de objetos.
-* **Una Instancia** es una representación física real de este tipo de dato abstracto.
+* **Una Instancia** es una representación física real de este tipo de dato abstracto.<br/><br/>
 
 Es importante no confundir la encapsulación con _**ocultamiento de información**_, que es un mecanismo que me brinda el lenguaje para definir que cosas son o no visibles al mundo exterior y en que nivel de visibilidad.
 

@@ -6,11 +6,15 @@ categories: conceptos principios
 ---
 
 Siguiendo con los conceptos importantes en la POO nos encontramos con la _**herencia**_.
-La definición más sencilla y puntual que podemos darle a la herencia es: _**un mecanismo de relación jerárquica**_; así tal cual y no más. Ahora bien esta relación es muy útil y la puedo aplicar en mi diseño o modelo de objetos para lograr varios objetivos:
+La definición más sencilla y puntual que podemos darle a la herencia es: _**un mecanismo de relación jerárquica**_; así tal cual y no más.
+Ahora bien esta relación es muy útil y la puedo aplicar en mi diseño o modelo de objetos para lograr varios objetivos:
 
-1. **Reúso de código :** Al aplicar este mecanismo de relación puedo heredar código desde otra clase a la que se llama padre, así puedo usar código del _**padre**_ en la clase hija tan solo escribiendo un par de líneas evitando el copiar, copiar y copiar de un lado a otro.
-2. **Organización de codigo :** Puedo estructurar mi modelo de una forma más lógica al mundo real, así tendría árboles jerárquicos como Animal – Mamífero – Gato, Animal – Reptil – Tortuga, etc…
-3. **Crear subtipos :**  Puedo obtener otros tipos de objetos hijos que vienen siendo _**subtipos**_ del padre, aunque la definición de un subtipo como tal este más ligada al _**polimorfismo**_ que a la herencia, podemos decir que esto es una consecuencia de aplicar este mecanismo de relación.
+1. **Reúso de código :** Al aplicar este mecanismo de relación puedo heredar código desde otra clase a la que se llama padre, así puedo usar código
+del _**padre**_ en la clase hija tan solo escribiendo un par de líneas evitando el copiar, copiar y copiar de un lado a otro.
+2. **Organización de codigo :** Puedo estructurar mi modelo de una forma más lógica al mundo real, así tendría árboles jerárquicos como
+Animal – Mamífero – Gato, Animal – Reptil – Tortuga, etc…
+3. **Crear subtipos :**  Puedo obtener otros tipos de objetos hijos que vienen siendo _**subtipos**_ del padre, aunque la definición de un subtipo
+como tal este más ligada al _**polimorfismo**_ que a la herencia, podemos decir que esto es una consecuencia de aplicar este mecanismo de relación.<br/><br/>
 
 Los términos a tener en cuenta cuando trabajamos con herencia son:
 
