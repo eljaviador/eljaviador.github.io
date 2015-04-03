@@ -28,7 +28,7 @@ Veamos rápidamente la definición de cada uno. En las próximas entradas los ve
 #### [Single Responsability Principle [Principio de Responsabilidad Simple]]({% post_url 2011-04-29-SOLID-principio-de-responsabilidad-simple %})
 Una clase debe tener una sola razón para cambiar.<br/><br/>
 
-#### Open / Close Principle [Principio Abierto / Cerrado]
+#### [Open / Close Principle [Principio Abierto / Cerrado]]({% post_url 2011-05-16-SOLID-principio-abierto-cerrado %})
 Clases, módulos y funciones deben ser abierta para extender y cerrada para modificar.<br/><br/>
 
 #### Liskov Substitution Principle [Principio de Sustitución de Liskov]
