@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Antipatrones. Mas problemitas [03]"
+title:  "Antipatrones y Problemas del Desarrollo [03]"
 date:   2011-09-30  13:28:00
 categories: arquitectura
 ---

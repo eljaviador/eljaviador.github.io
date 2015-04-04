@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Antipatrones. Metiendonos en problemas [01]"
+title:  "Antipatrones y Problemas del Desarrollo [01]"
 date:   2011-06-14  13:28:00
 categories: arquitectura
 ---
