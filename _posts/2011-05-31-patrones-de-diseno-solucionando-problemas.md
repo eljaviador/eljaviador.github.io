@@ -16,7 +16,7 @@ Personas detrás del desarrollo de lenguajes como SmallTalk, Eiffel o C++ han si
 publicación mas conocida en este ambito es **_Design patterns: elements of reusable object-oriented software_**, escrito por 
 Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides.
 
-[![](/images/gof_book.jpg "Libro en Amazon"){: .imgH300}](http://goo.gl/3vtZb5)<br/>
+[![](/images/book_gof.jpg "Libro en Amazon"){: .imgH300}](http://goo.gl/3vtZb5)<br/>
 
 La idea fundamental detrás de un patrón de diseño es identificar una 
 situación o problema y describir una estructura o modelo que recree la solución de este, así uno de sus objetivos es probar y 
