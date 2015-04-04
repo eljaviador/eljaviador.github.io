@@ -7,7 +7,7 @@ categories: arquitectura
 
 Aquí la segunda parte de los antipatrones de arquitectura de software.
 
-## Arquitectura de Software
+## Arquitectura de Software. Parte 2
 
 #### **Architecture by implication (Inferir arquitectura)** 
 Sucede cuando por experiencia previa los responsables de un proyecto asumen que la documentación no es necesaria. Este exceso 
