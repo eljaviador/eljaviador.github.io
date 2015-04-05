@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Hilos en Java - [03]"
+title:  "Hilos en Java [03]"
 date:   2011-10-16  13:28:00
 categories: javase
 ---
