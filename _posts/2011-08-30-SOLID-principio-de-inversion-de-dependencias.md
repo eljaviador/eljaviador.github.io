@@ -19,8 +19,8 @@ Cuando tenemos asociaciones en nuestro sistema con el objetivo de realizar un ta
 necesidad de usar partes dentro de partes para realizar esto, es aquí donde entra en acción la dependencia. Una cosa depende 
 o se ayuda de otra para realizar el trabajo o parte de este.
 
-Robert Martin dice que basándonos en el principio de [**Substitución de Liskov**]({% post_url 2011-06-29-SOLID-principio-de-sustitucion-de-liskov %} "S.O.L.I.D – Principio de Sustitución de Liskov") 
-y el principio [**Abierto / Cerrado**]({% post_url 2011-05-16-SOLID-principio-abierto-cerrado %} "S.O.L.I.D – Principio Abierto / Cerrado"), 
+Robert Martin dice que basándonos en el principio de [**Substitución de Liskov**]({% post_url 2011-06-29-SOLID-principio-de-sustitucion-de-liskov %}) 
+y el principio [**Abierto / Cerrado**]({% post_url 2011-05-16-SOLID-principio-abierto-cerrado %}), 
 la estructura resultante la podemos generalizar en un principio que llama **_Inversión de Dependencias_**.
 
 Tenemos una entidad o clase que queremos persistir, ahora bien podemos usar por ejemplo una clase `Libro` :

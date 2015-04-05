@@ -5,7 +5,8 @@ date:   2011-04-15  17:57:00
 categories: javase concurrencia
 ---
 
-En esta segunda entrega de hilos vamos a trabajar un poco mas con ellos teniendo en cuenta los conceptos que vimos en la _[primera entrega]({% post_url 2011-03-30-hilos-en-java-parte-1 %})_.
+En esta segunda entrega de hilos vamos a trabajar un poco mas con ellos teniendo en cuenta los conceptos que vimos en 
+la [_primera entrega_]({% post_url 2011-03-30-hilos-en-java-parte-1 %}).
 
 ## Trabajando con Hilos
 Conozcamos un poco el API de **Thread** para ver que podemos hacer con ella.

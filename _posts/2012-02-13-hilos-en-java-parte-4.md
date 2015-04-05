@@ -180,7 +180,7 @@ sincronizados para que no exista corrupción del estado del buffer. Cada vez que
 comprueba el tamaño del buffer, si esta al limite se espera. Cada vez que el consumidor intenta sacar un dato se verifica 
 que no este vacío el buffer.
 
-* [Hilos en Java - Parte 1]({% post_url 2011-03-30-hilos-en-java-parte-1 %} "Hilos en Java – Parte 1")
-* [Hilos en Java - Parte 2]({% post_url 2011-04-15-hilos-en-java-parte-2 %} "Hilos en Java – Parte 2")
-* [Hilos en Java - Parte 3]({% post_url 2011-10-16-hilos-en-java-parte-3 %} "Hilos en Java – Parte 3")
+* [Hilos en Java - Parte 1]({% post_url 2011-03-30-hilos-en-java-parte-1 %})
+* [Hilos en Java - Parte 2]({% post_url 2011-04-15-hilos-en-java-parte-2 %})
+* [Hilos en Java - Parte 3]({% post_url 2011-10-16-hilos-en-java-parte-3 %})
     

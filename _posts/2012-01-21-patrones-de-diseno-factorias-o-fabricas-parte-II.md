@@ -113,4 +113,4 @@ Por último dejo una imagen del diseño UML de este patrón y otra del ejemplo p
 ![Factory Method 01](/images/factory-method-01.jpg)<br/><br/>
 ![Factory Method 02](/images/factory-method-02.jpg)<br/><br/>
 
-* [Patrones de Diseño - Factorias (Parte 1)]({% post_url 2011-07-31-patrones-de-diseno-factorias-o-fabricas-parte-I %} "Factorias – Parte 1")
+* [Patrones de Diseño - Factorias (Parte 1)]({% post_url 2011-07-31-patrones-de-diseno-factorias-o-fabricas-parte-I %})

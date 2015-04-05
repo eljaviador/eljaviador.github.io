@@ -107,5 +107,5 @@ no estáticos sean accedidos por métodos no estáticos. El bloqueo de clase(sob
 instancia(sobre métodos no estáticos), por ende un hilo puede acceder a un método estático y otro hilo a un método no estático 
 y no bloquearse mutuamente.
 
-* [Hilos en Java - Parte 1]({% post_url 2011-03-30-hilos-en-java-parte-1 %} "Hilos en Java – Parte 1")
-* [Hilos en Java - Parte 2]({% post_url 2011-04-15-hilos-en-java-parte-2 %} "Hilos en Java – Parte 2")
+* [Hilos en Java - Parte 1]({% post_url 2011-03-30-hilos-en-java-parte-1 %})
+* [Hilos en Java - Parte 2]({% post_url 2011-04-15-hilos-en-java-parte-2 %})

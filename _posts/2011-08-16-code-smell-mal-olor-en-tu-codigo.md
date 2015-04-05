@@ -11,7 +11,7 @@ propuso el termino **Code smell** mientras ayudaba Martin Fowler a escribir su l
 indicio superficial que generalmente esta asociado a un problema mas profundo en el sistema.
 
 Son pequeños detalles en nuestro código que te dicen que algo esta como no debe ser. Esto no significa que tu sistema no funciona.
-El termino podría tener una similitud con los [antipatrones de diseño]({%  post_url 2011-06-14-antipatrones-metiendonos-en-problemas %} "Antipatrones – Metiendonos en problemas"), 
+El termino podría tener una similitud con los [antipatrones de diseño]({% post_url 2011-06-14-antipatrones-metiendonos-en-problemas %}), 
 pero es un poco mas superficial, solo un indicio y que no necesariamente representa un problema en tu software. 
 
 Asi como cuando hueles algo... uhm este olor no me gusta... esta como raro :).Algunos Smells interesantes:
