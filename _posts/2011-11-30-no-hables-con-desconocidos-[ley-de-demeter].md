@@ -51,5 +51,5 @@ Algunos decían que la factura debería entonces dar el nombre del cliente:
 factura.getNombreCliente();
 {% endhighlight %}<br/>
 
-esto basándose en lo anterior, pero yo personalmente me inclino mas por que un método en la vista reciba el Cliente y obtenga 
+esto basándose en lo anterior, pero yo personalmente me inclino mas por que un método en la vista reciba el `Cliente` y obtenga 
 el nombre.
