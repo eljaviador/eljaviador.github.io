@@ -2,7 +2,10 @@
 layout: post
 title:  "Comprender Manven [01]"
 date:   2013-05-22  13:41:00
-categories: frameworks herramientas
+published: true
+categories: [herramientas]
+tags: [maven, conceptos, arquitectura, proyectos]
+shortinfo: Enfoque comprensivo sobre esta herramienta de construcción de proyectos.
 ---
 
 Comúnmente creamos nuestros proyectos con el soporte Maven que traen IDEs como _Eclipse_, _IntelliJ IDEA_ o _Netbeans_ para facilitar las cosas sin ir a los detalles.

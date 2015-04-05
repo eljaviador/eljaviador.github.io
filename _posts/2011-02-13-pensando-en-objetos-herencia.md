@@ -2,7 +2,10 @@
 layout: post
 title:  "Pensando en objetos [Herencia]"
 date:   2011-02-13 18:10:04
-categories: conceptos principios
+published: true
+categories: [conceptos y principios]
+tags: [herencia, poo]
+shortinfo: Entender la Herencia y es su uso en la programación orientada a objetos.
 ---
 
 Siguiendo con los conceptos importantes en la POO nos encontramos con la _**herencia**_.

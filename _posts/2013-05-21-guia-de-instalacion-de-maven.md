@@ -2,7 +2,10 @@
 layout: post
 title:  "Guía de instalación de Maven"
 date:   2013-05-21  18:08:00
-categories: guias
+published: true
+categories: [guias]
+tags: [maven, guias]
+shortinfo: Guía de instalación de la herramienta de construcción de proyectos Maven.
 ---
 Maven es una herramienta Java y necesitamos el JDK(no solo el JRE) instalado y configurado. La instalación de Maven es 
 sencilla. Descargar un `.zip`, descomprimirlo en algún directorio y apuntar las variables a ese directorio. 

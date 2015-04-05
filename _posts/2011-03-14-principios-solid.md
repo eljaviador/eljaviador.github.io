@@ -2,7 +2,10 @@
 layout: post
 title:  "Principios S.O.L.I.D"
 date:   2011-03-14 11:00:04
-categories: conceptos principios
+published: true
+categories: [conceptos y principios]
+tags: [principios, poo]
+shortinfo: Conoceremos estos principios del desarrollo de software para crear sistemas óptimos.
 ---
 
 Los principios **S.O.L.I.D** son un conjunto de guías que nos ayudan a _**evitar malos diseños**_ cuando desarrollamos software orientado a objetos. Estos principios fueron reunidos y expuestos por _Robert Martin_, también conocido como “El tío bob” en su libro _“Agile Software Development: Principles, Patterns, and Practices”_.

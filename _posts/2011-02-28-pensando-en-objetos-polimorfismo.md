@@ -2,7 +2,10 @@
 layout: post
 title:  "Pensando en objetos [Polimorfismo]"
 date:   2011-02-28 18:10:04
-categories: conceptos principios
+published: true
+categories: [conceptos y principios]
+tags: [polimorfismo, poo]
+shortinfo: Asimilar el Polimorfismo y como se aplica en la programación orientada a objetos.
 ---
 
 Vayamos directo al grano y después entramos un poco más en detalle, veamos enseguida la definición de polimorfismo, y después la vamos a explicar paso a paso.

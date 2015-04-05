@@ -2,7 +2,10 @@
 layout: post
 title:  "Contenedores e Inyección de Dependencias [01]"
 date:   2014-07-08  09:24:00
-categories: arquitectura conceptos
+published: true
+categories: [conceptos y principios]
+tags: [conceptos, poo, arquitectura, contenedores, dependencias]
+shortinfo: El funcionamiento de los contenedores y las dependencias un tema imprecindible para un buen desarrollador de software.
 ---
 
 Voy a abordar este tema de una forma sencilla, puntual y fácil ya que próximamente hablaremos de _**Java EE**_ y _**Spring framework**_ y los conceptos que toquemos deben quedar bastante claros.

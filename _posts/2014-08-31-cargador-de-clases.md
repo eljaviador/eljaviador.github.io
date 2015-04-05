@@ -2,7 +2,10 @@
 layout: post
 title:  "Cargador de clases"
 date:   2014-08-31 18:10:04
-categories: arquitectura javase
+published: true
+categories: [conceptos, javase]
+tags: [principios, conceptos, arquitectura, javase]
+shortinfo: Un tema sumamente importante para entender como funciona la JVM y poder resolver varios problemas asociados al uso de clases.
 ---
 
 Este tema siempre me ha parecido interesante y es de las cosas que muchos programadores no conocen, pero una vez lo entiendes, empiezas a comprender como funcionan muchas cosas en la plataforma Java. Entre ellas el sistema de carga de servidores Java EE, OSGI y otras.

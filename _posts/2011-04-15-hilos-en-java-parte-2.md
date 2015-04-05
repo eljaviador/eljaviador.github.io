@@ -2,7 +2,10 @@
 layout: post
 title:  "Hilos en Java [02]"
 date:   2011-04-15  17:57:00
-categories: javase concurrencia
+published: true
+categories: [javase]
+tags: [concurrencia, hilos, javase, thread]
+shortinfo: Segunda entrega sobre concurrencia y programacion de hilos en Java
 ---
 
 En esta segunda entrega de hilos vamos a trabajar un poco mas con ellos teniendo en cuenta los conceptos que vimos en 

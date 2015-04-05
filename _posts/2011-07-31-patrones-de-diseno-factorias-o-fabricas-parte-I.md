@@ -2,7 +2,10 @@
 layout: post
 title:  "Patrones de Diseño - Factorias o Fabricas [01]"
 date:   2011-07-31  13:28:00
-categories: arquitectura
+published: true
+categories: [patrones]
+tags: [patrones, principios, poo, arquitectura]
+shortinfo: Patron de diseño Factoría. Aprende que es y como se usa para desarrollar y resolver problemas.
 ---
 
 Uno de los patrones de diseño creacionales que mas abunda en la POO son los denominados fábricas o factorías. Se asemejan 

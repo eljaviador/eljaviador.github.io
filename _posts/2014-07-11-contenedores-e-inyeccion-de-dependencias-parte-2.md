@@ -2,7 +2,10 @@
 layout: post
 title:  "Contenedores e Inyección de Dependencias [02]"
 date:   2014-07-11  09:24:00
-categories: arquitectura conceptos
+published: true
+categories: [conceptos y principios]
+tags: [conceptos, poo, arquitectura, contenedores, dependencias]
+shortinfo: Segunda parte del tema de los contenedores y la inyección de dependencias.
 ---
 
 En la entrada anterior veíamos un poco el paradigma de _Inyección de Dependencias_ que promueve la **modularidad** y la **reutilización** de objetos, además los contenedores nos facilitan su uso. 

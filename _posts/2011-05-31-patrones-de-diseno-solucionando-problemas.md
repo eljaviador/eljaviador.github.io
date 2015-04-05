@@ -2,7 +2,10 @@
 layout: post
 title:  "Patrones de diseño - Solucionando problemas"
 date:   2011-05-31  13:28:00
-categories: arquitectura patrones
+published: true
+categories: [patrones]
+tags: [patrones, principios, poo, arquitectura]
+shortinfo: Aprende como desarrollar software y resolver problemas recurrentes con los patrones de diseño.
 ---
 
 Cuando construimos software nos encontramos a menudo con todo tipo de situaciones y problemas que debemos solucionar creando un 

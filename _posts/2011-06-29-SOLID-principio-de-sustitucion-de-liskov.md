@@ -2,7 +2,10 @@
 layout: post
 title:  "S.O.L.I.D Principio de Sustitucion de Liskov"
 date:   2011-06-29  13:28:00
-categories: arquitectura
+published: true
+categories: [conceptos y principios]
+tags: [principios, poo]
+shortinfo: Tercera entrega sobre los pricipios S.O.L.I.D para desarrollo de software.
 ---
 
 Ahora conoceremos el tercer principio [_**S.O.L.I.D**_]({% post_url 2011-03-14-principios-solid %}).

@@ -2,7 +2,10 @@
 layout: post
 title:  "Pensando en objetos [Abstracción]"
 date:   2011-01-14 18:10:04
-categories: conceptos principios
+published: true
+categories: [conceptos y principios]
+tags: [abstracción, poo]
+shortinfo: Comprendiendo el concepto de Abstración asociado a la programación orientada a objetos.
 ---
 
 Una de las características más importante en la programación orientada a objeto (POO en adelante) es que me permite expresar _**conceptos**_ del mundo real tal y como son.

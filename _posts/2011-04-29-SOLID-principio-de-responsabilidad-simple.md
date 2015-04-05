@@ -2,7 +2,10 @@
 layout: post
 title:  "S.O.L.I.D Principio de Responsabilidad Simple"
 date:   2011-04-29  13:28:00
-categories: arquitectura conceptos principios
+published: true
+categories: [conceptos y principios]
+tags: [principios, poo]
+shortinfo: Primera entrega sobre los pricipios S.O.L.I.D para desarrollo de software.
 ---
 
 Este es el primero de varios posts sobre los principios [_**S.O.L.I.D**_]({% post_url 2011-03-14-principios-solid %}).

@@ -2,7 +2,10 @@
 layout: post
 title:  "S.O.L.I.D Principio Abierto/Cerrado"
 date:   2011-05-16  09:25:00
-categories: arquitectura principios
+published: true
+categories: [conceptos y principios]
+tags: [principios, poo]
+shortinfo: Segunda entrega sobre los pricipios S.O.L.I.D para desarrollo de software.
 ---
 
 Seguimos con el segundo de los principios [_**S.O.L.I.D**_]({% post_url 2011-03-14-principios-solid %}).

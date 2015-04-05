@@ -2,7 +2,10 @@
 layout: post
 title:  "S.O.L.I.D Principio de Inversion de Dependencias"
 date:   2011-08-30  13:28:00
-categories: arquitectura
+published: true
+categories: [conceptos y principios]
+tags: [principios, poo]
+shortinfo: Quinta y última entrega sobre los pricipios S.O.L.I.D para desarrollo de software.
 ---
 
 Ahora veamos el quinto y último de los principios [_**S.O.L.I.D**_]({% post_url 2011-03-14-principios-solid %}).

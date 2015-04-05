@@ -2,8 +2,10 @@
 layout: post
 title:  "Code Smell - Mal olor en tu codigo"
 date:   2011-08-16  13:28:00
-categories: arquitectura
-shortinfo: Tema intersante sobre detectar problemas en el código.
+published: true
+categories: [principios]
+tags: [antipatrones, patrones, principios, conceptos, poo, arquitectura]
+shortinfo: Conoce sobre este tema intersante y aprende a detectar problemas en el código.
 ---
 
 Kent Beck(creador de [JUnit](http://www.junit.org/ "JUnit") y precursor de [Extreme Programming](http://goo.gl/M3PNEv "Programación extrema")) 

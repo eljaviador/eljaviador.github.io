@@ -2,7 +2,10 @@
 layout: post
 title:  "Pensando en objetos [Encapsulación]"
 date:   2011-01-29 18:10:04
-categories: conceptos principios
+published: true
+categories: [conceptos y principios]
+tags: [encapsulación, poo]
+shortinfo: Comprendiendo el concepto de Encapsulación asociado a la programación orientada a objetos.
 ---
 
 Anteriormente habíamos hablado del proceso de Abstracción, este me ayuda a definir lo que es inherente al modelado de mi problema. Por ejemplo si tratamos de modelar un objeto Televisor, podemos pensar en que características y funciones debe tener este:

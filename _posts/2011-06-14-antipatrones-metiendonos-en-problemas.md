@@ -2,7 +2,10 @@
 layout: post
 title:  "Antipatrones y Problemas del Desarrollo [01]"
 date:   2011-06-14  13:28:00
-categories: arquitectura
+published: true
+categories: [patrones]
+tags: [patrones, antipatrones, principios, poo, arquitectura]
+shortinfo: Conoce los problemas asociados al uso de patrones de diseño y desarrollo de software
 ---
 
 Así como existen buenas practicas, también podemos encontramos con malas practicas que en teoría no nos ofrecen soluciones 

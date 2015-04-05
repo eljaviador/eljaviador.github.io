@@ -2,7 +2,10 @@
 layout: post
 title:  "Comprender Manven [02]"
 date:   2013-05-27  13:57:00
-categories: frameworks herramientas
+published: true
+categories: [herramientas]
+tags: [maven, conceptos, arquitectura, proyectos]
+shortinfo: Segunda entrega sobre esta herramienta de construcción de proyectos.
 ---
 
 El **_Project Object Model_** es un archivo xml(`pom.xml`) que cada proyecto posee y el cual describe la configuración de los plugins, las dependencias o librerías de terceros, los perfiles y más. 
