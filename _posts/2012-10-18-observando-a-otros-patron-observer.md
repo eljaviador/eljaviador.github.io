@@ -2,7 +2,10 @@
 layout: post
 title:  "Observando a otros [Patron observer]"
 date:   2012-10-18  13:28:00
-categories: patrones
+published: true
+categories: [patrones]
+tags: [patrones, principios, poo, arquitectura]
+shortinfo: Conoce como desarrollar una comunicación eficiente entre los componentes de tu sistema con este patron de diseño. 
 ---
 
 Qué pasa si tienes uno o varios objetos que necesitan saber cuando cambia algún valor en otro objeto?. Consultar al objeto 

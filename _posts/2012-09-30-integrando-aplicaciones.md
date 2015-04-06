@@ -2,7 +2,10 @@
 layout: post
 title:  "Integrando aplicaciones"
 date:   2012-09-30  13:28:00
-categories: arquitectura
+published: true
+categories: [conceptos y principios]
+tags: [patrones, conceptos, principios, arquitectura]
+shortinfo: Introducción a este tema interesante para la integracion entre multiples sistemas.
 ---
 
 En una sola empresa puede haber multitud de sistemas(ERP, CRM...) para manejar el negocio, incluso puede tener no una, sino varias web. 

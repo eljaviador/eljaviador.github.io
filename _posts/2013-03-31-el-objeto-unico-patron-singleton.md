@@ -2,7 +2,10 @@
 layout: post
 title:  "El objeto único [Patrón Singleton]"
 date:   2013-03-31  14:24:00
-categories: patrones
+published: true
+categories: [patrones]
+tags: [patrones, principios, poo, arquitectura]
+shortinfo: Comprender el uso apropiado de objetos o instancias únicas es un tema vital para desarrolladores de software.
 ---
 
 Existen muchas situaciones en el desarrollo de una aplicación, en la que se desea tener un punto de acceso único hacia 

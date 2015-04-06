@@ -2,7 +2,10 @@
 layout: post
 title:  "Reusando objetos"
 date:   2013-04-10  12:30:00
-categories: patrones
+published: true
+categories: [patrones]
+tags: [patrones, principios, poo, arquitectura]
+shortinfo: Optimiza tu sistema y el uso intensivo de objetos a través de este patron de diseño.
 ---
 
 Al instanciar ciertos tipos de objetos estos realizan otras operaciones de inicialización que toman un poco más tiempo de 

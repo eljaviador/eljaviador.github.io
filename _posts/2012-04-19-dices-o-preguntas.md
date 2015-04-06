@@ -2,8 +2,10 @@
 layout: post
 title:  "Dices o preguntas"
 date:   2012-04-19  13:28:00
-categories: arquitectura
-shortinfo: Principio de programación de la POO.
+published: true
+categories: [conceptos y principios]
+tags: [conceptos, principios, poo, arquitectura]
+shortinfo: Aprende a evitar la programación procedural dentro de la POO con este principio de orientación a objetos.
 ---
 
 ### Conversación UNO:

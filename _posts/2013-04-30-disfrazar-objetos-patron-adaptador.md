@@ -2,7 +2,10 @@
 layout: post
 title:  "Disfrazar objetos [Patrón adaptador]"
 date:   2013-04-30  12:49:00
-categories: patrones
+published: true
+categories: [patrones]
+tags: [patrones, principios, poo, arquitectura]
+shortinfo: Aprende como incorporar componentes incompatibles a tu sistema a través del patron Adaptador.
 ---
 
 Sacas la tarjeta de memoria de tu celular, una microSD para ver su contenido en tu Laptop. Resulta que tu Laptop tiene 

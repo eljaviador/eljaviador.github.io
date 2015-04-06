@@ -2,7 +2,10 @@
 layout: post
 title:  "Enumerados al extremo"
 date:   2012-11-12  09:19:00
-categories: javase
+published: true
+categories: [javase]
+tags: [conceptos, enum, principios, poo, arquitectura]
+shortinfo: Aprende a usar de forma optima uno de los elementos de declaración superior en la plataforma Java
 ---
 
 Desde la version 5, Java incluye una característica muy util para realizar algunas cosas interesantes como rangos de valores, 

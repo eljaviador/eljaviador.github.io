@@ -2,7 +2,9 @@
 layout: post
 title:  "Cual es el centro de tu aplicación"
 date:   2012-05-15  13:28:00
-categories: general
+published: true
+categories: [general]
+tags: [arquitectura, base de datos, aplicaciones]
 shortinfo: Artículo de Robert Martin sobre el uso de bases de datos en las apliacaciones.
 ---
 

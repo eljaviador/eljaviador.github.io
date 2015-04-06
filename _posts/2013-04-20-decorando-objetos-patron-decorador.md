@@ -2,7 +2,10 @@
 layout: post
 title:  "Decorando objetos [Patrón decorador]"
 date:   2013-04-20  08:29:00
-categories: patrones
+published: true
+categories: [patrones]
+tags: [patrones, principios, poo, arquitectura]
+shortinfo: La herencia es un tema importante el la POO, aquí vemos como usarla con sabiduría para extender el software.
 ---
 
 La herencia es una característica muy potente de la POO pero mal usada trae consigo problemas de flexibilidad, haiciendo 
