@@ -114,6 +114,24 @@
 		</ul>
 
 		<hr>
+
+        {% if page.comments %}
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES * * */
+            // Required: on line below, replace text in quotes with your forum shortname
+            var disqus_shortname = 'eljaviador';
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Por favor activa JavaScript los <a href="https://disqus.com/?ref_noscript" rel="nofollow">comentarios by Disqus.</a></noscript>
+        {% endif %}
+
 	</div>
 	
 	<div class="col-sm-2 sidebar-2">
@@ -121,3 +139,4 @@
 	</div>
 </article>
 <div class="clearfix"></div>
+
