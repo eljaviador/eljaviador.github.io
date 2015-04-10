@@ -5,6 +5,7 @@ date:   2012-04-19  13:28:00
 published: true
 categories: [conceptos y principios]
 tags: [conceptos, principios, poo, arquitectura]
+comments: true
 shortinfo: Aprende a evitar la programación procedural dentro de la POO con este principio de orientación a objetos.
 ---
 

@@ -5,6 +5,7 @@ date:   2013-05-27  13:57:00
 published: true
 categories: [herramientas]
 tags: [maven, conceptos, arquitectura, proyectos]
+comments: true
 shortinfo: Segunda entrega sobre esta herramienta de construcción de proyectos.
 ---
 

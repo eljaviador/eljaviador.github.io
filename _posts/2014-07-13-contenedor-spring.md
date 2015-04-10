@@ -5,6 +5,7 @@ date:   2014-07-13 08:00:04
 published: true
 categories: [frameworks]
 tags: [conceptos, arquitectura, spring]
+comments: true
 shortinfo: Enfoque comprensivo sobre el popular framework Spring.
 ---
 

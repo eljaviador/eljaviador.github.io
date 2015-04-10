@@ -2,7 +2,11 @@
 layout: post
 title:  "Patrones de Diseño - Factorias o Fabricas [Parte II]"
 date:   2012-01-21  13:28:00
-categories: patrones
+published: true
+categories: [patrones]
+tags: [patrones, principios, poo, arquitectura]
+comments: true
+shortinfo: Segunda entrega sobre el patron de diseño Factoría. Aprende que es y como se usa para desarrollar y resolver problemas.
 ---
 
 En el [artículo anterior]({% post_url 2011-07-31-patrones-de-diseno-factorias-o-fabricas-parte-I %}) hablábamos un poco 

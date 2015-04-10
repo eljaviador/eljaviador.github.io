@@ -5,6 +5,7 @@ date:   2013-03-31  14:24:00
 published: true
 categories: [patrones]
 tags: [patrones, principios, poo, arquitectura]
+comments: true
 shortinfo: Comprender el uso apropiado de objetos o instancias únicas es un tema vital para desarrolladores de software.
 ---
 

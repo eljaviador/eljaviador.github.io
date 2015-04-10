@@ -5,6 +5,7 @@ date:   2011-01-29 18:10:04
 published: true
 categories: [conceptos y principios]
 tags: [encapsulación, poo]
+comments: true
 shortinfo: Comprendiendo el concepto de Encapsulación asociado a la programación orientada a objetos.
 ---
 

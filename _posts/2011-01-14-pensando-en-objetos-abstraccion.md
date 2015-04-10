@@ -5,6 +5,7 @@ date:   2011-01-14 18:10:04
 published: true
 categories: [conceptos y principios]
 tags: [abstracción, poo]
+comments: true
 shortinfo: Comprendiendo el concepto de Abstración asociado a la programación orientada a objetos.
 ---
 

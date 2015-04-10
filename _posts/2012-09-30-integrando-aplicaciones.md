@@ -5,6 +5,7 @@ date:   2012-09-30  13:28:00
 published: true
 categories: [conceptos y principios]
 tags: [patrones, conceptos, principios, arquitectura]
+comments: true
 shortinfo: Introducción a este tema interesante para la integracion entre multiples sistemas.
 ---
 

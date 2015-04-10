@@ -2,8 +2,11 @@
 layout: post
 title:  "Hilos en Java [Parte 4]"
 date:   2012-02-13  13:28:00
-categories: javase
-shortinfo: Artículo número 4 sobre hilos en Java.
+published: true
+categories: [javase]
+tags: [concurrencia, hilos, javase, thread]
+comments: true
+shortinfo: Artículo No. 4 sobre concurrencia y programación de hilos en Java
 ---
 
 ## Interacción entre Hilos 

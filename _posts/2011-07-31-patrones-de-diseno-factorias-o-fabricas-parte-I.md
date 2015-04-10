@@ -5,6 +5,7 @@ date:   2011-07-31  13:28:00
 published: true
 categories: [patrones]
 tags: [patrones, principios, poo, arquitectura]
+comments: true
 shortinfo: Patron de diseño Factoría. Aprende que es y como se usa para desarrollar y resolver problemas.
 ---
 

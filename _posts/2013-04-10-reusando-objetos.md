@@ -5,6 +5,7 @@ date:   2013-04-10  12:30:00
 published: true
 categories: [patrones]
 tags: [patrones, principios, poo, arquitectura]
+comments: true
 shortinfo: Optimiza tu sistema y el uso intensivo de objetos a través de este patron de diseño.
 ---
 

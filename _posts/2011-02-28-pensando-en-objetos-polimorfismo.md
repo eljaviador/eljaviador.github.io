@@ -5,6 +5,7 @@ date:   2011-02-28 18:10:04
 published: true
 categories: [conceptos y principios]
 tags: [polimorfismo, poo]
+comments: true
 shortinfo: Asimilar el Polimorfismo y como se aplica en la programación orientada a objetos.
 ---
 

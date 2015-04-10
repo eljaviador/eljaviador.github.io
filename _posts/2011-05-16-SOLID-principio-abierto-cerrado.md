@@ -5,6 +5,7 @@ date:   2011-05-16  09:25:00
 published: true
 categories: [conceptos y principios]
 tags: [principios, poo]
+comments: true
 shortinfo: Segunda entrega sobre los pricipios S.O.L.I.D para desarrollo de software.
 ---
 

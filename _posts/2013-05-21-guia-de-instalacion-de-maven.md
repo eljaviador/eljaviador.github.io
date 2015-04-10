@@ -5,6 +5,7 @@ date:   2013-05-21  18:08:00
 published: true
 categories: [guias]
 tags: [maven, guias]
+comments: true
 shortinfo: Guía de instalación de la herramienta de construcción de proyectos Maven.
 ---
 Maven es una herramienta Java y necesitamos el JDK(no solo el JRE) instalado y configurado. La instalación de Maven es 

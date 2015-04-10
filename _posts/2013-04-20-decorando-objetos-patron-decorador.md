@@ -5,6 +5,7 @@ date:   2013-04-20  08:29:00
 published: true
 categories: [patrones]
 tags: [patrones, principios, poo, arquitectura]
+comments: true
 shortinfo: La herencia es un tema importante el la POO, aquí vemos como usarla con sabiduría para extender el software.
 ---
 

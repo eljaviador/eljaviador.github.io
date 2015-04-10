@@ -2,7 +2,11 @@
 layout: post
 title:  "Antipatrones y Problemas del Desarrollo [02]"
 date:   2011-09-16  13:28:00
-categories: arquitectura
+published: true
+categories: [patrones]
+tags: [patrones, antipatrones, principios, poo, arquitectura]
+comments: true
+shortinfo: Segunda entrega de problemas asociados al uso de patrones de diseño y desarrollo de software
 ---
 
 Siguiendo con las entregas de antipatrones veamos los pertenecientes a la segunda categoría:

@@ -5,6 +5,7 @@ date:   2011-05-31  13:28:00
 published: true
 categories: [patrones]
 tags: [patrones, principios, poo, arquitectura]
+comments: true
 shortinfo: Aprende como desarrollar software y resolver problemas recurrentes con los patrones de diseño.
 ---
 

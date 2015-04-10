@@ -2,7 +2,11 @@
 layout: post
 title:  "No hables con desconocidos [Ley de Demeter]"
 date:   2011-11-30  13:28:00
-categories: arquitectura
+published: true
+categories: [conceptos y principios]
+tags: [conceptos, principios, poo, arquitectura]
+comments: trueAd
+shortinfo: Principio para conocer el límite de comunicación entre componentes y optmizaar el bajo acoplamiento.
 ---
 
 La cohesión y el acoplamiento son dos de los temas mas importante en el desarrollo de sistemas orientados a objeto. 

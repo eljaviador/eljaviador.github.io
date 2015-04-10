@@ -5,6 +5,7 @@ date:   2013-04-30  12:49:00
 published: true
 categories: [patrones]
 tags: [patrones, principios, poo, arquitectura]
+comments: true
 shortinfo: Aprende como incorporar componentes incompatibles a tu sistema a través del patron Adaptador.
 ---
 

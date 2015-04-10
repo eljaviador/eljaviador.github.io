@@ -5,6 +5,7 @@ date:   2014-07-08  09:24:00
 published: true
 categories: [conceptos y principios]
 tags: [conceptos, poo, arquitectura, contenedores, dependencias]
+comments: true
 shortinfo: El funcionamiento de los contenedores y las dependencias un tema imprecindible para un buen desarrollador de software.
 ---
 

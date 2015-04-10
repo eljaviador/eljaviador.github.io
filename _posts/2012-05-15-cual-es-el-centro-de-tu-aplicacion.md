@@ -5,6 +5,7 @@ date:   2012-05-15  13:28:00
 published: true
 categories: [general]
 tags: [arquitectura, base de datos, aplicaciones]
+comments: true
 shortinfo: Artículo de Robert Martin sobre el uso de bases de datos en las apliacaciones.
 ---
 

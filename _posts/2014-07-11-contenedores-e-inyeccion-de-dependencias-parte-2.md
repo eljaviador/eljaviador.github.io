@@ -5,6 +5,7 @@ date:   2014-07-11  09:24:00
 published: true
 categories: [conceptos y principios]
 tags: [conceptos, poo, arquitectura, contenedores, dependencias]
+comments: true
 shortinfo: Segunda parte del tema de los contenedores y la inyección de dependencias.
 ---
 

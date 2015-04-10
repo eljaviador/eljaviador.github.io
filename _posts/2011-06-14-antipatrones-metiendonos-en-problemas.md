@@ -5,6 +5,7 @@ date:   2011-06-14  13:28:00
 published: true
 categories: [patrones]
 tags: [patrones, antipatrones, principios, poo, arquitectura]
+comments: true
 shortinfo: Conoce los problemas asociados al uso de patrones de diseño y desarrollo de software
 ---
 

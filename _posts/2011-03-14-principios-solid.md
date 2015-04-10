@@ -5,6 +5,7 @@ date:   2011-03-14 11:00:04
 published: true
 categories: [conceptos y principios]
 tags: [principios, poo]
+comments: true
 shortinfo: Conoceremos estos principios del desarrollo de software para crear sistemas óptimos.
 ---
 

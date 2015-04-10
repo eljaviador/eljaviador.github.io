@@ -5,6 +5,7 @@ date:   2012-10-18  13:28:00
 published: true
 categories: [patrones]
 tags: [patrones, principios, poo, arquitectura]
+comments: true
 shortinfo: Conoce como desarrollar una comunicación eficiente entre los componentes de tu sistema con este patron de diseño. 
 ---
 

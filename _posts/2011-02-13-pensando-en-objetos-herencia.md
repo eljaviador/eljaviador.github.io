@@ -5,6 +5,7 @@ date:   2011-02-13 18:10:04
 published: true
 categories: [conceptos y principios]
 tags: [herencia, poo]
+comments: true
 shortinfo: Entender la Herencia y es su uso en la programación orientada a objetos.
 ---
 

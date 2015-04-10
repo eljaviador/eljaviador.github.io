@@ -5,6 +5,7 @@ date:   2012-11-12  09:19:00
 published: true
 categories: [javase]
 tags: [conceptos, enum, principios, poo, arquitectura]
+comments: true
 shortinfo: Aprende a usar de forma optima uno de los elementos de declaración superior en la plataforma Java
 ---
 
