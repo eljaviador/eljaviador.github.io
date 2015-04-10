@@ -17,7 +17,7 @@ defaults:
 description: Blog personal sobre la plataforma Java
 author:
   name: Franky Villadiego
-  github: eljaviador
+  github:
   twitter: villadiegofj
   bio: Volando hacia el desarrollo productivo!
 
