@@ -9,6 +9,10 @@ comments: true
 shortinfo: Segunda parte del tema de los contenedores y la inyección de dependencias.
 ---
 
+Artículo recomendado antes de leer este:
+
+* [_**Contenedores e Inyección de Dependencias 01**_]({% post_url 2014-07-08-contenedores-e-inyeccion-de-dependencias-parte-1 %})
+
 En la entrada anterior veíamos un poco el paradigma de _Inyección de Dependencias_ que promueve la **modularidad** y la **reutilización** de objetos, además los contenedores nos facilitan su uso. 
 
 Vamos a crear un contenedor propio, claro solo con fines académicos para entrar mas en detalle y asimilar mejor estos conceptos.

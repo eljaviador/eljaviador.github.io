@@ -9,6 +9,11 @@ comments: true
 shortinfo: Enfoque comprensivo sobre el popular framework Spring.
 ---
 
+Artículos recomendados antes de leer este:
+
+* [_**Contenedores e Inyección de Dependencias 01**_]({% post_url 2014-07-08-contenedores-e-inyeccion-de-dependencias-parte-1 %})
+* [_**Contenedores e Inyección de Dependencias 02**_]({% post_url 2014-07-11-contenedores-e-inyeccion-de-dependencias-parte-2 %})
+
 No voy a entrar en detalles teóricos sobre **Spring** ya que en los dos últimos artículos hablamos sobre _Inyección de 
 Dependencias_ _y Contenedores_. Mencionare los conceptos adicionales necesarios para conocer mejor Spring framework. 
 
