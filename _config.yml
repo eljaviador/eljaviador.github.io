@@ -14,12 +14,14 @@ defaults:
     values:
       title: El Javiador
 
+permalink: "/:title.html"
 description: Blog personal sobre la plataforma Java
 author:
   name: Franky Villadiego
   github:
   twitter: villadiegofj
   bio: Volando hacia el desarrollo productivo!
+  email_md5:
 
 rss_path: feed.xml
 categories_path: categories.html
