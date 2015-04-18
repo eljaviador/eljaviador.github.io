@@ -100,7 +100,8 @@ Esta es la imagen oficial de los tutoriales de Java EE:
 ![Java EE](/images/javaee-01.gif)
 
 Nota que aquí estamos hablando de una distribución de capas practicamente física. No la confundas con la separación de capas
-de la arquitectura de tu aplicación.<br/><br/>
+de la arquitectura de tu aplicación. Mira como el servidor de aplicaciones(Java EE Server) abarca la capa web(Web tier) y
+la capa de negocios(Business tier)<br/><br/>
 
 Aquí otra imagen que expresa el mismo concepto de capas distribuidas:
 
