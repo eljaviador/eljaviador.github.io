@@ -20,22 +20,23 @@ Swarm ofrece un enfoque innovador para construir y ejecutar aplicaciones JavaEE 
 
 Ahora vamos a nuestro ejemplo.
 
+NOTA: Es recomendable tener la version **`3.2.5`** o superior de `Maven`.
+
 ## Pasos
-1. Crear un proyecto con Maven
+1. Crear un proyecto WEB con Maven
 2. Agregar las dependencias y plugins de Swarm al `pom.xml`
-3. Crear un `Servlet`
 4. Ejecutar la aplicacion
 
 <br/>
 
 #### Crear un proyecto con Maven
-Teniendo Maven instalado vamos a la linea de comandos y copiamos:
+Teniendo Maven(3.2.5 o superior) instalado vamos a la linea de comandos y copiamos:
 
 {% highlight bash %}
-$ mvn archetype:generate -DgroupId=org.acme -DartifactId=sample-swarm -Dpackage=org.acme.sample --batch-mode
+$ mvn archetype:generate -DarchetypeGroupId=org.codehaus.mojo.archetypes -DarchetypeArtifactId=webapp-javaee7 -DarchetypeVersion=1.1 -DgroupId=org.acme -DartifactId=sample-swarm -Dpackage=org.acme.sample --batch-mode
 {% endhighlight %}
 
-Esto nos crea un proyecto sencillo de maven, o lo que conocemos como un quick-start.
+Esto nos crea un proyecto Web Java EE 7.
 
 <br/>
 
@@ -46,7 +47,7 @@ La dependencia necesaria por ahora:
 <dependency>
     <groupId>org.wildfly.swarm</groupId>
     <artifactId>undertow</artifactId>
-    <version>1.0.0.Beta4</version>
+    <version>1.0.0.Beta2</version>
 </dependency>
 {% endhighlight %}<br/>
 
@@ -57,6 +58,7 @@ Y el plugin:
       <plugin>
         <groupId>org.wildfly.swarm</groupId>
         <artifactId>wildfly-swarm-plugin</artifactId>
+        <version>1.0.0.Beta2</version>
         <executions>
           <execution>
             <goals>
@@ -69,19 +71,6 @@ Y el plugin:
   </build>
 {% endhighlight %}<br/>
 
-#### Crear un Servlet
-Ahora creamos un `Servlet` en el paquete `org.acme.sample` :
-
-{% highlight java linenos %}
-@WebServlet("/hello")
-public class HelloServlet extends HttpServlet {
-    
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
-        writer.write("Hola Mundo!!");
-    }
-}
-{% endhighlight %}<br/>
 
 #### Ejecutar la aplicacion
 Ahora solo compilamos, empaquetamos y corremos la aplicacion:
@@ -94,6 +83,12 @@ $ mvn wildfly-swarm:run
 Ahora tenemos nuestra aplicacion corriendo con un servidor embebido WildFly.
 
 Ya podemos navegar a la URL `localhost:8080/hello`
+
+NOTA : Tambien podemos ejecutar la aplicacion dentro del directorio `target` con el comando:
+
+{% highlight bash %}
+$ java -jar sample-swarm-1.0-SNAPSHOT-swarm.jar
+{% endhighlight %}
 
 ## Notas Finales
 Con esto podemos empezar de una forma sencilla y rapida nuestra aplicaciones. Usaremos esta mecanica de ahora en adelante mientras vayamos explorando toda la plataforma **Java EE**.
