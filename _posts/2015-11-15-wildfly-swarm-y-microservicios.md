@@ -55,6 +55,7 @@ Y el plugin:
 {% highlight xml linenos %}
   <build>
     <plugins>
+      ... otros plugins
       <plugin>
         <groupId>org.wildfly.swarm</groupId>
         <artifactId>wildfly-swarm-plugin</artifactId>
@@ -82,7 +83,7 @@ $ mvn wildfly-swarm:run
 
 Ahora tenemos nuestra aplicacion corriendo con un servidor embebido WildFly.
 
-Ya podemos navegar a la URL `localhost:8080/hello`
+Ya podemos navegar a la URL `localhost:8080`
 
 NOTA : Tambien podemos ejecutar la aplicacion dentro del directorio `target` con el comando:
 
