@@ -3,7 +3,7 @@ layout: post
 title:  "WildFly Swarm y Microservicios"
 date:   2015-11-03 13:50:00
 published: false
-categories: [framewokrs]
+categories: [frameworks]
 tags: [spring, arquitectura, patrones]
 comments: true
 shortinfo: Uso de Spring Boot y los microservicios.
@@ -12,6 +12,7 @@ shortinfo: Uso de Spring Boot y los microservicios.
 Antes de comenzar quizas te interese leer :
 
 * [_**Microservicios**_]({% post_url 2015-10-05-microservicios %})
+* [_**Microservicios con WildFly Swarm**_]({% post_url 2015-10-15-wildfly-swarm-y-microservicios %})
 
 
 Unos de los puntos a criticar de **Spring** es todo el trabajo de configuración que se necesita antes de poner en marcha un proyecto.
