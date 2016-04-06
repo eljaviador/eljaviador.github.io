@@ -164,4 +164,4 @@ public class Main {
 Bueno ahí lo que hicimos fue ver en run() si t2 tiene un padre para encadenarse. Así t2 debe esperar a que su padre(t1) termine. Usamos sleep para
 ayudarnos a ver el proceso lentamente cuando ejecutemos este programa.
 
-[Hilos en Java - Parte 1]({% post_url 2011-3-30-hilos-en-java-parte-1 %})
+[Hilos en Java - Parte 1]({% post_url 2011-03-30-hilos-en-java-parte-1 %})
