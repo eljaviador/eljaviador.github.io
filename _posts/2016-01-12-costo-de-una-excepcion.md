@@ -9,6 +9,9 @@ comments: true
 shortinfo: Que parte de lanzar una excepcion es costoso o afecta el rendimiento
 ---
 
+http://stackoverflow.com/questions/36343209/which-part-of-throwing-an-exception-is-expensive
+
+
 Desde la version 5, Java incluye una característica muy util para realizar algunas cosas interesantes como rangos de valores, 
 constantes, singletones y mas. 
 
