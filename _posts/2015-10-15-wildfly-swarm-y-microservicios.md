@@ -1,13 +1,18 @@
 ---
 layout: post
 title:  "WildFly Swarm y Microservicios"
-date:   2015-11-15 08:02:00
+date:   2015-10-15 08:02:00
 published: false
 categories: [javaee]
 tags: [microservicios, javaee, arquitectura, patrones]
 comments: true
 shortinfo: Uso de WildFly Swarm y los microservicios.
 ---
+
+Antes de comenzar quizas te interese leer :
+
+* [_**Microservicios**_]({% post_url 2015-10-05-microservicios %})
+
 
 Siguiendo con la parte practica vamos a trabajar con proyectos JavaEE y Spring. Sabemos que para correr una aplicacion JavaEE es necesarios tener un servidor de aplicaciones instalado y corriendo para luego desplegar nuestro proyecto JavaEE en el. Pero vamos a hacer sencillo usando WildFly Swarm y depues Spring Boot.
 
