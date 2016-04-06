@@ -7,7 +7,7 @@ categories: [javase]
 tags: [conceptos, exception, principios, poo]
 comments: true
 shortinfo: Que parte de lanzar una excepcion es costoso o afecta el rendimiento
--------------------------------------------------------------------------------
+---
 
 Desde la version 5, Java incluye una característica muy util para realizar algunas cosas interesantes como rangos de valores, 
 constantes, singletones y mas. 
