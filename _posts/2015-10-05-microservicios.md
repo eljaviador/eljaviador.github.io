@@ -59,11 +59,13 @@ mensajería liviano.
 <br/>
 
 #### Que pasa con Java?
-En el mundo Java hay varios proyectos que ya están habilitados para los microservicios. En especial los servidores de aplicaciones 
-como _**WildFly Swarm**_ y _**WebSphere Liberty**_ para trabajar con aplicaciones **Java EE**.
+En el mundo Java hay varios proyectos que ya están habilitados para los microservicios. Por ejemplo los servidores de aplicaciones 
+[**WildFly**](http://www.wildfly.org "Web de WildFly") y [**Payara**](http://www.payara.fish "Web de Payara")
+tienen los subproyectos _**WildFly Swarm**_ y _**Payara Micro**_ destinados a trabajar con microservicios y aplicaciones **Java EE**.
 
-Otro producto que ha acaparado mucho la atención es _**Spring Boot**_ que permite crear aplicaciones standalone basadas en **Spring** 
-con un contenedor embebido como Tomcat o Jetty.
+Otro producto que ha acaparado mucho la atención es [**Spring Boot**](http://projects.spring.io/spring-boot/ "Web de Spring Boot") que 
+permite crear aplicaciones standalone basadas en **Spring** con un contenedor embebido como Tomcat o Jetty. Aunque también es posible 
+construir una aplicación con **Spring Boot** y correrla con **Payara Micro** o **WildFly Swarm**.
 
 En todo caso tendriamos nuestros servicios como aplicaciones independientes que arrancamos como un standalone y como distribuibles 
 listos para usar en cualquier servicio Cloud. 
