@@ -14,10 +14,10 @@ Una operación no tan común como la de nuestro anterior [_**Tip #1**_]({% post_
 En alguna ocasión el instinto de novato nos ha llevado a hacer algo como esto:
 
 {% highlight java linenos %}
-List&tt;Integer&gt; lista = new ArrayList&lt;Integer&gt;();
+List<Integer> lista = new ArrayList<Integer>();
 
 //LLenamos la lista para el ejemplo
-for(int index = 0; index &lt;10; index++){
+for(int index = 0; index < 10; index++){
     lista.add(index);
 }
 
@@ -50,15 +50,15 @@ La interface `Collection` extiende de `Iterable` y por ende, todas sus subinterf
 #### Eliminar un elemento
 
 {% highlight java linenos %}
-List&lt;Integer&gt; lista = new ArrayList&lt;Integer&gt;();
+List<Integer> lista = new ArrayList<Integer>();
 
 //LLenamos la lista para el ejemplo
-for(int index = 0; index &lt;10; index++){
+for(int index = 0; index < 10; index++){
     lista.add(index);
 }
 
 //Ahora eliminamos el elemento 5
-Iterator&lt;Integer&gt; iterator = lista.iterator();
+Iterator<Integer> iterator = lista.iterator();
 while (iterator.hasNext()){
     Integer item = iterator.next();
     if(item.equals(5)){
@@ -73,10 +73,10 @@ while (iterator.hasNext()){
 Podmemos sacar el `Iterator` del `Set` de entries del mapa:
 
 {% highlight java linenos %}
-Map map = new HashMap&lt;&gt;();
+Map map = new HashMap<>();
 
 //LLenamos el mapa para el ejemplo
-for(int index = 0; index &lt; 10; index++){
+for(int index = 0; index < 10; index++){
     map.put(index, index);
 }
 
