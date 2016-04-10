@@ -2,7 +2,7 @@
 layout: post
 title:  "Spring Boot y Payara Micro"
 date:   2015-12-16 07:30:00
-published: false
+published: true
 categories: [frameworks]
 tags: [spring, payara, arquitectura, patrones]
 comments: true

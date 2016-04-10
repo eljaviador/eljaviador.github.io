@@ -2,7 +2,7 @@
 layout: post
 title:  "Payara Micro y Microservicios"
 date:   2015-11-10 20:45:00
-published: false
+published: true
 categories: [javaee]
 tags: [microservicios, javaee, payara, arquitectura, patrones]
 comments: true
@@ -22,7 +22,7 @@ Siguiendo con la parte practica ahora le toca el turno a **Payara Micro**. Vamos
 #### Que es Payara Micro
 En la web de Payara Micro encontramos lo siguiente:
 
-Pequeño e increiblemente fácil de usar te permite correr archivos `.war` desde la línea de comandos sin ningún servidor de aplicaciones instalado. Con Clustering automático esta diseñado para ejecutar aplicaciones en una infraestructura moderna de contenedores. 
+_Pequeño e increiblemente fácil de usar te permite correr archivos `.war` desde la línea de comandos sin ningún servidor de aplicaciones instalado. Con Clustering automático esta diseñado para ejecutar aplicaciones en una infraestructura moderna de contenedores._
 
 Ahora vamos a nuestro ejemplo.
 

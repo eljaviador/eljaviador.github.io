@@ -2,7 +2,7 @@
 layout: post
 title:  "WildFly Swarm y Microservicios"
 date:   2015-10-15 08:02:00
-published: false
+published: true
 categories: [javaee]
 tags: [microservicios, javaee, wildfly, arquitectura, patrones]
 comments: true
@@ -22,11 +22,11 @@ necesarios tener un servidor de aplicaciones instalado y corriendo para luego de
 #### Que es WildFly Swarm
 En la web de WildFly Swarm encontramos lo siguiente:
 
-Swarm ofrece un enfoque innovador para construir y ejecutar aplicaciones JavaEE empaquetandolas con justo lo necesario de la plataforma para solo hacer "java -jar tuAplicacion". Sin embargo, es mucho mas genial que eso...
+_Swarm ofrece un enfoque innovador para construir y ejecutar aplicaciones JavaEE empaquetandolas con justo lo necesario de la plataforma para solo hacer "java -jar tuAplicacion". Sin embargo, es mucho mas genial que eso..._
 
 Ahora vamos a nuestro ejemplo.
 
-NOTA: Es recomendable tener la version **`3.2.5`** o superior de `Maven`.
+**NOTA:** Es recomendable tener la version **`3.2.5`** o superior de `Maven`.
 
 ## Pasos
 1. Crear un proyecto WEB con Maven
@@ -37,7 +37,7 @@ NOTA: Es recomendable tener la version **`3.2.5`** o superior de `Maven`.
 <br/>
 
 #### 1. Crear un proyecto con Maven
-Teniendo Maven(3.2.5 o superior) instalado vamos a la linea de comandos y copiamos:
+Teniendo `Maven`(3.2.5 o superior) instalado vamos a la linea de comandos y copiamos:
 
 {% highlight bash %}
 $ mvn archetype:generate -DarchetypeGroupId=org.codehaus.mojo.archetypes -DarchetypeArtifactId=webapp-javaee7 -DarchetypeVersion=1.1 -DgroupId=org.acme -DartifactId=sample-swarm -Dpackage=org.acme.sample --batch-mode
@@ -108,7 +108,7 @@ Ya podemos navegar a la URL `localhost:8080`
 
 {% highlight bash %}
 $ java -jar sample-swarm-1.0-SNAPSHOT-swarm.jar
-{% endhighlight %}
+{% endhighlight %}<br/>
 
 ## Notas Finales
 Con esto podemos empezar de una forma sencilla y rapida nuestra aplicaciones. Usaremos esta mecanica de ahora en adelante mientras 

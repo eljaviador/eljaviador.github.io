@@ -1,248 +1,40 @@
 ---
 layout: post
 title:  "El Costo de una Excepción"
-date:   2016-01-12  20:01:00
-published: false
+date:   2016-02-03  20:01:00
+published: true
 categories: [javase]
 tags: [conceptos, exception, principios, poo]
 comments: true
 shortinfo: Que parte de lanzar una excepcion es costoso o afecta el rendimiento
 ---
 
-http://stackoverflow.com/questions/36343209/which-part-of-throwing-an-exception-is-expensive
+Cuando creamos objetos `Exception` o alguna subclase de esta, estamos usando el mismo costo que al crear cualquier otro objeto. Ahora bien, la mayoria de los constructores de la clase `Throwable`:
 
+* `public Throwable()`
+* `public Throwable(String message)`
+* `public Throwable(String message, Throwable cause)`
+* `public Throwable(Throwable cause)`
 
-Desde la version 5, Java incluye una característica muy util para realizar algunas cosas interesantes como rangos de valores, 
-constantes, singletones y mas. 
+Hacen un llamado implicito al método `fillInStackTrace()`. Si revisamos el código fuente de la clase `Throwable` vemos la llamada a este metodo en cada unos de los construtores anteriores. La firma de este método es el siguiente:
 
-Hablo de los `enum` o _**enumerados**_. No confundamos con enumeraciones el cual es otro concepto diferente en Java.
+`private native Throwable fillInStackTrace(int dummy);`
 
-Si tienes un metodo como este:
+Ahi esta el detalle. Es un metodo nativo y todo el costo de crear una _excepción_ esta asociado a el ya que tiene que recorrer toda la pila de llamada para construir el _**stack trace**_: _clases_, _métodos_, _líneas_, etc.
 
-{% highlight java linenos %}
-void metodo(int diaSemana){...}
-{% endhighlight %}<br/>
+#### Como evitar este costo?
+Existe un constructor adicional que recibe un `boolean` con el que podemos controlar la llamada al método `fillInStackTrace()`.
 
-Y unas constantes para los dias de la semana:
+* `protected Throwable(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)`
 
-{% highlight java linenos %}
-public interface DiaSemana{
+Como vemos es un método `protected` y para usarlo debemos crear una clase(excepción personalizada) que extienda de `Exception` o preferiblemente de `RuntimeException`. Todo lo anterior tiene que ver con la creación del objeto.
 
-  int LUNES = 1;
-  int MARTES = 2;
-  int MIERCOLES = 3;
-  int JUEVES = 4;
-  int VIERNES = 5;
-  int SABADO = 6;
-  int DOMINGO = 7;
+### Lanzando la excepción
+Hay otro tema y es cuando lanzamos la execpción, o mas bien cuando la capturamos. Esta es quizas la parte mas complicada. Mayormente después que creamos la excepción la lanzamos y dependiendo en toda la pila de llamada donde se encuentre el `catch`. Si este esta en el mismo método o contexto(_method inlining_) no tiene practicamente ningún costo. Pero si esta en otro nivel la JVM necesita desevolver toda la pila de llamada tomando esto algo de tiempo. 
 
-}
-{% endhighlight %}<br/>
+Cuando hay métodos `synchronized` de por medio puede tomar incluso un poco mas ya que es necesario liberar los monitores que estan siendo usados en todos los noveles de la pila de llamada.
 
-Una de las desventajas de esto es que este metodo puede recibir cualquier valor valido para el rango de un `int`.
 
-Una posible solucion que nos ayude a limitar los valores que recibe el metodo es crear nuestra propia clase con unas 
-constantes dentro, veamos como hacerlo:
+## Conclusión
+Las excepciones estan ahí por algo. Son situaciones excepcionales de nuestra aplicación y que debemos usar con mesura. No hagamos de las execpciones el control de flujo de nuestro sistema. Si podemos salvar un poco de tiempo usando el constructor adecuado no siempre podemos hacer algo al respecto cuando son lanzadas.
 
-{% highlight java linenos %}
-public class PizzaSize {
-
-    public static final PizzaSize SMALL = new PizzaSize();
-    public static final PizzaSize MEDIUM = new PizzaSize();
-    public static final PizzaSize BIG = new PizzaSize();
-
-    private PizzaSize(){}
-
-}
-{% endhighlight %}<br/>
-
-Aqui creamos una clase `PizzaSize` que posee 3 constantes del mismo tipo `PizzaSize` y el constructor es privado para que 
-no se instancie desde afuera. Ahora si tuvieramos un metodo:
-
-{% highlight java linenos %}
-void crearPizza(PizzaSize size){...}
-{% endhighlight %}<br/>
-
-Aqui estamos limitando con una clase propia(`PizzaSize`) los posibles valores que recibe el metodo, en este caso nuestras 
-constantes `SMALL`, `MEDIUM` y `BIG`.
-
-Esta forma sencilla de restringir valores podriamos mejorarla por ejemplo, que cada tamaño posea la cantidad de partes. Una pizza Small tiene 6 pedazos, la Medium tiene 8 pedazos y la Big tiene 10 pedazos.
-
-{% highlight java linenos %}
-public class PizzaSize {
-
-    public static final PizzaSize SMALL = new PizzaSize(6);
-    public static final PizzaSize MEDIUM = new PizzaSize(8);
-    public static final PizzaSize BIG = new PizzaSize(10);
-
-    private int parts;
-    private PizzaSize(int parts){
-        this.parts = parts;
-    }
-
-    public int getParts() { return parts; }
-}
-
-public class Principal {
-
-    public static void main(String[] args) {
-
-        PizzaSize p = PizzaSize.MEDIUM;
-        Principal main = new Principal();
-        main.metodo(p);
-    }
-
-    public void metodo(PizzaSize size){
-        System.out.println("Partes =" + size.getParts());
-    }
-
-}
-{% endhighlight %}<br/>
-
-Agregamos un variable de instancia, modificamos el constructor y pasamos los valores en cada constante.
-
-Incluso podriamos obtener una lista de nuestras constantes:
-
-{% highlight java linenos %}
-public class PizzaSize {
-
-    public static Set<PizzaSize> values = new HashSet<PizzaSize>();
-    public static final PizzaSize SMALL = new PizzaSize(6, values);
-    public static final PizzaSize MEDIUM = new PizzaSize(8, values);
-    public static final PizzaSize BIG = new PizzaSize(10, values);
-
-    private int parts;
-    private PizzaSize(int parts, Set<PizzaSize> values){
-        this.parts = parts;
-        values.add(this);
-    }
-
-    public int getParts() { return parts; }
-}
-
-public class Principal {
-
-    public static void main(String[] args) {
-
-        PizzaSize p = PizzaSize.MEDIUM;
-        Set<PizzaSize> values = PizzaSize.values;
-
-        for(PizzaSize obj : values){
-            System.out.println("Equals =" + obj.equals(p));
-            System.out.println("Igual ==" + (obj == p));
-        }
-
-    }
-}
-{% endhighlight %}<br/>
-
-Aunque esto puede ser una solución algo creativa para nuestros problemillas de constantes, el lenguaje nos ayuda con los 
-tipos enumerados o `enum`.
-
-## Enumerados al rescate
-Un enumerado es una declaracion especial que nos permite limitar el rango de valores para un tipo de datos.
-
-{% highlight java linenos %}
-public enum PizzaSize {
-    SMALL, MEDIUM, BIG;
-}
-{% endhighlight %}<br/>
-
-Caracteristicas:
-
-*   Pueden tener uno o varios constructores (privados por defecto)
-*   Poseen variables de instancia
-*   Poseen metodos (incluso permiten metodos abstractos)
-*   Poseen algo llamado _constant specific class body_
-
-Un `enum` se puede declarar dentro de una clase o dentro de una interface y son static por defecto.
-
-{% highlight java linenos %}
-public class PizzaImpl {
-
-  public enum PizzaSize {
-    SMALL, MEDIUM, BIG;
-  }
-}
-
-public interface Pizza {
-
-  int B = 10;
-
-  void metodo();
-
-  enum PizzaSize {
-    SMALL, MEDIUM, BIG;
-  }
-}
-
-public class Principal {
-
-  public static void main(String[] args) {
-
-    PizzaImpl.PizzaSize smallSize = PizzaImpl.PizzaSize.SMALL;
-    Pizza.PizzaSize mediumSize = Pizza.PizzaSize.MEDIUM;
-  }
-}
-{% endhighlight %}<br/>
-
-Una de las ventajas es que los podemos usar en los `switch` y que poseen la lista de las constantes:
-
-{% highlight java linenos %}
-PizzaSize p = PizzaSize.BIG;
-switch (p){
-  case BIG:
-       //...
-       break;
-  case MEDIUM:
-       //...
-  break;
-}
-{% endhighlight %}<br/>
-
-Una de las cosas mas intersantes es que puedes colocar codigo especifico para cada constante, lo que se llama 
-_**constant specific class body**_.
-
-Ahora aqui esta lo que puede contener un enum en su declaracion:
-
-{% highlight java linenos %}
-public enum PizzaSize implements Foo{
-    SMALL(6){
-        public void pizzaMetodo(){};
-    }, MEDIUM(8){
-        public void pizzaMetodo(){}
-    }, BIG(10){
-        public void pizzaMetodo(){}
-        public void fooBar(){
-            System.out.println("Metodo sobreescrito para BIG");
-        }
-    };
-
-    private int parts;
-    private PizzaSize(int parts) {
-        System.out.println("Constructor");
-        this.parts = parts;
-    }
-
-    public int getParts() {return parts;}
-
-    public void fooBar(){
-        System.out.println("SMALL y MEDIUM");
-    }
-
-    //Metodo implementado en cada cuerpo de constante
-    public abstract void pizzaMetodo();
-
-    public static final String TIPO = "enum";
-
-    static {
-        System.out.println("Bloque de clase, ejecutado una sola vez");
-    }
-
-    {
-        System.out.println("Bloque de Instancia, ejecuta por instancia =" + this.name());
-    }
-}
-{% endhighlight %}<br/>
-
-Los `enum` tambien son singletones.

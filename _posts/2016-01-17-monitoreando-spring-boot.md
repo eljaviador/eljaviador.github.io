@@ -14,7 +14,6 @@ Antes de comenzar quizás te interese leer :
 * [_**Spring Boot Microservicios**_]({% post_url 2015-11-27-spring-boot-y-microservicios %})
 * [_**Spring Boot y Payara Micro**_]({% post_url 2015-12-16-spring-boot-y-payara-micro %})
 
-
 Una cuestión importante que agrega valor a un sistema es sin duda un sistema de monitoreo. **Spring Boot** tiene un `starter` especial para esta valiosa tarea. Se le llama _**Actuator**_. Sobre todo en ecosistemas basados en microservicios que cada uno permita un monitoreo y que informen del estado de salud en que se encuentran es realmente valioso.
 
 Lo único que debemos hacer es agregar la dependenca necesaria y listo:
@@ -36,10 +35,10 @@ La forma de ver todos los mappings seria:
 
 Esto nos da un `JSON` con una lista de mappings que podemos revisar. Algunos interesantes son:
 
-* /health   : Estatus.
-* /env      : Propiedades del entorno.
-* /metrics  : Información de memoria, procesador, heap, hilos, etc.
-* /trace    : Request ralizados.
-* /logfile  : Disponible si tenemos la propiedad `logging.file` o `logging.path`.
+* **/health**   : Estatus.
+* **/env**      : Propiedades del entorno.
+* **/metrics**  : Información de memoria, procesador, heap, hilos, etc.
+* **/trace**    : Request ralizados.
+* **/logfile**  : Disponible si tenemos la propiedad `logging.file` o `logging.path`.
 
 Hay mas EndPoints disponibles que puedes consultar en la web del proyecto.
