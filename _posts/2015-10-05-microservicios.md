@@ -9,10 +9,10 @@ comments: true
 shortinfo: Introdución al concepto de microservicios. Que son y porque usarlos?
 ---
 
-Desde hace tiempo tratamos de dividir los grandes sistemas en pequeñas partes. Los paquetes, clases y métodos son un 
-ejemplo práctico de ello. La modularidad la implementamos por lo general dentro de nuestra gran aplicación. 
+Desde hace tiempo tratamos de dividir los grandes sistemas en pequeñas partes. Los _paquetes_, _clases_ y _métodos_ son un 
+ejemplo práctico de ello. La _**modularidad**_ la implementamos por lo general dentro de nuestra gran aplicación. 
 
-Esto lo conocemos como una aplicación monolítica y de esa manera funciona para nosotros. Toda nuestra lógica de negocio 
+Esto lo conocemos como una aplicación _**monolítica**_ y de esa manera funciona para nosotros. Toda nuestra lógica de negocio 
 en un solo distribuible ya sea para desplegar en un server o para correr como standalone.
 
 
@@ -21,7 +21,7 @@ Recientemente, quiero decir quizás de 2013 y 2014 en adelante un estilo de arqu
 a emerger y a popularizarse. Los microservicios es un estilo de arquitectura que involucra construir grandes sistemas 
 como un conjunto de _**servicios pequeños**_, _**granulares**_, _**desplegados independientemente**_ y que _**colaboran entre sí**_.
 
-Ejemplos de microservicios pueden ser un catálogo de productos, un carrito de compra, registro de usuarios, facturas entre otros. 
+Ejemplos de microservicios pueden ser un _catálogo de productos_, un _carrito de compra_, _registro de usuarios_, _facturas_ entre otros. 
 Hay quienes pudieran llegar al punto de ver los microservicios como tablas siendo desde mi punto de vista un poco extremista.
 
 La idea de este tipo de arquitectura no es nueva pero se ha popularizado mucho ahora a raíz de las tendencias como **Cloud**, 
@@ -30,15 +30,15 @@ La idea de este tipo de arquitectura no es nueva pero se ha popularizado mucho a
 <br/>
 
 #### Porque si?
-Los microservicios fomentan buenas practicas de ingenieria, uso de APIs e _**interfaces limpias**_, _**bajo acoplamiento**_, _**alta cohesión**_, 
+Los microservicios fomentan buenas prácticas de ingeniería, uso de APIs e _**interfaces limpias**_, _**bajo acoplamiento**_, _**alta cohesión**_, 
 _**escalabilidad independiente**_, entre otras. Los microservicios permiten independencia en equipos de trabajo y facilitan el 
 Continous delivering de forma muy puntual mientras el resto del sistema se mantiene estable y disponible.
 
 <br/>
 
 #### Porque no?
-Los microservicios no son adecuados para todos. Una taza de te en varias copitas no hace el te sea más apetecible, de la misma 
-forma los microservicios no siempre son la solución adecuada para poner tu codigo en orden. Lo ideal es que tu aplicación se desarrolle 
+Los microservicios no son adecuados para todos. Una taza de té en varias copitas no hace el té sea más apetecible, de la misma 
+forma los microservicios no siempre son la solución adecuada para poner tu código en orden. Lo ideal es que tu aplicación se desarrolle 
 de forma _**monolítica**_ y muy bien _**modularizada**_. El tiempo te dira si es muy compleja para ser manejada de esta forma y debes ir a microservicios.
 
 Hay un esfuerzo extra para llegar a los microservicios. Características como _**data común**_, _**sincronización**_ de datos y _**transaccionalidad**_. 

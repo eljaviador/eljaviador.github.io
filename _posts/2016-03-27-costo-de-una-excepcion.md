@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "El Costo de una Excepción"
-date:   2016-02-03  20:01:00
+date:   2016-03-27  20:01:00
 published: true
 categories: [javase]
 tags: [conceptos, exception, principios, poo]
@@ -18,14 +18,20 @@ Cuando creamos objetos `Exception` o alguna subclase de esta, estamos usando el 
 
 Hacen un llamado implicito al método `fillInStackTrace()`. Si revisamos el código fuente de la clase `Throwable` vemos la llamada a este metodo en cada unos de los construtores anteriores. La firma de este método es el siguiente:
 
-`private native Throwable fillInStackTrace(int dummy);`
+{% highlight java %}
+private native Throwable fillInStackTrace(int dummy);
+{% endhighlight %}
 
-Ahi esta el detalle. Es un metodo nativo y todo el costo de crear una _excepción_ esta asociado a el ya que tiene que recorrer toda la pila de llamada para construir el _**stack trace**_: _clases_, _métodos_, _líneas_, etc.
+Ahí esta el detalle. Es un método nativo y todo el costo de crear una _excepción_ esta asociado a el ya que tiene que recorrer toda la pila de llamada para construir el _**stack trace**_: _clases_, _métodos_, _líneas_, etc.
+
+<br/>
 
 #### Como evitar este costo?
 Existe un constructor adicional que recibe un `boolean` con el que podemos controlar la llamada al método `fillInStackTrace()`.
 
-* `protected Throwable(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)`
+{% highlight java %}
+protected Throwable(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
+{% endhighlight %}
 
 Como vemos es un método `protected` y para usarlo debemos crear una clase(excepción personalizada) que extienda de `Exception` o preferiblemente de `RuntimeException`. Todo lo anterior tiene que ver con la creación del objeto.
 

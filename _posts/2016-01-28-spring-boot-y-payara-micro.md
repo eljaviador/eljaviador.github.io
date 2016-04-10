@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Spring Boot y Payara Micro"
-date:   2015-12-16 07:30:00
+date:   2016-01-28 07:30:00
 published: true
 categories: [frameworks]
 tags: [spring, payara, arquitectura, patrones]
@@ -12,9 +12,9 @@ shortinfo: Uso de Spring Boot y Payara Micro.
 Antes de comenzar quizás te interese leer :
 
 * [_**Microservicios**_]({% post_url 2015-10-05-microservicios %})
-* [_**WildFly Swarm y Microservicios**_]({% post_url 2015-10-15-wildfly-swarm-y-microservicios %})
-* [_**Payara Micro y Microservicios**_]({% post_url 2015-11-10-payara-micro-y-microservicios %})
-* [_**Spring Boot Microservicios**_]({% post_url 2015-11-27-spring-boot-y-microservicios %})
+* [_**WildFly Swarm y Microservicios**_]({% post_url 2015-11-10-wildfly-swarm-y-microservicios %})
+* [_**Payara Micro y Microservicios**_]({% post_url 2015-11-27-payara-micro-y-microservicios %})
+* [_**Spring Boot Microservicios**_]({% post_url 2015-12-15-spring-boot-y-microservicios %})
 
 Es turno para que usemos **Spring Boot** con una configración manual y ejecutemos nuestra aplicación con **Payara Micro** y no con un **Tomcat** embebido.
 
@@ -36,6 +36,8 @@ $ mvn archetype:generate -DarchetypeArtifactId=maven-archetype-webapp -DgroupId=
 {% endhighlight %}
 
 Esto nos crea un proyecto Web clásico. Es decir debemos hacer un pequeño cambio para colocar la versión servlet 3.0. Colocamos el siguiente contenido dentro del archivo `web.xml`.
+
+<br/>
 
 {% highlight xml linenos %}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -137,10 +139,15 @@ public class HelloController {
 Ahora solo compilamos, empaquetamos y corremos la aplicacion:
 
 {% highlight bash %}
-$ mvn spring-boot:run
-{% endhighlight %}
+$ mvn package
+{% endhighlight %}<br/>
 
-Ahora tenemos nuestra aplicacion corriendo con un servidor embebido Tomcat.
+Desde el directorio `target` corremos la aplicación. Ten en cuenta que tu versión de Payara puede ser diferente:
+{% highlight bash %}
+$ java -jar payara-micro-4.1.1.161.1.jar --deploy spring-boot-payara-1.0.war
+{% endhighlight %}<br/>
+
+Ahora tenemos nuestra aplicación corriendo con un servidor Payara Micro.
 
 Ya podemos navegar a la URL `localhost:8080/spring-boot-payara`
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "WildFly Swarm y Microservicios"
-date:   2015-10-15 08:02:00
+date:   2015-11-10 08:02:00
 published: true
 categories: [javaee]
 tags: [microservicios, javaee, wildfly, arquitectura, patrones]
@@ -14,15 +14,15 @@ Antes de comenzar quizas te interese leer :
 * [_**Microservicios**_]({% post_url 2015-10-05-microservicios %})
 
 
-Siguiendo con la parte practica vamos a trabajar con proyectos JavaEE y Spring. Sabemos que para correr una aplicacion JavaEE es 
-necesarios tener un servidor de aplicaciones instalado y corriendo para luego desplegar nuestro proyecto JavaEE en el. Pero vamos a hacer sencillo usando WildFly Swarm y después Spring Boot.
+Siguiendo con la parte practica vamos a trabajar con proyectos **JavaEE** y **Spring**. Sabemos que para correr una aplicacion JavaEE es 
+necesarios tener un servidor de aplicaciones instalado y corriendo para luego desplegar nuestro proyecto JavaEE en el. Pero vamos a hacer sencillo usando **WildFly Swarm** y después **Spring Boot**.
 
 <br/>
 
 #### Que es WildFly Swarm
 En la web de WildFly Swarm encontramos lo siguiente:
 
-_Swarm ofrece un enfoque innovador para construir y ejecutar aplicaciones JavaEE empaquetandolas con justo lo necesario de la plataforma para solo hacer "java -jar tuAplicacion". Sin embargo, es mucho mas genial que eso..._
+_WildFly Swarm ofrece un enfoque innovador para construir y ejecutar aplicaciones JavaEE empaquetandolas con justo lo necesario de la plataforma para solo hacer "java -jar tuAplicacion". Sin embargo, es mucho mas genial que eso..._
 
 Ahora vamos a nuestro ejemplo.
 
@@ -43,7 +43,7 @@ Teniendo `Maven`(3.2.5 o superior) instalado vamos a la linea de comandos y copi
 $ mvn archetype:generate -DarchetypeGroupId=org.codehaus.mojo.archetypes -DarchetypeArtifactId=webapp-javaee7 -DarchetypeVersion=1.1 -DgroupId=org.acme -DartifactId=sample-swarm -Dpackage=org.acme.sample --batch-mode
 {% endhighlight %}
 
-Esto nos crea un proyecto Web Java EE 7.
+Esto nos crea un proyecto **Web Java EE 7**.
 
 <br/>
 

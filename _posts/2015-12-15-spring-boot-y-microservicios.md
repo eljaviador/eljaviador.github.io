@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Spring Boot y Microservicios"
-date:   2015-11-27 18:00:00
+date:   2015-12-15 18:00:00
 published: true
 categories: [frameworks]
 tags: [spring, arquitectura, patrones]
@@ -12,18 +12,18 @@ shortinfo: Uso de Spring Boot y los microservicios.
 Antes de comenzar quizás te interese leer :
 
 * [_**Microservicios**_]({% post_url 2015-10-05-microservicios %})
-* [_**WildFly Swarm y Microservicios**_]({% post_url 2015-10-15-wildfly-swarm-y-microservicios %})
-* [_**Payara Micro y Microservicios**_]({% post_url 2015-11-10-payara-micro-y-microservicios %})
+* [_**WildFly Swarm y Microservicios**_]({% post_url 2015-11-10-wildfly-swarm-y-microservicios %})
+* [_**Payara Micro y Microservicios**_]({% post_url 2015-11-27-payara-micro-y-microservicios %})
 
 
 Unos de los puntos a criticar de **Spring** es todo el trabajo de configuración que se necesita antes de poner en marcha un proyecto.
-_**Spring Boot nace**_ como una respuesta a todas esas quejas de los usuarios con respecto a este tema. Este es un proyecto que te permite 
+_**Spring Boot**_ nace como una respuesta a todas esas quejas de los usuarios con respecto a este tema. Este es un proyecto que te permite 
 crear desde cero aplicaciones basadas en Spring de forma rápida y con poco esfuerzo de configuración.  
 
 En su web encontramos lo siguiente:
 
-Spring Boot toma un conjunto de principios establecidos(dogma) en la construcción de aplicaciones basadas en Spring. Favoreciendo 
-la [_**convención sobre configuración**_](https://es.wikipedia.org/wiki/Convenci%C3%B3n_sobre_Configuraci%C3%B3n) y diseñado para que construyas y ejecutes lo mas rápido posible.
+_Spring Boot toma un conjunto de principios establecidos(dogma) en la construcción de aplicaciones basadas en Spring. Favoreciendo 
+la [_**convención sobre configuración**_](https://es.wikipedia.org/wiki/Convenci%C3%B3n_sobre_Configuraci%C3%B3n) y diseñado para que construyas y ejecutes lo mas rápido posible_.
 
 Bueno, vamos entrando en materia. Como el ejemplo anterior que hicimos con **WildFly Swarm** y **Payara Micro**, ahora haremos uno parecido con **Spring Boot**.
 En este caso tendremos un contenedor **Tomcat** embebido corriendo nuesta aplicación Spring y que ejecutaremos como una simple aplicación standalone.
@@ -31,8 +31,8 @@ En este caso tendremos un contenedor **Tomcat** embebido corriendo nuesta aplica
 Para crear una aplicación con Spring Boot tenemos 3 alternativas:
  
 1. Usando la herramienta web [**start.spring.io**](http://start.spring.io "Iniciador de Spring Boot").
-2. Usando la herramienta `CLI` que debemos descargar e instalar.
-3. De forma manual creando un proyecto y modificando las dependencias.
+2. Usando la herramienta **CLI** que debemos descargar e instalar.
+3. De forma manual creando un proyecto **Maven** y modificando las dependencias.
 
 En este caso vamos a usar la número 1 que es la mas rápida y fácil.
  
@@ -75,7 +75,7 @@ Ahora solo compilamos, empaquetamos y corremos la aplicacion:
 
 {% highlight bash %}
 $ mvn spring-boot:run
-{% endhighlight %}
+{% endhighlight %}<br/>
 
 Ahora tenemos nuestra aplicacion corriendo con un servidor embebido Tomcat.
 
