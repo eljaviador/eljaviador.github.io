@@ -13,7 +13,7 @@ Una operación no tan común como la de nuestro anterior [_**Tip #1**_]({% post_
 
 En alguna ocasión el instinto de novato nos ha llevado a hacer algo como esto:
 
-```java
+```java?start_inline=1
 List<Integer> lista = new ArrayList<Integer>();
 
 //LLenamos la lista para el ejemplo
@@ -31,19 +31,7 @@ for (Integer item : lista) {
 
 <br/>
 
-Y bingo nos da una excepción de concurrencia como esta:
-
-```java
-Exception in thread "main" java.util.ConcurrentModificationException
-	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:901)
-	at java.util.ArrayList$Itr.next(ArrayList.java:851)
-	at ColeccionComas.main(ColeccionComas.java:17)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:497)
-	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140)
-```
+Y bingo nos da una excepción de concurrencia como esta `Exception in thread "main" java.util.ConcurrentModificationException`.
 
 <br/>
 
