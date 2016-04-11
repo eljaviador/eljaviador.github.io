@@ -13,7 +13,7 @@ Una operación no tan común como la de nuestro anterior [_**Tip #1**_]({% post_
 
 En alguna ocasión el instinto de novato nos ha llevado a hacer algo como esto:
 
-```java?start_inline=1
+{% highlight java linenos %}
 List<Integer> lista = new ArrayList<Integer>();
 
 //LLenamos la lista para el ejemplo
@@ -27,7 +27,7 @@ for (Integer item : lista) {
         lista.remove(item);
     }
 }
-```
+{% endhighlight %}
 
 <br/>
 
@@ -41,7 +41,7 @@ La interface `Collection` extiende de `Iterable` y por ende, todas sus subinterf
 
 #### Eliminar un elemento
 
-```java
+{% highlight java linenos %}
 List<Integer> lista = new ArrayList<Integer>();
 
 //LLenamos la lista para el ejemplo
@@ -57,7 +57,7 @@ while (iterator.hasNext()){
         iterator.remove();
     }
 }
-```
+{% endhighlight %}
 
 <br/>
 
@@ -66,7 +66,7 @@ while (iterator.hasNext()){
 
 Podmemos sacar el `Iterator` del `Set` de entries del mapa:
 
-```java
+{% highlight java linenos %}
 Map map = new HashMap<>();
 
 //LLenamos el mapa para el ejemplo
@@ -83,7 +83,7 @@ while (iterator.hasNext()){
         iterator.remove();
     }
 }
-```
+{% endhighlight %}
 
 <br/>
 
