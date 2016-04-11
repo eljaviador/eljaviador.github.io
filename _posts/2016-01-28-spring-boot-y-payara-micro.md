@@ -96,9 +96,9 @@ Agregamos el `starter` para web `spring-boot-starter-web`. Esta dependencia por 
 #### 4. Configurar arranque de Spring Boot
 Ahora debemos crear una clase para el arranque y configuración automática de **Spring Boot**. Esto es similar a la clase que Spring Boot agrega por defecto cuando creamos el proyecto con el mismo.
 
-En la ruta `src/main/java/org/acme`:
+En la ruta `src/main/java/org/acme` :
 
-{% highlight java linenos %}
+{% highlight java %}
 package org.acme;
 
 @SpringBootApplication
