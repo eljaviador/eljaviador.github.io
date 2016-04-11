@@ -13,7 +13,7 @@ Una operación no tan común como la de nuestro anterior [_**Tip #1**_]({% post_
 
 En alguna ocasión el instinto de novato nos ha llevado a hacer algo como esto:
 
-{% highlight java linenos %}
+```java
 List<Integer> lista = new ArrayList<Integer>();
 
 //LLenamos la lista para el ejemplo
@@ -27,11 +27,13 @@ for (Integer item : lista) {
         lista.remove(item);
     }
 }
-{% endhighlight %}<br/>
+```
+
+<br/>
 
 Y bingo nos da una excepción de concurrencia como esta:
 
-{% highlight java linenos %}
+```java
 Exception in thread "main" java.util.ConcurrentModificationException
 	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:901)
 	at java.util.ArrayList$Itr.next(ArrayList.java:851)
@@ -41,7 +43,9 @@ Exception in thread "main" java.util.ConcurrentModificationException
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:497)
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140)
-{% endhighlight %}<br/>
+```
+
+<br/>
 
 Aquí es donde aparecen los iteradores. La interface `Iterator` es nuestra amiga para esta operación, de hecho es la única forma segúra de remover o modificar una colección mientras la recorremos. Toda clase e interface que implemente o extienda de `Iterable<T>` retorna un `Iterator`.
 
@@ -49,7 +53,7 @@ La interface `Collection` extiende de `Iterable` y por ende, todas sus subinterf
 
 #### Eliminar un elemento
 
-{% highlight java linenos %}
+```java
 List<Integer> lista = new ArrayList<Integer>();
 
 //LLenamos la lista para el ejemplo
@@ -65,14 +69,16 @@ while (iterator.hasNext()){
         iterator.remove();
     }
 }
-{% endhighlight %}<br/>
+```
+
+<br/>
 
 
 #### Y que pasa con `Map`?
 
 Podmemos sacar el `Iterator` del `Set` de entries del mapa:
 
-{% highlight java linenos %}
+```java
 Map map = new HashMap<>();
 
 //LLenamos el mapa para el ejemplo
@@ -89,6 +95,8 @@ while (iterator.hasNext()){
         iterator.remove();
     }
 }
-{% endhighlight %}<br/>
+```
+
+<br/>
 
 

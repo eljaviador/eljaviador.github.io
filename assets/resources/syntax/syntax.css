@@ -68,7 +68,7 @@
 .highlight .lineno { color: #ccc !important; display:inline-block !important; padding: 0 5px !important; border-right:1px solid #ccc !important; }
 .highlight pre code { display: block !important; white-space: pre !important; overflow-x: auto !important; word-wrap: normal !important; }
 /*Make line numbers unselectable: excludes line numbers from copy-paste user ops*/
-.highlight .lineno {-webkit-user-select: none !important;-moz-user-select: none !important; -o-user-select: none !important;}
+.highlight .lineno {-webkit-user-select: none !important; -moz-user-select: none !important; -o-user-select: none !important;}
 /*Override text selection highlighting for linenos*/
 .lineno::-moz-selection {background-color: transparent !important;}/*Mozilla specific*/
 .lineno::selection {background-color: transparent !important;}/*Other major browsers*/
