@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Java Tip #1 - Date y TimeZone"
+title:  "Java Tip #3 - Date y TimeZone"
 date:   2016-04-20  11:40:00
 published: false
 categories: [javase]
