@@ -23,17 +23,9 @@ En las aplicaciones web `.war` podemos configurar la carga del contenedor de Spr
 Esta había sido la forma mas tradicional de configurar Spring hasta la llegada de Servlet 3.0 que permite también la configuración
 por código. Aquí usamos la clase `ContextLoaderListener`.
 
+{% gist 6fcf9d5e552d27545f3fef40ed6ac1cc %}
 
-{% highlight xml linenos %}
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app ... >
-
-    <listener>
-       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-</web-app>
-{% endhighlight %}<br/>
+<br/>
 
 `ContextLoaderListener` por defecto usa `XmlWebApplicationContext` para la carga del contexto. Este `XmlWebApplicationContext`
 busca las configuraciones en `WEB-INF/applicationContext.xml`. Si nuestro archivo XML de configuraciones no esta en esa ruta
@@ -41,22 +33,9 @@ o no se llama igual, debemos especificar su nombre y ubicación de lo contrario 
 
 A través del parámetro de contexto `contextConfigLocation` podemos especificar nuestro XML.
 
-{% highlight xml linenos %}
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app ... >
+{% gist a1547bb11b2d5714c6fa5536f1ca190b %}
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>WEB-INF/mis-beans.xml</param-value>
-    </context-param>
-
-    <listener>
-       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-</web-app>
-{% endhighlight %}<br/>
-
+<br/>
 
 ## Cargar contenedor desde el web.xml (Configuración Java)
 También podemos especificar que el origen de nuestras configuraciones sea una clase Java anotada con `@Configuration`.
@@ -66,27 +45,6 @@ usamos la clase `AnnotationConfigWebApplicationContext`.
 {% gist 8e0383087a811aa1ba454363ca5e86e6 %}
 
 <br/>
-
-{% highlight xml %}
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app ... >
-
-    <context-param>
-        <param-name>contextClass</param-name>
-        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>com.acme.AppConfig</param-value>
-    </context-param>
-
-    <listener>
-       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-</web-app>
-{% endhighlight %}<br/>
 
 Aquí `AppConfig` es nuestra clase con las configuraciones de los beans.
 
@@ -100,36 +58,17 @@ Spring nos proporciona otra interface `WebApplicationInitializer` que debemos im
 contexto. Debemos usar alguna implementación ya sea `XmlWebApplicationContext` o `AnnotationConfigWebApplicationContext` dependiendo
 si nuestra configuración esta en un **XML** o en una clase **Java**.
 
-{% highlight java linenos %}
-public class IniciadorWeb implements WebApplicationInitializer {
+{% gist 0fa7f649faea58f38169c305e50c326e %}
 
-    public void onStartup(ServletContext servletContext) throws ServletException {
-
-        XmlWebApplicationContext context = new XmlWebApplicationContext();
-        ContextLoaderListener loaderListener = new ContextLoaderListener(context);
-        servletContext.addListener(loaderListener);
-
-    }
-}
-{% endhighlight %}<br/>
+<br/>
 
 Ya saben que `XmlWebApplicationContext` busca por defecto un xml en `WEB-INF/applicationContext.xml` y si es diferente el nombre
 debemos aplicar la misma estrategia anterior y registrar los parámetros de contexto necesarios. Tambien podemos usar
 `AnnotationConfigWebApplicationContext`.
 
-{% highlight java linenos %}
-public class IniciadorWeb implements WebApplicationInitializer {
+{% gist ce561e8b3dcb02b01cc0d6ee739856a0 %}
 
-    public void onStartup(ServletContext servletContext) throws ServletException {
-
-        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.register(AppConfig.class);
-        ContextLoaderListener loaderListener = new ContextLoaderListener(context);
-        servletContext.addListener(loaderListener);
-
-    }
-}
-{% endhighlight %}<br/>
+<br/>
 
 
 Espero que estas sencillas configuraciones ayuden a despejar algunas dudas que tenían sobre Spring y como integrarlo en nuestras aplicaciones.
