@@ -63,6 +63,9 @@ También podemos especificar que el origen de nuestras configuraciones sea una c
 Lo único es que tenemos que agregar un parámetro adicional al web.xml que especifica la clase del contexto. En este caso
 usamos la clase `AnnotationConfigWebApplicationContext`.
 
+{% gist 8e0383087a811aa1ba454363ca5e86e6 %}
+
+<br/>
 
 {% highlight xml %}
 <?xml version="1.0" encoding="UTF-8"?>
