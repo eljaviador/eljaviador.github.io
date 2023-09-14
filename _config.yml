@@ -38,4 +38,7 @@ BASE_PATH:  https://eljaviador.com
 
 future: false
 
-gems: [jekyll-paginate]
+plugins:
+  - jekyll-gist
+  - jekyll-paginate
+
