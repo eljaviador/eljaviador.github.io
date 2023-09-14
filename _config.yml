@@ -34,7 +34,7 @@ rss_path: feed.xml
 categories_path: categories.html
 tags_path: tags.html
 
-BASE_PATH:  http://eljaviador.com
+BASE_PATH:  https://eljaviador.com
 
 future: false
 
